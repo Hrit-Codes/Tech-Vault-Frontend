@@ -1,5 +1,7 @@
+import HomeBannerSection from "../Banner/HomeBanner";
+
 export default function HomePage(){
     return(
-        <h1>Hello</h1>
+        <HomeBannerSection/>
     )
 }
