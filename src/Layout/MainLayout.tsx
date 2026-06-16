@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Components/ui/Header";
 import { BackgroundEffects } from "../Components/ui/BackgroundEffects";
+import Footer from "../Components/ui/Footer";
 
 export default function MainLayout(){
     return(
@@ -12,6 +13,7 @@ export default function MainLayout(){
                 <main className="min-h-screen">
                     <Outlet/>
                 </main>
+                <Footer/>
             </div>
         </div>
     )
