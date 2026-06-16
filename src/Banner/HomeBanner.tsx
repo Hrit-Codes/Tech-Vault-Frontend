@@ -4,7 +4,7 @@ export default function HomeBannerSection() {
   return (
     <section className="relative overflow-hidden">
 
-      <div className="relative max-w-7xl min-h-screen mx-auto px-6 py-30 grid grid-cols-1 justify-items-center md:grid-cols-2 gap-12 items-center place-items-center">
+      <div className="relative max-w-6xl min-h-screen mx-auto py-30 grid grid-cols-1 justify-items-center md:grid-cols-2 gap-12 items-center place-items-center">
     
         {/* Left content */}
         <div className="space-y-6 flex flex-col px-2 lg:px-12  items-center lg:items-start text-center lg:text-left">
