@@ -22,7 +22,7 @@ export default function Header(){
                 </div>
 
                 {/*Nav Menu*/}
-                <div className="hidden md:flex flex-row justify-evenly gap-2 items-center space-x-5 px-5 py-4 rounded-full bg-white/100">
+                <div className="hidden md:flex flex-row justify-evenly gap-2 items-center space-x-5 px-5 py-4 rounded-full bg-primary-600">
                     {navItems.map((item)=>{
                         return(
                             <h3 key={item.label} className=" hover:cursor-pointer whitespace-nowrap">{item.label}</h3>
