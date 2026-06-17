@@ -7,7 +7,7 @@ export default function HomePage(){
     return(
         <>
         <HomeBannerSection/>
-        <div className="bg-section-alternative">
+        <div className="bg-section-alternative py-10">
             <CategorySection/>
             <NewArrivals/>
         </div>

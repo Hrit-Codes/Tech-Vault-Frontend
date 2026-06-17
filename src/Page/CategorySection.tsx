@@ -1,14 +1,17 @@
 import SliderComponent from "react-slick";
 import CategoryCard from "../Components/ui/CategoryCard";
+import Headphones from "@/Assets/Categories/Headphones.webp";
+import Laptop from "@/Assets/Categories/Laptop.webp";
+import Smartwatch from "@/Assets/Categories/Smartwatch.webp";
 const Slider = (SliderComponent as any).default || SliderComponent;
 export default function CategorySection(){
 
     const Categories = [
-        { id: 1, image: '/products/watch.jpg', name: 'UltraWatch Series 8', subtitle: 'Midnight Aluminum', price: 399.00, isNew: true },
-        { id: 2, image: '/products/earbuds.jpg', name: 'SonicPod Pro', subtitle: 'Noise Cancelling', price: 249.00 },
-        { id: 3, image: '/products/laptop.jpg', name: 'TechBook Air 15', subtitle: 'M2 Chip / 16GB RAM', price: 1299.00 },
-        { id: 4, image: '/products/tablet.jpg', name: 'PadVision Pro', subtitle: 'Retina XDR Display', price: 899.00 },
-        { id: 5, image: '/products/speaker.jpg', name: 'SoundCore Max', subtitle: '360° Audio', price: 199.00 },
+        { id: 1, image: Smartwatch , name: 'Laptops', subtitle: 'Power for professionals'},
+        { id: 2, image: Headphones , name: 'Audio', subtitle: 'Immersive Precision' },
+        { id: 3, image: Laptop , name: 'Wearables', subtitle: 'Stay connected beautifully' },
+        { id: 4, image: '/products/tablet.jpg', name: 'PadVision Pro', subtitle: 'Retina XDR Display' },
+        { id: 5, image: '/products/speaker.jpg', name: 'SoundCore Max', subtitle: '360° Audio' },
     ];
 
     const settings = {
@@ -28,7 +31,7 @@ export default function CategorySection(){
         ],
     };
     return(
-        <div className="w-full max-w-6xl mx-auto px-6 py-16">
+        <div className="w-full max-w-6xl mx-auto px-6 py-20">
             {/* Header */}
             <div className="flex items-start justify-between mb-8">
                 <div>

@@ -10,7 +10,7 @@ export default function ProductCard({ image, name, subtitle, price, isNew }: Pro
   return (
     <div className="relative flex flex-col gap-3 cursor-pointer group">
       {/* Image Container */}
-      <div className="relative bg-primary-100 dark:bg-primary-800 rounded-2xl overflow-hidden aspect-square">
+      <div className="relative  rounded-2xl overflow-hidden aspect-square bg-section/60 p-6 ">
         {isNew && (
           <span className="absolute top-3 left-3 z-10 bg-primary-900 dark:bg-white text-white dark:text-primary-900 text-xs font-semibold px-3 py-1 rounded-full">
             New

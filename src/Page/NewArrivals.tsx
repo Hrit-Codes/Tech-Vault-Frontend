@@ -1,13 +1,18 @@
 import SliderComponent from "react-slick";
 import ProductCard from "../Components/ui/ProductCard";
+import UltraWatch from '@/Assets/Products/UltraWatchSeries8.webp'
+import MacbookAir from '@/Assets/Products/MacbookAir15.webp'
+import IpadPro from '@/Assets/Products/IpadPro.webp'
+import SoundCoreMax from '@/Assets/Products/SoundCoreMax.webp'
+import SonicPodPro from '@/Assets/Products/SonicPodPro.webp'
 
 const Slider = (SliderComponent as any).default || SliderComponent;
 const newArrivals = [
-  { id: 1, image: '/products/watch.jpg', name: 'UltraWatch Series 8', subtitle: 'Midnight Aluminum', price: 399.00, isNew: true },
-  { id: 2, image: '/products/earbuds.jpg', name: 'SonicPod Pro', subtitle: 'Noise Cancelling', price: 249.00 },
-  { id: 3, image: '/products/laptop.jpg', name: 'TechBook Air 15', subtitle: 'M2 Chip / 16GB RAM', price: 1299.00 },
-  { id: 4, image: '/products/tablet.jpg', name: 'PadVision Pro', subtitle: 'Retina XDR Display', price: 899.00 },
-  { id: 5, image: '/products/speaker.jpg', name: 'SoundCore Max', subtitle: '360° Audio', price: 199.00 },
+  { id: 1, image: UltraWatch, name: 'UltraWatch Series 8', subtitle: 'Midnight Aluminum', price: 399.00, isNew: true },
+  { id: 2, image: SonicPodPro, name: 'SonicPod Pro', subtitle: 'Noise Cancelling', price: 249.00 },
+  { id: 3, image: MacbookAir , name: 'TechBook Air 15', subtitle: 'M2 Chip / 16GB RAM', price: 1299.00 },
+  { id: 4, image: IpadPro , name: 'PadVision Pro', subtitle: 'Retina XDR Display', price: 899.00 },
+  { id: 5, image: SoundCoreMax , name: 'SoundCore Max', subtitle: '360° Audio', price: 199.00 },
 ];
 
 export default function NewArrivals() {
@@ -29,7 +34,7 @@ export default function NewArrivals() {
   };
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-6 py-16">
+    <section className="w-full max-w-6xl mx-auto px-6 py-20">
       {/* Header */}
       <div className="flex items-start justify-between mb-8">
         <div>
