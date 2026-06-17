@@ -23,7 +23,7 @@ export default function Footer() {
         }
     ]
   return (
-    <footer className="w-full bg-primary-700 border-t-2 border-slate-900 dark:border-white pt-8 py-4">
+    <footer className="w-full bg-section border-t-2 border-slate-900 dark:border-white pt-8 py-4">
 
         <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-2 pb-5">
 

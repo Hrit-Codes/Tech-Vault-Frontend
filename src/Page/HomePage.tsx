@@ -1,11 +1,17 @@
 import HomeBannerSection from "../Banner/HomeBanner";
+import CategorySection from "./CategorySection";
 import NewArrivals from "./NewArrivals";
+import SubscribeSection from "./SubscribeSection";
 
 export default function HomePage(){
     return(
         <>
         <HomeBannerSection/>
-        <NewArrivals/>
+        <div className="bg-section-alternative">
+            <CategorySection/>
+            <NewArrivals/>
+        </div>
+        <SubscribeSection/>
         </>
     )
 }
