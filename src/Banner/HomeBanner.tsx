@@ -2,7 +2,7 @@ import { ArrowDown,Facebook, Instagram, Linkedin, X } from "lucide-react";
 
 export default function HomeBannerSection() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden bg-section">
 
       <div className="relative max-w-6xl min-h-screen mx-auto py-30 grid grid-cols-1 justify-items-center md:grid-cols-2 gap-12 items-center place-items-center">
     
