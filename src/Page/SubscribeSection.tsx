@@ -22,9 +22,9 @@ export default function SubscribeSection() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email@example.com"
-            className="flex-1 px-5 py-3 rounded-full bg-primary-800/70 dark:bg-primary-100 text-white dark:text-primary-900 placeholder:text-primary-500 dark:placeholder:text-primary-500 text-sm outline-none focus:ring-2 focus:ring-white/20 dark:focus:ring-primary-300 transition hover:cursor-pointer"
+            className="flex-1 px-5 py-3 rounded-full bg-primary-700 dark:bg-primary-100 text-white dark:placeholder:text-primary-500 text-sm outline-none focus:ring-2 focus:ring-white/20 dark:focus:ring-primary-300 transition hover:cursor-pointer"
           />
-          <button className="px-6 py-3 rounded-full bg-white dark:bg-primary-700 text-primary-900 dark:text-white text-sm font-semibold hover:bg-primary-100 dark:hover:bg-primary-800 transition-colors whitespace-nowrap">
+          <button className="px-6 py-3 rounded-full bg-secondary-400 hover:bg-secondary-500 dark:bg-primary-700 text-white text-sm font-semibold dark:hover:bg-primary-800 transition-colors whitespace-nowrap hover:cursor-pointer">
             Subscribe
           </button>
         </div>

@@ -128,7 +128,7 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="border-t-2 border-white/10 pt-6 text-center">
+          <div className="border-t-2 border-primary-400/40 pt-6 text-center">
             <p className=" text-xs tracking-wide">
               @2026 Nepal Travels &amp; Expedition Pvt. Ltd. All rights reserved.
             </p>

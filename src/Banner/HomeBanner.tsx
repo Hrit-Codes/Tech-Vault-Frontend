@@ -13,13 +13,13 @@ export default function HomeBannerSection() {
               Nepal's Trusted Tech Store 🇳🇵
           </span>
 
-          <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight text-white">
+          <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">
               Upgrade Your <br />
               <span className="text-[var(--primary)]">Tech Lifestyle</span>
           </h1>
           </div>
 
-          <p className="text-white/70 max-w-sm md:max-w-lg lg:max-w-xl text-base md:text-lg">
+          <p className=" max-w-sm md:max-w-lg lg:max-w-xl text-base md:text-lg">
               Premium tech accessories — earbuds, speakers, smartwatches and more.
               Genuine products with fast delivery across Nepal.
           </p>
