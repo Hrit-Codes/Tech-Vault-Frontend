@@ -3,12 +3,13 @@ import { User } from 'lucide-react';
 import { Search } from 'lucide-react';
 import { navItems } from '../../Constants';
 import MainLogo from './MainLogo';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header(){
 
     // const {setIsCartOpen}=useCart();
 
-    // const navigate= useNavigate();
+    const navigate= useNavigate();
 
     // const [searchbarOpen, setSearchbarOpen]=useState<Boolean>(false);
 
@@ -25,7 +26,7 @@ export default function Header(){
                 <div className="hidden md:flex flex-row justify-evenly gap-2 items-center space-x-5 px-5 py-4 rounded-full bg-primary-500">
                     {navItems.map((item)=>{
                         return(
-                            <h3 key={item.label} className="hover:cursor-pointer whitespace-nowrap hover:text-white darK:hover:text-black">{item.label}</h3>
+                            <h3 key={item.label} className="hover:cursor-pointer whitespace-nowrap hover:text-white dark:hover:text-black">{item.label}</h3>
                         )
                     })}
                 </div>
@@ -54,10 +55,10 @@ export default function Header(){
                     ):(
                         <Search onClick={()=>setSearchbarOpen(true)} className="text-white/50 hover:cursor-pointer hover:text-white"/>
                     )} */}
-                    <Search className=" hover:cursor-pointer"/>
-                    <Heart className=" hover:cursor-pointer" onClick={()=>window.location.href="/wishlist1"}/>
-                    <ShoppingCart className="hover:cursor-pointer" />
-                    <User className=" hover:cursor-pointer "/>
+                    <Search className=" hover:cursor-pointer hover:text-primary-400"/>
+                    <Heart className=" hover:cursor-pointer hover:text-primary-400" onClick={()=>navigate("/wishlist")}/>
+                    <ShoppingCart className="hover:cursor-pointer hover:text-primary-400" />
+                    <User className=" hover:cursor-pointer hover:text-primary-400" onClick={()=>navigate("/login")}/>
                 </div>
 
             </div>

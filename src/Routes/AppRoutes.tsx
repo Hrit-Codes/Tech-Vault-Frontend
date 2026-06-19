@@ -6,6 +6,7 @@ import AuthLayout from "../Layout/AuthLayout";
 import LoginPage from "../Page/Login";
 import PublicRoute from "../Layout/PublicLayout";
 import ProductDetailPage from "../Page/ProductDetail";
+import RegisterPage from "../Page/Register";
 
 export default function AppRoutes(){
     return(
@@ -19,6 +20,7 @@ export default function AppRoutes(){
             <Route element={<PublicRoute/>}>
                 <Route element={<AuthLayout/>}>
                     <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/register" element={<RegisterPage/>}/>
                 </Route>
             </Route>
         </Routes>
