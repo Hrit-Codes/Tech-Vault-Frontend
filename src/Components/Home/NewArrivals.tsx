@@ -34,7 +34,7 @@ export default function NewArrivals() {
   };
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-6 py-20">
+    <section id="newArrivals" className="w-full max-w-6xl mx-auto px-6 py-20">
       {/* Header */}
       <div className="flex items-start justify-between mb-8">
         <div>
