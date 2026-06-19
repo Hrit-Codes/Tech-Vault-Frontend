@@ -83,11 +83,11 @@ export default function ProductDetailPage() {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                <button className="w-full flex items-center justify-center gap-2 bg-primary-900 dark:bg-white text-white dark:text-primary-900 py-4 rounded-xl font-semibold text-sm hover:bg-primary-700 dark:hover:bg-primary-100 transition-colors">
+                <button className="w-full flex items-center justify-center gap-2 bg-primary-900 dark:bg-white text-white dark:text-primary-900 py-4 rounded-xl font-semibold text-sm hover:bg-primary-700 dark:hover:bg-primary-100 transition-colors hover:cursor-pointer">
                     <ShoppingBag size={18} />
                     Add to Cart
                 </button>
-                <button className="w-full flex items-center justify-center gap-2 border-2 border-primary-200 dark:border-primary-700 text-primary-900 dark:text-white py-4 rounded-xl font-semibold text-sm hover:bg-primary-50 dark:hover:bg-primary-800 transition-colors">
+                <button className="w-full flex items-center justify-center gap-2 border-2 border-primary-200 dark:border-primary-700 text-primary-900 dark:text-white py-4 rounded-xl font-semibold text-sm hover:bg-primary-50 dark:hover:bg-primary-800 transition-colors hover:cursor-pointer">
                     <Heart size={18} />
                     Add to Wishlist
                 </button>
