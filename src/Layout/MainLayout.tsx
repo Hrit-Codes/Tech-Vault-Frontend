@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Header from "../Components/ui/Header";
+import Header from "../Components/Header/Header";
 import { BackgroundEffects } from "../Components/ui/BackgroundEffects";
-import Footer from "../Components/ui/Footer";
+import Footer from "../Components/Footer/Footer";
 import ScrollToTopButton from "../Components/ScrollToTopButton";
 
 export default function MainLayout(){
