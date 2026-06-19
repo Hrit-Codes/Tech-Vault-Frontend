@@ -1,5 +1,5 @@
 import SliderComponent from "react-slick";
-import ProductCard from "../Components/ui/ProductCard";
+import ProductCard from "../Product/ProductCard";
 import UltraWatch from '@/Assets/Products/UltraWatchSeries8.webp'
 import MacbookAir from '@/Assets/Products/MacbookAir15.webp'
 import IpadPro from '@/Assets/Products/IpadPro.webp'

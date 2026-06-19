@@ -1,7 +1,7 @@
-import HomeBannerSection from "../Banner/HomeBanner";
-import CategorySection from "./CategorySection";
-import NewArrivals from "./NewArrivals";
-import SubscribeSection from "./SubscribeSection";
+import HomeBannerSection from "../../Banner/HomeBanner";
+import CategorySection from "../../Components/Home/CategorySection";
+import NewArrivals from "../../Components/Home/NewArrivals";
+import SubscribeSection from "../../Components/Home/SubscribeSection";
 
 export default function HomePage(){
     return(
