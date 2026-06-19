@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 interface ProductCardProps {
   image: string;
   name: string;
@@ -7,8 +9,9 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ image, name, subtitle, price, isNew }: ProductCardProps) {
+  const navigate=useNavigate();
   return (
-    <div className="relative flex flex-col gap-3 cursor-pointer group">
+    <div onClick={()=>navigate("/product")} className="relative flex flex-col gap-3 cursor-pointer group">
       {/* Image Container */}
       <div className="relative  rounded-2xl overflow-hidden aspect-square bg-section/60 p-6 ">
         {isNew && (

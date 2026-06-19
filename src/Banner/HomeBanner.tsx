@@ -26,10 +26,10 @@ export default function HomeBannerSection() {
           </p>
 
           <div className="flex gap-4 justify-center lg:justify-start">
-              <button className="px-6 py-3 bg-[var(--primary)] text-black font-semibold rounded-xl hover:bg-[var(--primary-hover)] cursor-pointer transition">
+              <button className="px-6 py-3 bg-primary-500 text-white font-semibold rounded-xl hover:bg-primary-500/90 cursor-pointer transition">
               Shop Now
               </button>
-              <button className="px-6 py-3 border border-[#60A5FA]/40 text-[var(--primary)] rounded-xl hover:bg-[var(--primary-hover)]/10 cursor-pointer transition">
+              <button className="px-6 py-3 border border-[#60A5FA]/40 rounded-xl  hover:bg-secondary-200/30 cursor-pointer transition">
               Browse Categories
               </button>
           </div>
@@ -51,14 +51,14 @@ export default function HomeBannerSection() {
     </div>
 
     <div className="absolute flex flex-row lg:flex-col z-10 bottom-14 left-4 gap-4">
-      <div className="rounded-full bg-[var(--primary)]/30 outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:text-[var(--primary)] hover:outline-[var(--primary)]"><Facebook/></div>
-      <div className="rounded-full bg-[var(--primary)]/30 outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:text-[var(--primary)] hover:outline-[var(--primary)]"><Instagram/></div>
-      <div className="rounded-full bg-[var(--primary)]/30 outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:text-[var(--primary)] hover:outline-[var(--primary)]"><X/></div>
-      <div className="rounded-full bg-[var(--primary)]/30 outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:text-[var(--primary)] hover:outline-[var(--primary)]"><Linkedin/></div>
+      <div className="rounded-full outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100"><Facebook/></div>
+      <div className="rounded-full outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100"><Instagram/></div>
+      <div className="rounded-full outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100"><X/></div>
+      <div className="rounded-full outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100"><Linkedin/></div>
     </div>
 
     <button onClick={()=>scrollToSection("newArrivals")} className="absolute z-20 bottom-18 right-0 flex flex-row gap-4 items-center justify-center rotate-90 font-bold cursor-pointer border-r-2 border-t-2 border-zinc-200/40">
-      <span className="text-white/70 uppercase tracking-widest text-md">Shop</span>
+      <span className="uppercase tracking-widest text-md">Shop</span>
       <span className="flex items-center justify-center -rotate-90">
         <span className="animate-bounce text-[var(--primary)]">
           <ArrowDown size={34} />
