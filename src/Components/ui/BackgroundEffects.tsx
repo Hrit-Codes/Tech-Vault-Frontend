@@ -1,6 +1,6 @@
 export const BackgroundEffects = ({ animated = false }: { animated?: boolean }) => {
   return (
-    <div className="fixed h-full inset-0 overflow-hidden pointer-events-none bg-white dark:bg-slate-900 -z-10">
+    <div className="fixed h-full inset-0 overflow-hidden pointer-events-none bg-section-alternative -z-10">
       {/* Vertical lines */}
       <div className="absolute inset-0 grid grid-cols-4">
         {Array.from({ length: 20 }).map((_, i) => (
