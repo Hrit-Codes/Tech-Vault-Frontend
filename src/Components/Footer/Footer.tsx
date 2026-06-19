@@ -1,7 +1,7 @@
 import companyLogo from "@/Assets/Logo.webp"
 import { Mail, MapPin, Phone } from "lucide-react";
 
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
@@ -11,15 +11,15 @@ export default function Footer() {
     const socials=[
         {
             label:"Facebook",
-            icon:Facebook
+            icon:FaFacebookF
         },
         {
             label:"Instagram",
-            icon:Instagram
+            icon:FaInstagram
         },
         {
             label:"LinkedIn",
-            icon:Linkedin
+            icon:FaLinkedinIn
         }
     ]
   return (
@@ -56,7 +56,7 @@ export default function Footer() {
 
               <div className="flex flex-row gap-3">
                 {socials.map(({label,icon:Icon})=>(
-                    <Icon key={label} className=" hover:text-primary-400 text-xl cursor-pointer transition-colors duration-200"/>
+                    <Icon key={label} className=" hover:text-secondary-400 text-xl cursor-pointer transition-colors duration-200"/>
                 ))}
 
               </div>
@@ -130,7 +130,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="border-t-2 border-primary-400/40 pt-6 text-center">
             <p className=" text-xs tracking-wide">
-              @2026 Nepal Travels &amp; Expedition Pvt. Ltd. All rights reserved.
+              @2026 <a href="https://magnas.com.np/" className="hover:text-secondary-400">Magnas Infotech Solutions</a> . All rights reserved.
             </p>
           </div>
         </div>

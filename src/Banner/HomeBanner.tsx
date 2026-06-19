@@ -1,4 +1,6 @@
-import { ArrowDown,Facebook, Instagram, Linkedin, X } from "lucide-react";
+import { ArrowDown} from "lucide-react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn} from "react-icons/fa";
+import { RiTwitterXLine } from "react-icons/ri";
 import scrollToSection from "../Components/ScrollToSection";
 
 export default function HomeBannerSection() {
@@ -51,10 +53,10 @@ export default function HomeBannerSection() {
     </div>
 
     <div className="absolute flex flex-row lg:flex-col z-10 bottom-14 left-4 gap-4">
-      <div className="rounded-full outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100"><Facebook/></div>
-      <div className="rounded-full outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100"><Instagram/></div>
-      <div className="rounded-full outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100"><X/></div>
-      <div className="rounded-full outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100"><Linkedin/></div>
+      <div className="rounded-full flex justify-center outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100 hover:text-black"><FaFacebookF size={20}/></div>
+      <div className="rounded-full flex justify-center outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100 hover:text-black"><FaInstagram size={20}/></div>
+      <div className="rounded-full flex justify-center outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100 hover:text-black"><RiTwitterXLine size={20}/></div>
+      <div className="rounded-full flex justify-center outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100 hover:text-black"><FaLinkedinIn size={20}/></div>
     </div>
 
     <button onClick={()=>scrollToSection("newArrivals")} className="absolute z-20 bottom-18 right-0 flex flex-row gap-4 items-center justify-center rotate-90 font-bold cursor-pointer border-r-2 border-t-2 border-zinc-200/40">
