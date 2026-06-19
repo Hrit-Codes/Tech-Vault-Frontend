@@ -1,4 +1,5 @@
 import { ArrowDown,Facebook, Instagram, Linkedin, X } from "lucide-react";
+import scrollToSection from "../Components/ScrollToSection";
 
 export default function HomeBannerSection() {
   return (
@@ -56,14 +57,14 @@ export default function HomeBannerSection() {
       <div className="rounded-full bg-[var(--primary)]/30 outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:text-[var(--primary)] hover:outline-[var(--primary)]"><Linkedin/></div>
     </div>
 
-    <a className="absolute z-20 bottom-18 right-0 flex flex-row gap-4 items-center justify-center rotate-90 font-bold cursor-pointer border-r-2 border-t-2 border-zinc-200/40">
+    <button onClick={()=>scrollToSection("newArrivals")} className="absolute z-20 bottom-18 right-0 flex flex-row gap-4 items-center justify-center rotate-90 font-bold cursor-pointer border-r-2 border-t-2 border-zinc-200/40">
       <span className="text-white/70 uppercase tracking-widest text-md">Shop</span>
       <span className="flex items-center justify-center -rotate-90">
         <span className="animate-bounce text-[var(--primary)]">
           <ArrowDown size={34} />
         </span>
       </span>
-    </a>
+    </button>
     </section>
   );
 }
