@@ -82,8 +82,8 @@ export default function WishlistPage(){
                             <p className="text-xs ">{item.description}</p>
 
                             <div className="w-full flex flex-col gap-4 text-center font-medium">
-                                <button className="bg-primary-400 hover:bg-primary-500 p-3 rounded-2xl hover:cursor-pointer ">Move to Cart</button>
-                                <a href="#" className="cursor-pointer text-secondary-400 hover:underline hover:text-secondary-500 dark:text-secondary-500">View Details</a>
+                                <button className="bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-2xl hover:cursor-pointer ">Move to Cart</button>
+                                <a href="#" className="cursor-pointer text-secondary-500 hover:underline hover:text-secondary-400">View Details</a>
 
                             </div>
                         </div>
