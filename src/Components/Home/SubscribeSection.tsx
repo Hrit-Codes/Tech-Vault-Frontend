@@ -11,9 +11,9 @@ export default function SubscribeSection() {
           <h2 className="text-2xl font-bold ">
             Stay ahead of the curve.
           </h2>
-          <p className="text-sm max-w-md leading-relaxed ">
+          <h3 className="text-sm text-gray-700 dark:text-gray-400 max-w-md leading-relaxed ">
             Subscribe to get exclusive access to new product drops, technical insights, and premium offers.
-          </p>
+          </h3>
         </div>
 
         <div className="flex flex-row items-center gap-3 w-full max-w-md">
@@ -22,7 +22,7 @@ export default function SubscribeSection() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email@example.com"
-            className="flex-1 px-5 py-3 rounded-full bg-primary-700 dark:bg-primary-100 text-white dark:placeholder:text-primary-500 text-sm outline-none focus:ring-2 focus:ring-white/20 dark:focus:ring-primary-300 transition hover:cursor-pointer"
+            className="flex-1 px-5 py-3 rounded-full border-2 border-primary-300 dark:border-primary-700 bg-transparent  placeholder:text-black dark:placeholder:text-white text-sm outline-none focus:ring-2 focus:ring-secondary-400 dark:focus:ring-primary-400 transition hover:cursor-pointer"
           />
           <button className="px-6 py-3 rounded-full bg-secondary-400 hover:bg-secondary-500 dark:bg-primary-700 text-white text-sm font-semibold dark:hover:bg-primary-800 transition-colors whitespace-nowrap hover:cursor-pointer">
             Subscribe

@@ -60,10 +60,10 @@ export default function ProductDetailPage() {
 
             {/* Title + Description */}
             <div className="flex flex-col gap-3">
-                <h1 className="text-4xl font-bold text-primary-900 dark:text-white">
+                <h1 className="text-4xl font-bold ">
                 {product.name}
                 </h1>
-                <p className="text-sm leading-relaxed text-primary-500 dark:text-primary-300">
+                <p className="text-sm leading-relaxed ">
                 {product.description}
                 </p>
             </div>
@@ -73,7 +73,7 @@ export default function ProductDetailPage() {
                 <div className="flex items-end justify-between">
                 <div className="flex flex-col gap-0.5">
                     <p className="text-xs text-primary-400 dark:text-primary-400">Starting from</p>
-                    <h2 className="text-3xl font-bold text-primary-900 dark:text-white">
+                    <h2 className="text-3xl font-bold ">
                     ${product.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}
                     </h2>
                 </div>
@@ -87,7 +87,7 @@ export default function ProductDetailPage() {
                     <ShoppingBag size={18} />
                     Add to Cart
                 </button>
-                <button className="w-full flex items-center justify-center gap-2 border-2 border-primary-200 dark:border-primary-700 text-primary-900 dark:text-white py-4 rounded-xl font-semibold text-sm hover:bg-primary-50 dark:hover:bg-primary-800 transition-colors hover:cursor-pointer">
+                <button className="w-full flex items-center justify-center gap-2 border-2 border-primary-200 dark:border-primary-700  py-4 rounded-xl font-semibold text-sm hover:bg-primary-50 dark:hover:bg-primary-800 transition-colors hover:cursor-pointer">
                     <Heart size={18} />
                     Add to Wishlist
                 </button>
@@ -98,10 +98,10 @@ export default function ProductDetailPage() {
             <div className="grid grid-cols-3 gap-4 pt-2">
                 {product.specs.map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="flex flex-col items-center gap-2 text-center">
-                    <Icon size={24} className="text-primary-500 dark:text-primary-300" />
+                    <Icon size={24} className="text-secondary-400 " />
                     <div>
-                    <p className="text-sm font-bold text-primary-900 dark:text-white">{label}</p>
-                    <p className="text-xs text-primary-400 dark:text-primary-400">{sub}</p>
+                    <p className="text-sm font-bold ">{label}</p>
+                    <p className="text-xs ">{sub}</p>
                     </div>
                 </div>
                 ))}
@@ -114,7 +114,7 @@ export default function ProductDetailPage() {
             <div className="w-full max-w-6xl mx-auto py-14">
             <div className="flex flex-col gap-3 text-center">
                 <h2 className="text-3xl font-semibold">Technical Specifications</h2>
-                <p className="text-primary-500 text-sm">Precision tuned hardware components designed to deliver unparalled performance for demanding creative workflows.</p>
+                <h3 className="text-sm text-gray-600 dark:text-gray-400">Precision tuned hardware components designed to deliver unparalled performance for demanding creative workflows.</h3>
             </div>
 
             <div className="flex flex-row flex-wrap my-10 gap-6">
@@ -128,7 +128,7 @@ export default function ProductDetailPage() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <h3 className="text-base font-bold">{specification.title}</h3>
-                            <p className="text-sm text-primary-400 dark:text-primary-300 leading-relaxed">{specification.description}</p>
+                            <p className="text-sm leading-relaxed">{specification.description}</p>
                         </div>
                     </div>
                 ))}
@@ -142,7 +142,7 @@ export default function ProductDetailPage() {
 
                 {/* Left — Rating Summary */}
                 <div className="flex flex-col gap-5">
-                    <h2 className="text-3xl font-bold text-primary-900 dark:text-white">Customer Reviews</h2>
+                    <h2 className="text-3xl font-bold ">Customer Reviews</h2>
 
                     <div className="flex items-center gap-3">
                         <span className="text-5xl font-bold text-primary-900 dark:text-white">{product.rating}</span>
@@ -160,7 +160,7 @@ export default function ProductDetailPage() {
                         </div>
                     </div>
 
-                    <button className="border-2 border-primary-200 dark:border-primary-700 text-primary-900 dark:text-white py-3 rounded-xl font-semibold text-sm hover:bg-primary-50 dark:hover:bg-primary-800 transition-colors">
+                    <button className="border-2 border-primary-200 dark:border-primary-700 dark:text-white py-3 rounded-xl font-semibold text-sm hover:bg-primary-50 dark:hover:bg-primary-800 transition-colors hover:cursor-pointer">
                         Write a Review
                     </button>
                 </div>
@@ -174,7 +174,7 @@ export default function ProductDetailPage() {
                         >
                             <div className="flex items-start justify-between">
                                 <div className="flex flex-col gap-0.5">
-                                    <h4 className="text-sm font-bold text-primary-900 dark:text-white">{review.name}</h4>
+                                    <h4 className="text-base font-bold ">{review.name}</h4>
                                     <p className="text-xs text-primary-400 dark:text-primary-400">{review.date}</p>
                                 </div>
                                 <div className="flex items-center gap-0.5">
@@ -187,7 +187,7 @@ export default function ProductDetailPage() {
                                     ))}
                                 </div>
                             </div>
-                            <p className="text-sm leading-relaxed text-primary-500 dark:text-primary-300">
+                            <p className="text-sm leading-relaxed ">
                                 "{review.text}"
                             </p>
                         </div>

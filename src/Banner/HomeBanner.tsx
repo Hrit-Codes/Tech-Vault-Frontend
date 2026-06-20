@@ -12,17 +12,17 @@ export default function HomeBannerSection() {
         {/* Left content */}
         <div className="space-y-6 flex flex-col px-2 lg:px-12  items-center lg:items-start text-center lg:text-left">
           <div className="space-y-4">
-          <span className="inline-block px-4 py-1 text-sm bg-[#74c69d]/10 text-[var(--primary)] rounded-full border border-[#74c69d]/30">
+          <span className="inline-block px-4 py-1 text-sm bg-secondary-400/10 text-primary-400 rounded-full border border-secondary-400/30 font-medium">
               Nepal's Trusted Tech Store 🇳🇵
           </span>
 
-          <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">
+          <h2 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">
               Upgrade Your <br />
-              <span className="text-[var(--primary)]">Tech Lifestyle</span>
-          </h1>
+              <span className="text-primary-400">Tech Lifestyle</span>
+          </h2>
           </div>
 
-          <p className=" max-w-sm md:max-w-lg lg:max-w-xl text-base md:text-lg">
+          <p className="max-w-sm md:max-w-lg lg:max-w-xl text-base md:text-lg">
               Premium tech accessories — earbuds, speakers, smartwatches and more.
               Genuine products with fast delivery across Nepal.
           </p>
@@ -52,7 +52,7 @@ export default function HomeBannerSection() {
 
     </div>
 
-    <div className="absolute flex flex-row lg:flex-col z-10 bottom-14 left-4 gap-4">
+    <div className="absolute text-black dark:text-white flex flex-row lg:flex-col z-10 bottom-14 left-4 gap-4">
       <div className="rounded-full flex justify-center outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100 hover:text-black"><FaFacebookF size={20}/></div>
       <div className="rounded-full flex justify-center outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100 hover:text-black"><FaInstagram size={20}/></div>
       <div className="rounded-full flex justify-center outline-2 backdrop-blur-md p-3 items-center cursor-pointer hover:bg-secondary-100 hover:text-black"><RiTwitterXLine size={20}/></div>

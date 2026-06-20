@@ -15,7 +15,7 @@ export default function ProductCard({ image, name, subtitle, price, isNew }: Pro
       {/* Image Container */}
       <div className="relative  rounded-2xl overflow-hidden aspect-square bg-section/60 p-6 ">
         {isNew && (
-          <span className="absolute top-3 left-3 z-10 bg-primary-900 dark:bg-white text-white dark:text-primary-900 text-xs font-semibold px-3 py-1 rounded-full">
+          <span className="absolute top-3 left-3 z-10 bg-primary-900 dark:bg-white text-white dark:text-primary-900 text-sm font-bold px-3 py-1 rounded-full">
             New
           </span>
         )}
@@ -28,9 +28,9 @@ export default function ProductCard({ image, name, subtitle, price, isNew }: Pro
 
       {/* Info */}
       <div className="flex flex-col gap-0.5 px-1">
-        <h3 className="text-sm font-semibold text-primary-900 dark:text-white">{name}</h3>
+        <h3 className="text-md font-semibold">{name}</h3>
         <p className="text-xs text-primary-400 dark:text-primary-300">{subtitle}</p>
-        <p className="text-sm font-semibold text-primary-900 dark:text-white mt-1">${price.toFixed(2)}</p>
+        <p className="text-sm font-semibold mt-1">${price.toFixed(2)}</p>
       </div>
     </div>
   );
