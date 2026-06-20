@@ -35,18 +35,18 @@ export default function Footer() {
               <div className="flex items-center gap-8">
                 <img src={companyLogo} alt="Company Logo" className="w-30 h-20" />
                 <div>
-                  <p className="font-bold text-lg ">
+                  <h2 className="font-bold text-lg ">
                     Tech Vault
-                  </p>
-                  <p className=" text-xs tracking-wide uppercase">
+                  </h2>
+                  <h4 className=" text-xs tracking-wide uppercase">
                     &amp; Pvt. Ltd.
-                  </p>
+                  </h4>
                 </div>
               </div>
 
               <div className="w-16 h-0.5 bg-primary-400" />
 
-              <p className="text-sm leading-relaxed w-full text-[clamp(13px,1.4vw,15px)] font-light ">
+              <p className="text-sm leading-relaxed w-full text-[clamp(13px,1.4vw,15px)] font-medium ">
                 Our aim is to provide clients with every kind of viable programs
                 Nepal can possibly offer. Our team of expert travel planners is
                 always there to answer your specific questions with absolutely
@@ -78,9 +78,9 @@ export default function Footer() {
                 ].map(({ label, href }) => (
                   <li key={label}>
                     <nav onClick={()=>navigate(href)}
-                      className=" text-sm transition-colors duration-200 flex items-center gap-2 hover:cursor-pointer"
+                      className=" text-sm md:text-base transition-colors duration-200 flex items-center gap-2 hover:cursor-pointer font-medium"
                     >
-                      <div className="w-2 h-0.5 bg-primary-400 text-sm md:text-base leading-relaxed font-light " />{label}
+                      <div className="w-2 h-0.5 bg-primary-400 "/>{label}
                     </nav>
                   </li>
                 ))}
@@ -98,27 +98,27 @@ export default function Footer() {
                   <span className="mt-0.5  flex-shrink-0">
                     <MapPin className="w-4 h-4 text-primary-400"/>
                   </span>
-                  <span className=" text-sm w-full leading-relaxed font-light ">
-                    New Plaze Putalisadak, Kathmandu, Nepal<br />
+                  <span className=" text-sm md:text-base w-full leading-relaxed font-medium ">
+                    New Plaza Putalisadak, Kathmandu, Nepal<br />
                     Post Box No:- 13965
                   </span>
                 </li>
 
                 {["+977 9742935093", "+977 986-1418083"].map((num) => (
-                  <li key={num} className="flex items-center gap-3">
+                  <li key={num} className="flex items-center gap-3 font-medium">
                     <span className=" flex-shrink-0">
                       <Phone className="w-4 h-4 text-primary-400"/>
                     </span>
-                    <span className=" text-sm md:text-base leading-relaxed w-full font-light">{num}</span>
+                    <span className=" text-sm md:text-base leading-relaxed w-full ">{num}</span>
                   </li>
                 ))}
 
                 {["info@kalapatthar.com", "sales@kalapatthar.com", "hrit.kalapatthar@gmail.com"].map((email) => (
-                  <li key={email} className="flex items-center gap-3">
+                  <li key={email} className="flex items-center gap-3 font-medium">
                     <span className=" flex-shrink-0">
                       <Mail className="w-4 h-4 text-primary-400"/>
                     </span>
-                    <a href={`mailto:${email}`} className=" text-sm md:text-base transition-colors duration-200 break-all leading-relaxed w-full font-light">
+                    <a href={`mailto:${email}`} className=" text-sm md:text-base transition-colors duration-200 break-all leading-relaxed w-full ">
                       {email}
                     </a>
                   </li>
@@ -129,7 +129,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <div className="border-t-2 border-primary-400/40 pt-6 text-center">
-            <p className=" text-xs tracking-wide">
+            <p className="text-xs  tracking-wide">
               @2026 <a href="https://magnas.com.np/" className="hover:text-secondary-400">Magnas Infotech Solutions</a> . All rights reserved.
             </p>
           </div>

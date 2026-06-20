@@ -51,9 +51,9 @@ export default function WishlistPage(){
             <div className="w-full max-w-6xl mx-auto py-30 flex flex-col gap-10">
 
                 {/* Header */}
-                <div className="w-full flex flex-col gap-3">
+                <div className="w-full flex flex-col gap-2">
                     <h2 className="font-semibold text-3xl">Wishlist</h2>
-                    <p className="text-sm">4 items saved for later</p>
+                    <h3 className="text-sm text-gray-700 dark:text-gray-400">4 items saved for later</h3>
                 </div>
 
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-14">
@@ -76,14 +76,14 @@ export default function WishlistPage(){
                         {/* Info */}
                         <div className="flex flex-col gap-4 px-4 py-6">
                             <div className="flex flex-row items-center justify-between gap-2">
-                                <h3 className="text-lg font-semibold text-primary-900 dark:text-white">{item.name}</h3>
-                                <p className="text-lg font-semibold text-primary-900 dark:text-white mt-1">${item.price.toFixed(2)}</p>
+                                <h3 className="text-lg font-semibold ">{item.name}</h3>
+                                <p className="text-lg font-semibold mt-1">${item.price.toFixed(2)}</p>
                             </div>
-                            <p className="text-xs text-primary-400 dark:text-primary-300">{item.description}</p>
+                            <p className="text-xs ">{item.description}</p>
 
-                            <div className="w-full flex flex-col gap-4 text-center">
-                                <button className="bg-primary-400 hover:bg-primary-500 p-3 rounded-2xl hover:cursor-pointer">Move to Cart</button>
-                                <a href="#" className="cursor-pointer text-secondary-400 hover:underline hover:text-secondary-300 dark:text-secondary-500">View Details</a>
+                            <div className="w-full flex flex-col gap-4 text-center font-medium">
+                                <button className="bg-primary-400 hover:bg-primary-500 p-3 rounded-2xl hover:cursor-pointer ">Move to Cart</button>
+                                <a href="#" className="cursor-pointer text-secondary-400 hover:underline hover:text-secondary-500 dark:text-secondary-500">View Details</a>
 
                             </div>
                         </div>

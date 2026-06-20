@@ -14,31 +14,31 @@ export default function LoginPage() {
 
         {/* Header */}
         <div className="flex flex-col gap-1">
-          <h1 className="text-3xl font-bold">Welcome Back</h1>
-          <p className="text-sm text-primary-500 dark:text-primary-300">Sign in to your premium account.</p>
+          <h2 className="text-3xl font-bold">Welcome Back</h2>
+          <h3 className="text-sm text-gray-700 dark:text-gray-400">Sign in to your premium account.</h3>
         </div>
 
         {/* Form */}
         <form className="flex flex-col gap-5">
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="text-sm font-semibold text-primary-700 dark:text-primary-200">
+            <label htmlFor="email" className="text-sm font-semibold ">
               Email Address
             </label>
             <input
               id="email"
               type="email"
               placeholder="name@company.com"
-              className="px-4 py-3 rounded-xl border border-primary-300 dark:border-primary-700 bg-transparent text-sm text-primary-900 dark:text-white placeholder:text-primary-400 dark:placeholder:text-primary-500 outline-none focus:ring-2 focus:ring-secondary-400 dark:focus:ring-primary-400 transition"
+              className="px-4 py-3 rounded-xl border border-primary-300 dark:border-primary-700 bg-transparent text-sm text-gray-800 dark:text-gray-300 placeholder:text-gray-800 dark:placeholder:text-gray-300 outline-none focus:ring-2 focus:ring-secondary-400 dark:focus:ring-primary-400 transition"
             />
           </div>
 
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <label htmlFor="password" className="text-sm font-semibold text-primary-700 dark:text-primary-200">
+              <label htmlFor="password" className="text-sm font-semibold ">
                 Password
               </label>
-              <Link to="/forgot-password" className="text-sm font-medium text-secondary-500 hover:text-secondary-400 transition-colors">
+              <Link to="/forgot-password" className="text-sm font-medium text-secondary-400 hover:text-secondary-300 dark:text-secondary-500 transition-colors">
                 Forgot Password?
               </Link>
             </div>
@@ -47,7 +47,7 @@ export default function LoginPage() {
                 id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
-                className="w-full px-4 py-3 rounded-xl border border-primary-300 dark:border-primary-700 bg-transparent text-sm text-primary-900 dark:text-white placeholder:text-primary-400 dark:placeholder:text-primary-500 outline-none focus:ring-2 focus:ring-secondary-400 dark:ring-primary-400 transition pr-11"
+                className="w-full px-4 py-3 rounded-xl border border-primary-300 dark:border-primary-700 bg-transparent text-sm text-gray-800 dark:text-gray-300 placeholder:text-gray-800 dark:placeholder:text-gray-300 outline-none focus:ring-2 focus:ring-secondary-400 dark:focus:ring-primary-400 transition pr-11"
               />
               <button
                 type="button"
@@ -73,7 +73,7 @@ export default function LoginPage() {
             <div className="w-full border-t border-primary-200 dark:border-primary-700" />
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="px-2 bg-section text-primary-500 dark:text-primary-300">
+            <span className="px-2 bg-section ">
               Or continue with
             </span>
           </div>
@@ -93,9 +93,9 @@ export default function LoginPage() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-sm text-primary-500 dark:text-primary-300">
+        <p className="text-center text-sm">
           Don't have an account?{" "}
-          <Link to="/register" className="font-semibold text-secondary-500 hover:text-secondary-400 hover:cursor-pointer hover:underline transition-colors">
+          <Link to="/register" className="font-semibold text-secondary-400 hover:text-secondary-400 hover:cursor-pointer hover:underline transition-colors">
             Create Account
           </Link>
         </p>

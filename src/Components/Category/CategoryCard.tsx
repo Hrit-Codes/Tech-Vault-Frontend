@@ -17,9 +17,9 @@ export default function CategoryCard({image,name,subtitle}:CategoryCardProps){
                 <span className="absolute w-full h-full z-10 bg-black/10">
                 </span>
 
-                <span className="hidden group-hover:block absolute top-70 left-5 w-full h-full z-20">
-                    <h3 className="font-semibold">{name}</h3>
-                    <p className="text-xs">{subtitle}</p>
+                <span className="hidden group-hover:block bg-black/50 absolute top-70 px-5 py-2 w-full h-full z-20">
+                    <h3 className="font-semibold text-white">{name}</h3>
+                    <p className="text-xs text-primary-400">{subtitle}</p>
                 </span>
             </div>
 

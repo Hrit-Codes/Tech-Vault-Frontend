@@ -11,11 +11,11 @@ export default function OtpForm({email, setOtpVerification}:OtpFormProps) {
     return (
         <div className="w-full h-full">
             {/* Header */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
                 <h1 className="text-3xl font-bold">Verify Your Email</h1>
-                <p className="text-sm text-primary-500 dark:text-primary-300">
+                <h3 className="text-sm text-gray-700 dark:text-gray-400">
                     Enter the 6-digit code sent to your email address
-                </p>
+                </h3>
             </div>
 
             {/* Form */}
@@ -48,7 +48,7 @@ export default function OtpForm({email, setOtpVerification}:OtpFormProps) {
             </form>
 
             {/* Resend */}
-            <p className="text-center text-sm text-primary-500 dark:text-primary-300 mt-6">
+            <p className="text-center text-sm  mt-6">
                 Didn't receive the code?{" "}
                 <button
                     type="button"
@@ -61,7 +61,7 @@ export default function OtpForm({email, setOtpVerification}:OtpFormProps) {
             </p>
 
             {/* Footer */}
-            <p className="text-center text-sm text-primary-500 dark:text-primary-300 mt-3">
+            <p className="text-center text-sm mt-3">
                 Wrong email?{" "}
                 <span onClick={()=>setOtpVerification(false)} className="font-semibold text-secondary-500 hover:text-secondary-400 transition-colors hover:underline hover:cursor-pointer">
                     Go Back

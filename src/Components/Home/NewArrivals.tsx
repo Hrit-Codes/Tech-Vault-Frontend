@@ -38,12 +38,12 @@ export default function NewArrivals() {
       {/* Header */}
       <div className="flex items-start justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-primary-900 dark:text-white">
+          <h2 className=" font-bold ">
             New Arrivals
           </h2>
-          <p className="text-sm text-primary-400 dark:text-primary-300 mt-1">
+          <h3 className="text-gray-700 dark:text-gray-400 mt-1">
             The latest in precision engineering.
-          </p>
+          </h3>
         </div>
         <button className="text-sm text-secondary-500 hover:text-secondary-600 font-medium transition-colors">
           View All
