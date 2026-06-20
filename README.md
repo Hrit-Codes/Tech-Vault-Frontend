@@ -1,73 +1,98 @@
-# React + TypeScript + Vite
+# Tech Vault
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack tech solutions e-commerce platform — built as my final-semester (7th sem, CSIT) project.
 
-Currently, two official plugins are available:
+> 🚧 **Status: In Development** — this project is actively being built. Features and setup instructions below will evolve as development progresses.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Live preview:** [tech-vault-cyan.vercel.app](https://tech-vault-cyan.vercel.app/)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## About
 
-## Expanding the ESLint configuration
+Tech Vault is a tech-focused online store designed to deliver a smooth shopping experience for tech products — from browsing and checkout to order tracking. The project emphasizes secure authentication, local payment integration, and an AI-assisted shopping experience.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Planned Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 🔐 **Google OAuth Login** — secure, frictionless authentication
+- 💳 **Local Payment Integration** — eSewa & Khalti payment gateways
+- 🔔 **Real-Time Order Updates** — live order status and notifications
+- 🤖 **AI Shopping Assistant** — chatbot to help customers find the right products
+- 🛍️ **Product Catalog** — browsing, filtering, and search
+- 📦 **Order Management** — cart, checkout, and order history
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js, React, TypeScript |
+| Styling | Tailwind CSS |
+| Database | PostgreSQL |
+| Auth | Google OAuth |
+| Payments | eSewa, Khalti |
+| AI | AI-integrated chat assistant |
+
+## Getting Started
+
+> ⚠️ Setup steps below are a starting template — update them once the project structure and scripts are finalized.
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- PostgreSQL instance (local or hosted)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Hrit-Codes/Tech-Vault-Frontend.git
+cd Tech-Vault-Frontend
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Fill in your database, OAuth, and payment gateway credentials
+
+# Run the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Environment Variables
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+> Update this list as features are implemented.
+
+```env
+DATABASE_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+ESEWA_MERCHANT_ID=
+KHALTI_SECRET_KEY=
 ```
+
+## Roadmap
+
+- [ ] Product catalog & search
+- [ ] Cart & checkout flow
+- [ ] Google OAuth integration
+- [ ] eSewa & Khalti payment integration
+- [ ] Real-time order notifications
+- [ ] AI chat assistant
+- [ ] Admin dashboard
+
+## Author
+
+**Hrit Amatya**
+Full Stack Developer | CSIT, Trinity International College
+
+- GitHub: [@Hrit-Codes](https://github.com/Hrit-Codes)
+- LinkedIn: [hrit-amatya](https://www.linkedin.com/in/hrit-amatya-b23289379/)
+- Portfolio: [hrit-digital-world.vercel.app](https://hrit-digital-world.vercel.app/)
+
+## License
+
+This project is currently a personal academic project. License to be determined.
