@@ -60,6 +60,7 @@ export default function NewArrivals() {
               subtitle={product.subtitle}
               price={product.price}
               isNew={product.isNew}
+              bgColor="bg-section"
             />
           </div>
         ))}

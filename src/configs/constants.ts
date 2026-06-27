@@ -1,4 +1,5 @@
 import { Battery, Cpu, HardDrive, LayoutGrid, MemoryStick, Monitor, ShoppingBag, SlidersHorizontal, Zap } from "lucide-react";
+import SonicPodPro from '@/Assets/Products/SonicPodPro.webp'
 
 export const product = {
   name: "ProBook Ultra X1",
@@ -75,4 +76,18 @@ export const reviews = [
     rating: 5,
     text: "I've been a Windows user for 15 years, but the Ultra X1 made me switch to Mac. The battery life is unbelievable - I can go two full workdays without charging. The display makes my photo editing feel like I'm looking at prints. Absolutely worth every penny.",
     }
+];
+
+export const categories=[
+  "Earbuds","Smartwatches","Laptops","Tablets"
+]
+
+export const earbuds = [
+  { id: 1, image: SonicPodPro, name: "EarBuds Pro", subtitle: "Active Noise Cancellation", price: 179.00, isNew: true },
+  { id: 2, image: SonicPodPro, name: "AirBeam Elite", subtitle: "Spatial Audio", price: 149.00 },
+  { id: 3, image: SonicPodPro, name: "SonicBuds X", subtitle: "30Hr Battery Life", price: 99.00 },
+  { id: 4, image: SonicPodPro, name: "NoiseFree Max", subtitle: "Hybrid ANC", price: 219.00, isNew: true },
+  { id: 5, image: SonicPodPro, name: "BassDrop Pro", subtitle: "Deep Bass Edition", price: 129.00 },
+  { id: 6, image: SonicPodPro, name: "ClearTone X", subtitle: "Crystal Clear Audio", price: 89.00 },
+  { id: 7, image: SonicPodPro, name: "StudioBuds Max", subtitle: "Studio Quality Sound", price: 259.00, isNew: true },
 ];
