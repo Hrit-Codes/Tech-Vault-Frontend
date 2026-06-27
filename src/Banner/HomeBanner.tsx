@@ -31,7 +31,7 @@ export default function HomeBannerSection() {
               <button className="px-6 py-3 bg-primary-500 text-white font-semibold rounded-xl hover:bg-primary-500/90 cursor-pointer transition">
               Shop Now
               </button>
-              <button className="px-6 py-3 border border-[#60A5FA]/40 rounded-xl  hover:bg-secondary-200/30 cursor-pointer transition">
+              <button className="px-6 py-3 border border-secondary-400 rounded-xl  hover:bg-secondary-200/30 cursor-pointer transition">
               Browse Categories
               </button>
           </div>
