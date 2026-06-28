@@ -15,7 +15,7 @@ export default function Footer() {
 
     return (
         <footer className="w-full bg-section-alternative border-t border-secondary-400/10 pt-16 pb-8">
-            <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+            <div className="max-w-6xl mx-auto px-6 ">
 
                 {/* Main Grid Structure */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
