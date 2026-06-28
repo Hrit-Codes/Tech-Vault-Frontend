@@ -12,7 +12,7 @@ export default function HomeBannerSection() {
         {/* Left content */}
         <div className="space-y-6 flex flex-col px-2 lg:px-12  items-center lg:items-start text-center lg:text-left">
           <div className="space-y-4">
-          <span className="inline-block px-4 py-1 text-sm bg-secondary-400/10 text-primary-400 rounded-full border border-secondary-400/30 font-medium">
+          <span className="inline-block px-4 py-1 text-sm bg-secondary-800/10 text-primary-400 rounded-full border border-secondary-400/30 font-semibold">
               Nepal's Trusted Tech Store 🇳🇵
           </span>
 

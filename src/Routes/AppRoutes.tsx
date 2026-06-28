@@ -8,7 +8,7 @@ import PublicRoute from "../Layout/PublicLayout";
 import ProductDetailPage from "../Page/ProductDetail";
 import RegisterPage from "../Page/Register";
 import ShopPage from "../Page/Shop";
-// import AboutUsPage from "../Page/AboutUs";
+import AboutUsPage from "../Page/AboutUs";
 
 export default function AppRoutes(){
     return(
@@ -19,7 +19,7 @@ export default function AppRoutes(){
                 <Route path="/wishlist" element={<WishlistPage/>}/>
                 <Route path="/product" element={<ProductDetailPage/>}/>
                 <Route path="/shop" element={<ShopPage/>}/>
-                {/* <Route path="/aboutus" element={<AboutUsPage/>}/> */}
+                <Route path="/aboutus" element={<AboutUsPage/>}/>
             </Route>
             <Route element={<PublicRoute/>}>
                 <Route element={<AuthLayout/>}>

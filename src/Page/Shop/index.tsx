@@ -12,11 +12,11 @@ export default function ShopPage(){
                 {/* Category list */}
                 <div className="w-full max-w-6xl mx-auto ">
                     <div className="max-w-2xl flex gap-2 mx-auto ">
-                        <button className="w-full p-3 border border-secondary-400 hover:bg-secondary-200/30 rounded-full hover:cursor-pointer hover:bg-primary-500 font-semibold hover:text-white">
+                        <button className="w-full p-3 border border-primary-400 hover:bg-primary-400/80 rounded-full hover:cursor-pointer font-semibold hover:text-white">
                             All
                         </button>
                         {categories.map((category,index)=>(
-                            <button key={index} className="w-full p-3 border border-secondary-400 hover:bg-secondary-200/30 rounded-full hover:cursor-pointer  hover:text-white font-semibold">
+                            <button key={index} className="w-full p-3 border border-primary-400 hover:bg-primary-400/80 rounded-full hover:cursor-pointer  hover:text-white font-semibold">
                                 {category}
                             </button>
                         ))}
