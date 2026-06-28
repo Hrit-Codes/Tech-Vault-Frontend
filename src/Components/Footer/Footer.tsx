@@ -14,8 +14,24 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="w-full bg-section-alternative border-t border-secondary-400/10 pt-16 pb-8">
+        <footer className="w-full bg-section-alternative border-t dark:border-white border-black pt-20 pb-8">
             <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+
+                {/* Pre-footer CTA strip
+                <div className="w-full bg-section-alternative mb-10 py-8">
+                    <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <h3 className="font-bold  text-lg">Ready to upgrade your tech?</h3>
+                            <p className=" text-sm">Fast delivery across Nepal. Genuine products guaranteed.</p>
+                        </div>
+                        <button
+                            onClick={() => navigate("/shop")}
+                            className="px-6 py-3 rounded-xl bg-white text-primary-600 text-sm font-bold hover:bg-primary-50 transition-colors whitespace-nowrap"
+                        >
+                            Shop Now →
+                        </button>
+                    </div>
+                </div> */}
 
                 {/* Main Grid Structure */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
@@ -119,7 +135,7 @@ export default function Footer() {
                 </div>
 
                 {/* Sub-Footer Copyright Area */}
-                <div className="border-t border-secondary-400/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-description opacity-80">
+                <div className="border-t border-primary-400 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-description opacity-80">
                     <p className="tracking-wide">
                         &copy; 2026 <a href="https://magnas.com.np/" className="hover:text-primary-400 font-semibold transition-colors">Magnas Infotech Solutions</a>. All rights reserved.
                     </p>

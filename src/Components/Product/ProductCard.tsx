@@ -10,7 +10,7 @@ interface ProductCardProps {
   bgColor: string;
 }
 
-export default function ProductCard({ image, name, subtitle, price, isNew, bgColor}: ProductCardProps) {
+export default function ProductCard({ image, name, subtitle, price, isNew, bgColor }: ProductCardProps) {
   const navigate = useNavigate();
 
   return (
@@ -23,7 +23,7 @@ export default function ProductCard({ image, name, subtitle, price, isNew, bgCol
 
         {/* Badges */}
         {isNew && (
-          <span className="absolute top-3 left-3 z-10 bg-primary-900 dark:bg-white text-white dark:text-primary-900 text-xs font-bold px-3 py-1 rounded-full tracking-wide">
+          <span className="absolute top-3 left-3 z-10 bg-secondary-500 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide uppercase shadow-sm">
             New
           </span>
         )}
@@ -31,10 +31,10 @@ export default function ProductCard({ image, name, subtitle, price, isNew, bgCol
         {/* Wishlist */}
         <button
           onClick={(e) => e.stopPropagation()}
-          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm hover:scale-110 transition-transform hover:cursor-pointer"
+          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm hover:scale-110 transition-transform hover:cursor-pointer border border-secondary-400/5"
           aria-label="Add to wishlist"
         >
-          <Heart size={20} strokeWidth={3.5} className="text-primary-400 hover:fill-primary-400 transition-all" />
+          <Heart size={20} strokeWidth={3.5} className="text-secondary-400 hover:fill-secondary-400 transition-all" />
         </button>
 
         {/* Image */}
@@ -47,9 +47,9 @@ export default function ProductCard({ image, name, subtitle, price, isNew, bgCol
         {/* Add to Cart — slides up on hover */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out "
+          className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
         >
-          <button className="w-full flex items-center justify-center gap-2 bg-primary-900 dark:bg-white text-white dark:text-primary-900 py-3 text-sm font-semibold tracking-wide hover:bg-primary-700 dark:hover:bg-primary-100 transition-colors hover:cursor-pointer">
+          <button className="w-full flex items-center justify-center gap-2 bg-primary-500 text-white py-3.5 text-sm font-semibold tracking-wide hover:bg-primary-600 transition-colors hover:cursor-pointer">
             <ShoppingCart size={16} />
             Add to Cart
           </button>
@@ -59,10 +59,10 @@ export default function ProductCard({ image, name, subtitle, price, isNew, bgCol
       {/* Info */}
       <div className="flex items-start justify-between mt-3 px-1">
         <div className="flex flex-col gap-0.5">
-          <h3 className="font-semibold">{name}</h3>
-          <p className="text-sm font-semibold text-primary-400 dark:text-primary-400">{subtitle}</p>
+          <h3 className="font-semibold text-base">{name}</h3>
+          <p className="text-sm font-semibold text-description">{subtitle}</p>
         </div>
-        <h3 className=" font-bold shrink-0 ml-3 mt-0.5">
+        <h3 className="font-bold shrink-0 ml-3 mt-0.5">
           ${price.toFixed(2)}
         </h3>
       </div>

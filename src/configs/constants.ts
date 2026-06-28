@@ -147,3 +147,18 @@ export const reasons = [
     highlight: "Instant Claim",
   },
 ];
+
+export const navItems=[
+    {
+        label:"Shop",
+        path:"/shop"
+    },
+    {
+        label:"About Us",
+        path:"/aboutus"
+    },
+    {
+        label:"Support",
+        path:"/"
+    },
+]
