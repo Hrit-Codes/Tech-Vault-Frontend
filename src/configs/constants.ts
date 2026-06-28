@@ -91,3 +91,59 @@ export const earbuds = [
   { id: 6, image: SonicPodPro, name: "ClearTone X", subtitle: "Crystal Clear Audio", price: 89.00 },
   { id: 7, image: SonicPodPro, name: "StudioBuds Max", subtitle: "Studio Quality Sound", price: 259.00, isNew: true },
 ];
+
+export const promises = [
+  {
+    title: "Precision Engineering",
+    description: "Micron-perfect tolerance in every single component we manufacture."
+  },
+  {
+    title: "Minimalist Design",
+    description: "Focusing on the essence. Reducing noise to amplify your performance."
+  },
+  {
+    title: "Ethical Sourcing",
+    description: "Responsible materials for a sustainable technological future."
+  },
+  {
+    title: "Customer Centricity",
+    description: "Personalized support that respects your time and intelligence."
+  }
+];
+
+export const stats = [
+  {
+    value: "50k+",
+    label: "PRODUCTS CRAFTED"
+  },
+  {
+    value: "120+",
+    label: "DESIGN AWARDS"
+  },
+  {
+    value: "15+",
+    label: "GLOBAL OFFICES"
+  },
+  {
+    value: "24/7",
+    label: "EXPERT SUPPORT"
+  }
+];
+
+export const reasons = [
+  {
+    title: "Engineered for Performance",
+    description: "Every accessory undergoes rigorous acoustic and structural calibration to match international premium standards.",
+    highlight: "100% QC Tested",
+  },
+  {
+    title: "Designed in Nepal",
+    description: "Tailored localized tech architecture and design aesthetics optimized specifically for the modern lifestyle.",
+    highlight: "Local Innovation",
+  },
+  {
+    title: "1-Year Direct Warranty",
+    description: "No-hassle instant replacements and dedicated customer support counters across major tech hubs.",
+    highlight: "Instant Claim",
+  },
+];

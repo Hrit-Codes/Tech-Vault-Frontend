@@ -63,7 +63,7 @@ export default function ProductDetailPage() {
                 <h1 className="text-4xl font-bold ">
                 {product.name}
                 </h1>
-                <p className="text-sm leading-relaxed ">
+                <p className="text-sm leading-relaxed text-description">
                 {product.description}
                 </p>
             </div>
@@ -114,7 +114,7 @@ export default function ProductDetailPage() {
             <div className="w-full max-w-6xl mx-auto py-14">
             <div className="flex flex-col gap-3 text-center">
                 <h2 className="text-3xl font-semibold">Technical Specifications</h2>
-                <h3 className="text-sm text-gray-600 dark:text-gray-400">Precision tuned hardware components designed to deliver unparalled performance for demanding creative workflows.</h3>
+                <h3 className="text-sm text-description">Precision tuned hardware components designed to deliver unparalled performance for demanding creative workflows.</h3>
             </div>
 
             <div className="flex flex-row flex-wrap my-10 gap-6">
@@ -128,7 +128,7 @@ export default function ProductDetailPage() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <h3 className="text-base font-bold">{specification.title}</h3>
-                            <p className="text-sm leading-relaxed">{specification.description}</p>
+                            <p className="text-sm leading-relaxed text-description">{specification.description} </p>
                         </div>
                     </div>
                 ))}
@@ -187,7 +187,7 @@ export default function ProductDetailPage() {
                                     ))}
                                 </div>
                             </div>
-                            <p className="text-sm leading-relaxed ">
+                            <p className="text-sm leading-relaxed text-description">
                                 "{review.text}"
                             </p>
                         </div>
