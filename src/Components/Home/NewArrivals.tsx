@@ -7,6 +7,7 @@ import SoundCoreMax from '@/Assets/Products/SoundCoreMax.webp'
 import SonicPodPro from '@/Assets/Products/SonicPodPro.webp'
 
 const Slider = (SliderComponent as any).default || SliderComponent;
+
 const newArrivals = [
   { id: 1, image: UltraWatch, name: 'UltraWatch Series 8', subtitle: 'Midnight Aluminum', price: 399.00, isNew: true },
   { id: 2, image: SonicPodPro, name: 'SonicPod Pro', subtitle: 'Noise Cancelling', price: 249.00 },
@@ -38,14 +39,14 @@ export default function NewArrivals() {
       {/* Header */}
       <div className="flex items-start justify-between mb-8">
         <div>
-          <h2 className=" font-bold ">
+          <h2 className="text-2xl font-bold">
             New Arrivals
           </h2>
-          <h3 className="text-gray-700 dark:text-gray-400 mt-1">
+          <h3 className="text-sm font-normal text-description leading-relaxed mt-1">
             The latest in precision engineering.
           </h3>
         </div>
-        <button className="text-sm text-secondary-500 hover:text-secondary-600 font-medium transition-colors">
+        <button className="text-sm text-secondary-500 hover:text-secondary-600 font-semibold transition-colors cursor-pointer">
           View All
         </button>
       </div>

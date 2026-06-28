@@ -1,69 +1,115 @@
-import { Heart, ShoppingCart} from 'lucide-react';
-import { User } from 'lucide-react';
-import { Search } from 'lucide-react';
-import { navItems } from '../../Constants';
+import { Heart, ShoppingCart, Search, User, Menu, X } from 'lucide-react';
+import { useState, useRef } from 'react';
 import MainLogo from './MainLogo';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { navItems } from '../../configs/constants';
 
-export default function Header(){
+interface NavItem {
+    label: string;
+    path: string;
+}
 
-    // const {setIsCartOpen}=useCart();
+export default function Header() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const menuItemsRef = useRef<(HTMLButtonElement | null)[]>([]);
+    const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0, opacity: 0 });
 
-    const navigate= useNavigate();
+    const isHomePage = location.pathname === "/";
 
-    // const [searchbarOpen, setSearchbarOpen]=useState<Boolean>(false);
+    const updateSlider = (index: number | null) => {
+        if (index === null || !menuItemsRef.current[index]) {
+            setSliderStyle((prev) => ({ ...prev, opacity: 0 }));
+            return;
+        }
+        const el = menuItemsRef.current[index];
+        if (el) setSliderStyle({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
+    };
 
-    return(
+    return (
         <>
-        <header className="absolute z-10 top-4 left-0 right-0 px-4 font-outfit">
+        <header className="absolute top-0 left-0 right-0 z-50 px-6 py-4">
             <div className="w-full max-w-7xl mx-auto flex flex-row justify-between items-center">
-                {/*Company Logo */}
+
+                {/* Logo */}
                 <div className="shrink-0">
-                    <MainLogo/>
+                    <MainLogo />
                 </div>
 
-                {/*Nav Menu*/}
-                <div className="hidden md:flex flex-row justify-evenly gap-2 items-center space-x-5 px-5 py-4 rounded-full bg-primary-500">
-                    {navItems.map((item)=>{
-                        return(
-                            <h3 key={item.label} className="hover:cursor-pointer whitespace-nowrap hover:text-white dark:hover:text-black font-semibold">{item.label}</h3>
-                        )
+                {/* Desktop Nav */}
+                <div className={`hidden md:flex relative items-center gap-1 backdrop-blur-md border rounded-full px-2 py-2 ${
+                    isHomePage
+                        ? "bg-black/10 dark:bg-white/5 border-black/10 dark:border-white/10"
+                        : "bg-white/80 dark:bg-primary-950/80 border-black/10 dark:border-white/10 shadow-sm"
+                }`}>
+                    {/* Sliding indicator */}
+                    <div
+                        className="absolute h-[calc(100%-8px)] top-1 rounded-full bg-primary-500 transition-all duration-300 ease-out pointer-events-none"
+                        style={{ left: sliderStyle.left, width: sliderStyle.width, opacity: sliderStyle.opacity }}
+                    />
+                    {navItems.map((item: NavItem, idx: number) => {
+                        const isActive = location.pathname === item.path && !isHomePage;
+                        return (
+                            <button
+                                key={item.label}
+                                ref={(el) => { menuItemsRef.current[idx] = el; }}
+                                onClick={() => navigate(item.path)}
+                                onMouseEnter={() => updateSlider(idx)}
+                                onMouseLeave={() => updateSlider(null)}
+                                className={`relative z-10 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 hover:cursor-pointer ${
+                                    isActive
+                                        ? "bg-primary-500 text-white"
+                                        : isHomePage
+                                            ? "text-primary-900 dark:text-white hover:text-white"
+                                            : "text-primary-900 dark:text-white hover:text-white"
+                                }`}
+                            >
+                                {item.label}
+                            </button>
+                        );
                     })}
                 </div>
-                
-                {/*ShoppingCart + User Profile*/}
-                <div className="flex flex-row justify-evenly items-center gap-4 shrink-0">
-                    {/* {searchbarOpen? (
-                        <div className="relative">
-                        <div className="p-[2px] rounded-full animate-in fade-in slide-in-from-right-5 duration-300">
-                            <div className="bg-black/50 backdrop-blur-sm rounded-full flex items-center">
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                className="bg-transparent text-white px-4 py-2 outline-none w-48 placeholder:text-white/50 text-sm"
-                                autoFocus
-                            />
-                            <button
-                                onClick={() => setSearchbarOpen(false)}
-                                className="p-2 text-white/80 hover:text-white transition-colors mr-1 hover:cursor-pointer"
-                            >
-                                <X size={18} />
-                            </button>
-                            </div>
-                        </div>
-                        </div>
-                    ):(
-                        <Search onClick={()=>setSearchbarOpen(true)} className="text-white/50 hover:cursor-pointer hover:text-white"/>
-                    )} */}
-                    <Search className=" hover:cursor-pointer hover:text-primary-400"/>
-                    <Heart className=" hover:cursor-pointer hover:text-primary-400" onClick={()=>navigate("/wishlist")}/>
-                    <ShoppingCart className="hover:cursor-pointer hover:text-primary-400" />
-                    <User className=" hover:cursor-pointer hover:text-primary-400" onClick={()=>navigate("/login")}/>
-                </div>
 
+                {/* Icons */}
+                <div className="flex flex-row items-center gap-4 shrink-0">
+                    <Search size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
+                    <Heart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/wishlist")} />
+                    <ShoppingCart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
+                    <User size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/login")} />
+
+                    <button
+                        className="md:hidden hover:text-primary-400 transition-colors"
+                        onClick={() => setMobileOpen((p) => !p)}
+                        aria-label="Toggle menu"
+                    >
+                        {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+                    </button>
+                </div>
             </div>
 
+            {/* Mobile Menu */}
+            {mobileOpen && (
+                <div className="md:hidden mt-3 mx-auto max-w-7xl bg-white dark:bg-primary-950 border border-black/10 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+                    {navItems.map((item: NavItem) => {
+                        const isActive = location.pathname === item.path;
+                        return (
+                            <button
+                                key={item.label}
+                                onClick={() => { navigate(item.path); setMobileOpen(false); }}
+                                className={`w-full text-left px-6 py-4 text-sm font-semibold border-b border-black/5 dark:border-white/5 last:border-0 transition-colors hover:cursor-pointer ${
+                                    isActive
+                                        ? "text-primary-500 bg-primary-50 dark:bg-primary-900/30"
+                                        : "text-primary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/20"
+                                }`}
+                            >
+                                {item.label}
+                            </button>
+                        );
+                    })}
+                </div>
+            )}
         </header>
         </>
-    )
+    );
 }
