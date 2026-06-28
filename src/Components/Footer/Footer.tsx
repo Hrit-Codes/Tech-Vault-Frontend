@@ -14,8 +14,8 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="w-full bg-section-alternative border-t dark:border-white border-black pt-20 pb-8">
-            <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
+        <footer className="w-full bg-section-alternative border-t border-secondary-400/10 pt-16 pb-8">
+            <div className="max-w-6xl mx-auto px-6 ">
 
                 {/* Pre-footer CTA strip
                 <div className="w-full bg-section-alternative mb-10 py-8">
