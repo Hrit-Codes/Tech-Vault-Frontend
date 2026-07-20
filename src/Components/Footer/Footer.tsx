@@ -1,17 +1,17 @@
 import companyLogo from "@/Assets/Logo.webp"
 import { useState } from "react";
 import type { ReactNode } from "react";
-import { Mail, Phone, MapPin, Truck, ShieldCheck, BadgeCheck, Headset, ChevronDown, ArrowUp } from "lucide-react";
+import { Mail, Phone, MapPin, ChevronDown, ArrowUp } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { SiVisa, SiMastercard } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 
-const trustBadges = [
-    { icon: Truck, title: "Nationwide Delivery", desc: "2–5 day dispatch across Nepal" },
-    { icon: ShieldCheck, title: "Secure Checkout", desc: "Encrypted payments, every order" },
-    { icon: BadgeCheck, title: "100% Genuine", desc: "Authorized dealer warranty" },
-    { icon: Headset, title: "Real Support", desc: "Humans on call, not bots" },
-];
+// const trustBadges = [
+//     { icon: Truck, title: "Nationwide Delivery", desc: "2–5 day dispatch across Nepal" },
+//     { icon: ShieldCheck, title: "Secure Checkout", desc: "Encrypted payments, every order" },
+//     { icon: BadgeCheck, title: "100% Genuine", desc: "Authorized dealer warranty" },
+//     { icon: Headset, title: "Real Support", desc: "Humans on call, not bots" },
+// ];
 
 const socials = [
     { label: "Facebook", icon: FaFacebookF, url: "#" },
