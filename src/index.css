@@ -168,6 +168,11 @@ body {
   float: left;
   height: 100%;
   min-height: 1px;
+  overflow: hidden;
+}
+
+.slick-slide > div {
+  min-width: 0;
 }
 
 [dir='rtl'] .slick-slide {

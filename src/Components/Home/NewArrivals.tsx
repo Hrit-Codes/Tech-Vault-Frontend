@@ -5,6 +5,7 @@ import MacbookAir from '@/Assets/Products/MacbookAir15.webp'
 import IpadPro from '@/Assets/Products/IpadPro.webp'
 import SoundCoreMax from '@/Assets/Products/SoundCoreMax.webp'
 import SonicPodPro from '@/Assets/Products/SonicPodPro.webp'
+import { useEffect, useState } from "react";
 
 const Slider = (SliderComponent as any).default || SliderComponent;
 
@@ -16,22 +17,34 @@ const newArrivals = [
   { id: 5, image: SoundCoreMax , name: 'SoundCore Max', subtitle: '360° Audio', price: 199.00 },
 ];
 
+function getSlidesToShow(width: number) {
+  if (width < 640) return 2;
+  if (width < 1024) return 3;
+  return 4;
+}
+
 export default function NewArrivals() {
+  const [slidesToShow, setSlidesToShow] = useState(() =>
+    getSlidesToShow(typeof window === "undefined" ? 1280 : window.innerWidth)
+  );
+
+  useEffect(() => {
+    const onResize = () => setSlidesToShow(getSlidesToShow(window.innerWidth));
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   const settings = {
     dots: false,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow,
     slidesToScroll: 1,
     arrows: false,
     pauseOnHover: true,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
-    ],
   };
 
   return (
@@ -54,7 +67,7 @@ export default function NewArrivals() {
       {/* Slider */}
       <Slider {...settings}>
         {newArrivals.map((product) => (
-          <div key={product.id} className="px-3">
+          <div key={product.id} className="px-2 sm:px-4 md:px-6">
             <ProductCard
               image={product.image}
               name={product.name}
