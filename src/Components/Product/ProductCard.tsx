@@ -16,7 +16,7 @@ export default function ProductCard({ image, name, subtitle, price, isNew, bgCol
   return (
     <div
       onClick={() => navigate("/product")}
-      className="relative flex flex-col cursor-pointer group"
+      className="relative flex flex-col cursor-pointer group overflow-hidden"
     >
       {/* Image Container */}
       <div className={`relative rounded-2xl overflow-hidden aspect-square ${bgColor} p-2`}>
@@ -57,12 +57,12 @@ export default function ProductCard({ image, name, subtitle, price, isNew, bgCol
       </div>
 
       {/* Info */}
-      <div className="flex items-start justify-between mt-3 px-1">
-        <div className="flex flex-col gap-0.5">
-          <h3 className="font-semibold text-base">{name}</h3>
-          <p className="text-sm font-semibold text-description">{subtitle}</p>
+      <div className="flex items-start justify-between gap-2 mt-3 px-1">
+        <div className="flex flex-col gap-0.5 min-w-0">
+          <h3 className="font-semibold text-base truncate">{name}</h3>
+          <p className="text-sm font-semibold text-description truncate">{subtitle}</p>
         </div>
-        <h3 className="font-bold shrink-0 ml-3 mt-0.5">
+        <h3 className="font-bold shrink-0 mt-0.5 text-sm sm:text-base whitespace-nowrap">
           ${price.toFixed(2)}
         </h3>
       </div>
