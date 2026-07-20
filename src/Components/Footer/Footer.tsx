@@ -43,7 +43,7 @@ function FooterColumn({ title, children }: { title: string; children: ReactNode 
                 onClick={() => setOpen((o) => !o)}
                 className="w-full flex items-center justify-between py-1 md:py-0 md:pointer-events-none cursor-pointer md:cursor-default"
             >
-                <h3 className="font-bold text-xs uppercase tracking-wider">{title}</h3>
+                <h3 className="font-bold text-sm uppercase tracking-wider">{title}</h3>
                 <ChevronDown
                     className={`w-4 h-4 text-description md:hidden transition-transform duration-200 ${open ? "rotate-180" : ""}`}
                 />
@@ -78,7 +78,7 @@ export default function Footer() {
                                     <Icon className="w-4 h-4 text-primary-400" />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold">{title}</p>
+                                    <p className="text-base font-bold">{title}</p>
                                     <p className="text-[11px] text-description leading-snug">{desc}</p>
                                 </div>
                             </div>
