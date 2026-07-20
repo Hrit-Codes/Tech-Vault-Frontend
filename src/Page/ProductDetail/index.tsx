@@ -113,7 +113,7 @@ export default function ProductDetailPage() {
       <div className="bg-section-alternative py-8 px-6 border-t border-secondary-400/5">
         <div className="w-full max-w-6xl mx-auto py-14">
           <div className="flex flex-col gap-3 text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold">Technical Specifications</h2>
+            <h2 className="heading-section">Technical Specifications</h2>
             <h3 className="text-sm text-description font-semibold leading-relaxed">
               Precision tuned hardware components designed to deliver unparalleled performance for demanding creative workflows.
             </h3>
@@ -144,7 +144,7 @@ export default function ProductDetailPage() {
 
           {/* Left — Rating Summary */}
           <div className="flex flex-col gap-5">
-            <h2 className="text-3xl font-bold">Customer Reviews</h2>
+            <h2 className="heading-section">Customer Reviews</h2>
 
             <div className="flex items-center gap-3">
               <span className="text-5xl font-bold">{product.rating}</span>

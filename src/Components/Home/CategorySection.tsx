@@ -44,11 +44,11 @@ export default function CategorySection() {
     };
 
     return (
-        <div className="w-full max-w-6xl mx-auto px-6 py-20">
+        <div className="w-full max-w-6xl mx-auto px-6 py-16">
             {/* Header */}
             <div className="flex items-start justify-between mb-8">
                 <div>
-                    <h2 className="text-2xl font-bold">
+                    <h2 className="heading-section">
                         Shop by Category
                     </h2>
                     <h3 className="text-sm font-normal text-description leading-relaxed mt-1">

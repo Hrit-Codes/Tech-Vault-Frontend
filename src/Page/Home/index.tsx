@@ -2,12 +2,14 @@ import HomeBannerSection from "../../Banner/HomeBanner";
 import CategorySection from "../../Components/Home/CategorySection";
 import NewArrivals from "../../Components/Home/NewArrivals";
 import SubscribeSection from "../../Components/Home/SubscribeSection";
+import TrustSection from "../../Components/Home/TrustSection";
 
 export default function HomePage(){
     return(
         <>
         <HomeBannerSection/>
-        <div className="bg-section-alternative">
+        <TrustSection/>
+        <div className="bg-section-alternative py-16">
             <CategorySection/>
             <NewArrivals/>
         </div>

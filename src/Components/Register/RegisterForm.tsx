@@ -18,7 +18,7 @@ export default function RegisterForm({ setShowOtpVerification }: RegisterFormPro
     <div className="w-full h-full">
       {/* Header */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold">Create Account</h1>
+        <h1 className="heading-page">Create Account</h1>
         <h3 className="text-sm text-description font-semibold">Sign up for your premium account.</h3>
       </div>
 

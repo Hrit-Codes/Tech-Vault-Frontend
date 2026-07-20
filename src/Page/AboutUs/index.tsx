@@ -55,7 +55,7 @@ export default function AboutUsPage() {
           </div>
 
           <div className="w-full max-w-6xl mt-40 mx-auto flex flex-col items-center gap-16">
-            <h2 className="w-fit border-b-4 border-secondary-400 pb-1 font-bold text-3xl">Our Promise</h2>
+            <h2 className="heading-section w-fit border-b-4 border-secondary-400 pb-1">Our Promise</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full">
               {promises.map((promise, index) => (
@@ -78,7 +78,7 @@ export default function AboutUsPage() {
           <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-14">
             <div className="flex flex-col items-center text-center gap-3">
               <span className="text-xs font-bold tracking-[0.2em] uppercase text-secondary-400">The Template Advantage</span>
-              <h2 className="text-3xl md:text-4xl font-bold">Why Leading Brands Trust Us</h2>
+              <h2 className="heading-section">Why Leading Brands Trust Us</h2>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
@@ -105,7 +105,7 @@ export default function AboutUsPage() {
         {/* ── 4. VISIT OUR OFFICE ── */}
         <section className="w-full py-30 pb-40 px-6 bg-section">
           <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-4">
-            <h2 className="text-3xl font-bold">Visit Our Main Office</h2>
+            <h2 className="heading-section">Visit Our Main Office</h2>
             <p className="text-sm text-secondary-400 font-medium">123 Precision Way, Silicon Valley, CA 94025</p>
 
             <div className="w-full my-6 border border-primary-100 dark:border-primary-800 rounded-2xl overflow-hidden h-[500px]">
