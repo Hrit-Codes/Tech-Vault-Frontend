@@ -14,7 +14,7 @@ export default function LoginPage() {
 
         {/* Header */}
         <div className="flex flex-col gap-1">
-          <h2 className="text-3xl font-bold">Welcome Back</h2>
+          <h2 className="heading-page">Welcome Back</h2>
           <h3 className="text-sm text-description font-semibold">Sign in to your premium account.</h3>
         </div>
 

@@ -63,13 +63,13 @@ export default function Footer() {
     const navigate = useNavigate();
 
     return (
-        <footer className="relative w-full bg-section-alternative border-t border-secondary-400/10 overflow-hidden">
+        <footer className="relative w-full bg-section-alternative border-t-6 border-secondary-400/10 overflow-hidden">
 
             
 
             <div className="relative z-10">
 
-                {/* Trust badge strip */}
+                {/* Trust badge strip
                 <div className="border-b border-secondary-400/10">
                     <div className="max-w-6xl mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-4 gap-6">
                         {trustBadges.map(({ icon: Icon, title, desc }) => (
@@ -84,7 +84,7 @@ export default function Footer() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
 
                 {/* Main content grid */}
                 <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-12 gap-10">

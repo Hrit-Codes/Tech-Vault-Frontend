@@ -12,7 +12,7 @@ export default function OtpForm({ email, setOtpVerification }: OtpFormProps) {
     <div className="w-full h-full">
       {/* Header */}
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold">Verify Your Email</h1>
+        <h1 className="heading-page">Verify Your Email</h1>
         <h3 className="text-sm text-description font-semibold">
           Enter the 6-digit code sent to your email address
         </h3>

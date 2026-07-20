@@ -45,7 +45,7 @@
 .dark {
   --color-section: #0b0f19;              /* Deep dark background */
   --color-section-alternative: #101829;  /* Slightly lighter card panels */
-  
+
   /* Description text color mapped to standard Tailwind gray-400 HEX */
   --color-description: #d1d5db;
 }
@@ -69,13 +69,28 @@ body {
 
 
   h4{
-    @apply text-lg lg:text-xl text-black font-semibold dark:text-white 
+    @apply text-lg lg:text-xl text-black font-semibold dark:text-white
   }
 
   p{
     @apply dark:text-white text-black font-medium text-sm
   }
 
+}
+
+@layer components {
+  /* Shared type scale: use instead of ad-hoc text/font size combos so
+     headings with the same role stay the same size across pages. */
+
+  /* Standalone page titles: Wishlist, Login, Register, OTP */
+  .heading-page {
+    @apply text-3xl font-bold;
+  }
+
+  /* In-page section titles: "New Arrivals", "Shop by Category", etc. */
+  .heading-section {
+    @apply text-2xl md:text-3xl font-bold;
+  }
 }
 
 /* Custom Scrollbar */
@@ -207,4 +222,14 @@ body {
 
 .slick-arrow.slick-hidden {
   display: none;
+}
+
+/* Continuous marquee (trust strip) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
 }

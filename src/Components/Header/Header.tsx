@@ -61,8 +61,8 @@ export default function Header() {
                                     isActive
                                         ? "bg-primary-500 text-white"
                                         : isHomePage
-                                            ? "text-primary-900 dark:text-white hover:text-white"
-                                            : "text-primary-900 dark:text-white hover:text-white"
+                                            ? " hover:text-white"
+                                            : " hover:text-white"
                                 }`}
                             >
                                 {item.label}
