@@ -1,147 +1,221 @@
 import companyLogo from "@/Assets/Logo.webp"
-import { Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
+import type { ReactNode } from "react";
+import { Mail, Phone, MapPin, Truck, ShieldCheck, BadgeCheck, Headset, ChevronDown, ArrowUp } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { SiVisa, SiMastercard } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
+
+const trustBadges = [
+    { icon: Truck, title: "Nationwide Delivery", desc: "2–5 day dispatch across Nepal" },
+    { icon: ShieldCheck, title: "Secure Checkout", desc: "Encrypted payments, every order" },
+    { icon: BadgeCheck, title: "100% Genuine", desc: "Authorized dealer warranty" },
+    { icon: Headset, title: "Real Support", desc: "Humans on call, not bots" },
+];
+
+const socials = [
+    { label: "Facebook", icon: FaFacebookF, url: "#" },
+    { label: "Instagram", icon: FaInstagram, url: "#" },
+    { label: "X", icon: FaXTwitter, url: "#" },
+    { label: "LinkedIn", icon: FaLinkedinIn, url: "#" },
+];
+
+const shopLinks = [
+    { label: "Browse Categories", href: "/shop" },
+    { label: "New Arrivals", href: "/shop" },
+    { label: "Wishlist", href: "/wishlist" },
+    { label: "Track Order", href: "#" },
+];
+
+const companyLinks = [
+    { label: "About Us", href: "/aboutus" },
+    { label: "Warranty Policy", href: "#" },
+    { label: "Terms & Conditions", href: "#" },
+    { label: "Privacy Policy", href: "#" },
+];
+
+function FooterColumn({ title, children }: { title: string; children: ReactNode }) {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <div className="border-b border-secondary-400/10 md:border-none pb-5 md:pb-0">
+            <button
+                onClick={() => setOpen((o) => !o)}
+                className="w-full flex items-center justify-between py-1 md:py-0 md:pointer-events-none cursor-pointer md:cursor-default"
+            >
+                <h3 className="font-bold text-xs uppercase tracking-wider">{title}</h3>
+                <ChevronDown
+                    className={`w-4 h-4 text-description md:hidden transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+                />
+            </button>
+            <div
+                className={`grid transition-all duration-300 ease-out md:grid-rows-[1fr]! md:opacity-100! ${
+                    open ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"
+                } md:mt-4`}
+            >
+                <div className="overflow-hidden">{children}</div>
+            </div>
+        </div>
+    );
+}
 
 export default function Footer() {
     const navigate = useNavigate();
 
-    const socials = [
-        { label: "Facebook", icon: FaFacebookF, url: "#" },
-        { label: "Instagram", icon: FaInstagram, url: "#" },
-        { label: "X", icon: FaXTwitter, url: "#" },
-        { label: "LinkedIn", icon: FaLinkedinIn, url: "#" }
-    ];
-
     return (
-        <footer className="w-full bg-section-alternative border-t border-secondary-400/10 pt-16 pb-8">
-            <div className="max-w-6xl mx-auto px-6 ">
+        <footer className="relative w-full bg-section-alternative border-t border-secondary-400/10 overflow-hidden">
 
-                {/* Pre-footer CTA strip
-                <div className="w-full bg-section-alternative mb-10 py-8">
-                    <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div>
-                            <h3 className="font-bold  text-lg">Ready to upgrade your tech?</h3>
-                            <p className=" text-sm">Fast delivery across Nepal. Genuine products guaranteed.</p>
-                        </div>
-                        <button
-                            onClick={() => navigate("/shop")}
-                            className="px-6 py-3 rounded-xl bg-white text-primary-600 text-sm font-bold hover:bg-primary-50 transition-colors whitespace-nowrap"
-                        >
-                            Shop Now →
-                        </button>
-                    </div>
-                </div> */}
+            
 
-                {/* Main Grid Structure */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+            <div className="relative z-10">
 
-                    {/* Col 1 – Brand Identity (Spans 5 Columns for balanced weight) */}
-                    <div className="md:col-span-5 flex flex-col gap-5">
-                        <div className="flex items-center gap-4">
-                            <img src={companyLogo} alt="TechVault Logo" className="w-12 h-12 object-contain" />
-                            <div>
-                                <h2 className="font-bold text-xl tracking-tight ">
-                                    TechVault
-                                </h2>
-                                <h4 className="text-[10px] tracking-[0.2em] uppercase text-primary-400 font-semibold">
-                                    &amp; Pvt. Ltd.
-                                </h4>
+                {/* Trust badge strip */}
+                <div className="border-b border-secondary-400/10">
+                    <div className="max-w-6xl mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {trustBadges.map(({ icon: Icon, title, desc }) => (
+                            <div key={title} className="flex items-start gap-3">
+                                <div className="w-9 h-9 rounded-lg bg-section border border-secondary-400/10 flex items-center justify-center shrink-0">
+                                    <Icon className="w-4 h-4 text-primary-400" />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-bold">{title}</p>
+                                    <p className="text-[11px] text-description leading-snug">{desc}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <p className="text-sm leading-relaxed text-description font-normal max-w-sm">
-                            Engineered for those who pursue performance and visual silence. We design premium tech accessories tailored for the modern digital lifestyle across Nepal, delivering uncompromising quality from prototype to box.
-                        </p>
-
-                        {/* Social Icons with Clean Circular Glassmorphism Backgrounds */}
-                        <div className="flex flex-row gap-3 pt-2">
-                            {socials.map(({ label, icon: Icon }) => (
-                                <button 
-                                    key={label} 
-                                    aria-label={label}
-                                    className="w-9 h-9 rounded-full bg-section border border-secondary-400/5 flex items-center justify-center text-description hover:text-primary-400 hover:border-primary-400/30 transition-all duration-200 cursor-pointer shadow-sm"
-                                >
-                                    <Icon className="text-base" />
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Col 2 – Navigation Links (Spans 3 Columns) */}
-                    <div className="md:col-span-3">
-                        <h3 className="font-bold text-sm uppercase tracking-wider mb-4">
-                            Quick Links
-                        </h3>
-                        <div className="w-8 h-0.5 bg-primary-400 mb-6" />
-                        <ul className="space-y-3.5">
-                            {[
-                                { label: "Browse Categories", href: "/categories" },
-                                { label: "New Arrivals",     href: "/new-arrivals" },
-                                { label: "Company Profile",   href: "/company-profile" },
-                                { label: "Terms & Conditions",href: "/terms" },
-                                { label: "Warranty Policy",   href: "/warranty" },
-                            ].map(({ label, href }) => (
-                                <li key={label}>
-                                    <button 
-                                        onClick={() => navigate(href)}
-                                        className="text-sm text-description hover:text-primary-400 transition-colors duration-200 flex items-center gap-2 font-medium cursor-pointer"
-                                    >
-                                        <div className="w-1.5 h-1.5 rounded-full bg-primary-400/40 shrink-0" />
-                                        {label}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Col 3 – Corporate Headquarters (Spans 4 Columns) */}
-                    <div className="md:col-span-4">
-                        <h3 className="font-bold text-sm uppercase tracking-wider mb-4">
-                            Contact Details
-                        </h3>
-                        <div className="w-8 h-0.5 bg-primary-400 mb-6" />
-                        <ul className="space-y-4 text-sm text-description">
-                            
-                            {/* Address Location */}
-                            <li className="flex items-start gap-3">
-                                <MapPin className="w-4 h-4 text-primary-400 shrink-0 mt-0.5" />
-                                <span className="leading-relaxed font-normal">
-                                    New Plaza Putalisadak, Kathmandu, Nepal<br />
-                                    <span className="text-xs opacity-70">Post Box No:- 13965</span>
-                                </span>
-                            </li>
-
-                            {/* Phone Systems */}
-                            <li className="flex items-start gap-3">
-                                <Phone className="w-4 h-4 text-primary-400 shrink-0 mt-0.5" />
-                                <div className="flex flex-col gap-0.5 font-normal">
-                                    <a href="tel:+9779742935093" className="hover:text-primary-400 transition-colors">+977 9742935093</a>
-                                    <a href="tel:+9779861418083" className="hover:text-primary-400 transition-colors">+977 986-1418083</a>
-                                </div>
-                            </li>
-
-                            {/* Email Support Counters */}
-                            <li className="flex items-start gap-3">
-                                <Mail className="w-4 h-4 text-primary-400 shrink-0 mt-0.5" />
-                                <div className="flex flex-col gap-1 font-normal break-all">
-                                    <a href="mailto:info@techvault.com.np" className="hover:text-primary-400 transition-colors">info@techvault.com.np</a>
-                                    <a href="mailto:support@techvault.com.np" className="hover:text-primary-400 transition-colors">support@techvault.com.np</a>
-                                </div>
-                            </li>
-
-                        </ul>
+                        ))}
                     </div>
                 </div>
 
-                {/* Sub-Footer Copyright Area */}
-                <div className="border-t border-primary-400 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-description opacity-80">
-                    <p className="tracking-wide">
-                        &copy; 2026 <a href="https://magnas.com.np/" className="hover:text-primary-400 font-semibold transition-colors">Magnas Infotech Solutions</a>. All rights reserved.
-                    </p>
-                    <div className="flex gap-6">
-                        <a href="/privacy" className="hover:text-primary-400 transition-colors">Privacy Policy</a>
-                        <a href="/sitemap" className="hover:text-primary-400 transition-colors">Sitemap</a>
+                {/* Main content grid */}
+                <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-12 gap-10">
+
+                    {/* Brand column */}
+                    <div className="md:col-span-4 flex flex-col gap-5">
+                        <div className="flex items-center gap-3">
+                            <img src={companyLogo} alt="TechVault Logo" className="w-10 h-10 object-contain rounded-md bg-section border border-secondary-400/10 p-1" />
+                            <div>
+                                <h2 className="font-bold text-lg tracking-tight">TechVault</h2>
+                                <p className="text-[10px] tracking-[0.2em] uppercase text-primary-400 font-semibold">&amp; Pvt. Ltd.</p>
+                            </div>
+                        </div>
+
+                        <p className="text-sm leading-relaxed max-w-xs text-description">
+                            Premium tech accessories engineered for performance and visual silence — curated and shipped across Nepal.
+                        </p>
+
+                        <div className="flex items-center gap-2 text-xs text-description">
+                            <MapPin className="w-3.5 h-3.5 text-secondary-400 shrink-0" />
+                            Kathmandu, Nepal
+                        </div>
+
+                        <div className="flex flex-row gap-2 pt-1">
+                            {socials.map(({ label, icon: Icon, url }) => (
+                                <a
+                                    key={label}
+                                    href={url}
+                                    aria-label={label}
+                                    className="w-9 h-9 rounded-lg bg-section border border-secondary-400/10 flex items-center justify-center text-description hover:text-primary-400 hover:border-primary-400/40 hover:bg-primary-400/5 transition-all duration-200"
+                                >
+                                    <Icon className="text-sm" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Link columns — collapsible on mobile, static on desktop */}
+                    <div className="md:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <FooterColumn title="Shop">
+                            <ul className="space-y-3">
+                                {shopLinks.map(({ label, href }) => (
+                                    <li key={label}>
+                                        <button
+                                            onClick={() => navigate(href)}
+                                            className="text-sm text-description hover:text-primary-400 transition-colors cursor-pointer text-left"
+                                        >
+                                            {label}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </FooterColumn>
+
+                        <FooterColumn title="Company">
+                            <ul className="space-y-3">
+                                {companyLinks.map(({ label, href }) => (
+                                    <li key={label}>
+                                        <button
+                                            onClick={() => navigate(href)}
+                                            className="text-sm text-description hover:text-primary-400 transition-colors cursor-pointer text-left"
+                                        >
+                                            {label}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </FooterColumn>
+                    </div>
+
+                    {/* Contact column */}
+                    <div className="md:col-span-3">
+                        <FooterColumn title="Get in Touch">
+                            <ul className="space-y-4 text-sm text-description">
+                                <li className="flex items-start gap-3">
+                                    <Phone className="w-4 h-4 text-secondary-400 shrink-0 mt-0.5" />
+                                    <div className="flex flex-col gap-0.5">
+                                        <a href="tel:+9779742935093" className="hover:text-primary-400 transition-colors">+977 974-2935093</a>
+                                        <a href="tel:+9779861418083" className="hover:text-primary-400 transition-colors">+977 986-1418083</a>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Mail className="w-4 h-4 text-secondary-400 shrink-0 mt-0.5" />
+                                    <a href="mailto:support@techvault.com.np" className="hover:text-primary-400 transition-colors break-all">
+                                        support@techvault.com.np
+                                    </a>
+                                </li>
+                            </ul>
+                        </FooterColumn>
+                    </div>
+                </div>
+
+                {/* Payment methods strip */}
+                <div className="border-t border-secondary-400/10">
+                    <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <p className="text-[11px] uppercase tracking-wider text-description">Secure payment options</p>
+                        <div className="flex items-center gap-2 flex-wrap justify-center">
+                            <span className="w-11 h-8 rounded-md bg-section border border-secondary-400/10 flex items-center justify-center text-description">
+                                <SiVisa className="text-base" />
+                            </span>
+                            <span className="w-11 h-8 rounded-md bg-section border border-secondary-400/10 flex items-center justify-center text-description">
+                                <SiMastercard className="text-base" />
+                            </span>
+                            {["eSewa", "Khalti", "COD"].map((label) => (
+                                <span
+                                    key={label}
+                                    className="px-3 h-8 rounded-md bg-section border border-secondary-400/10 flex items-center justify-center text-[11px] font-semibold text-description"
+                                >
+                                    {label}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom bar */}
+                <div className="border-t border-secondary-400/10">
+                    <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-description opacity-80">
+                        <p>
+                            &copy; 2026 <a href="https://magnas.com.np/" className="hover:text-primary-400 font-semibold transition-colors">Magnas Infotech Solutions</a>. All rights reserved.
+                        </p>
+                        <div className="hidden lg:flex items-center gap-6">
+                            <a href="/sitemap" className="hover:text-primary-400 transition-colors">Sitemap</a>
+                            <button
+                                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                                aria-label="Back to top"
+                                className="w-8 h-8 rounded-lg bg-section border border-secondary-400/10 flex items-center justify-center hover:text-primary-400 hover:border-primary-400/40 transition-all cursor-pointer"
+                            >
+                                <ArrowUp className="w-3.5 h-3.5" />
+                            </button>
+                        </div>
                     </div>
                 </div>
 
