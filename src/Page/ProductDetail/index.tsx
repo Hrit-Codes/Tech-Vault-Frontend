@@ -1,9 +1,21 @@
 import { useState } from "react";
-import { Heart, ShoppingBag, Star, Ticket } from "lucide-react";
-import { product, specifications, reviews } from "../../configs/constants";
+import { CheckIcon, Heart, ShoppingBag, Star, StarIcon } from "lucide-react";
+import { product, reviews } from "../../configs/constants";
+import ProductDescriptionTab from "../../Components/Product/Tab/ProductDescriptionTab";
+import ProductFeaturesTab from "../../Components/Product/Tab/ProductFeaturesTab";
+import ProductSpecificationTab from "../../Components/Product/Tab/ProductSpecificationTab";
+
+const defaultProductBadges=[
+  "Official Warranty",
+  "VAT Bill Included",
+  "Brand Authorized",
+  "100% Genuine Product",
+  "Free Exchange Up To 7 days"
+]
 
 export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedButton, setSelectedButton]=useState<"description"|"specifications"|"features">("description");
 
   return (
     <div className="w-full bg-section">
@@ -93,23 +105,48 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          {/* Specs Mini Summary */}
-          <div className="grid grid-cols-3 gap-4 pt-2">
-            {product.specs.map(({ icon: Icon, label, sub }) => (
-              <div key={label} className="flex flex-col items-center gap-2 text-center">
-                <Icon size={24} className="text-secondary-400" />
-                <div>
-                  <p className="text-sm font-bold">{label}</p>
-                  <p className="text-xs text-description font-semibold mt-0.5">{sub}</p>
-                </div>
+          {/* Product Badge Summary */}
+          <div className="flex gap-3 flex-wrap">
+            {defaultProductBadges.map((badge, index) => (
+              <div key={index} className="text-description text-sm font-semibold shadow-sm px-4 py-3 rounded-2xl border border-secondary-400/5 bg-section-alternative flex items-center gap-2 hover:border-primary-400/30 transition-colors">
+                <CheckIcon size={16} className="text-secondary-400 shrink-0" />{badge}
               </div>
             ))}
           </div>
 
         </div>
       </div>
+        
+      <div className="border-y border-secondary-400/20 py-32 px-6">
+        <div className="w-full max-w-6xl mx-auto">
+          <div className="w-full flex items-center border-b border-secondary-400/20">
+            {(
+              [
+                { key: "description", label: "Description" },
+                { key: "specifications", label: "Specifications" },
+                { key: "features", label: "Features" },
+              ] as const
+            ).map(({ key, label }) => (
+              <button
+                key={key}
+                onClick={() => setSelectedButton(key)}
+                className={`-mb-px py-4 px-5 text-sm font-semibold border border-neutral-500 transition-colors hover:cursor-pointer ${
+                  selectedButton === key
+                    ? "border-primary-500 text-white bg-primary-500"
+                    : " text-description hover:text-black dark:hover:text-white"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          {selectedButton === "description" && <ProductDescriptionTab />}
+          {selectedButton === "specifications" && <ProductSpecificationTab />}
+          {selectedButton === "features" && <ProductFeaturesTab />}
+        </div>
+      </div>
 
-      {/* Deep Dive Technical Specifications Section */}
+      {/* Deep Dive Technical Specifications Section
       <div className="bg-section-alternative py-8 px-6 border-t border-secondary-400/5">
         <div className="w-full max-w-6xl mx-auto py-14">
           <div className="flex flex-col gap-3 text-center max-w-2xl mx-auto">
@@ -136,7 +173,7 @@ export default function ProductDetailPage() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Customer Reviews Section */}
       <div className="w-full bg-section border-t border-secondary-400/5">
@@ -194,6 +231,12 @@ export default function ProductDetailPage() {
                 </p>
               </div>
             ))}
+
+            <div className="w-full flex justify-center mt-6">
+              <button className="bg-primary-500 py-4 px-10 rounded-full hover:bg-primary-500/90 hover:cursor-pointer text-white font-semibold transition-colors">
+                View More
+              </button>
+            </div>
           </div>
 
         </div>
