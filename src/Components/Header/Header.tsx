@@ -38,10 +38,10 @@ export default function Header() {
                 </div>
 
                 {/* Desktop Nav */}
-                <div className={`hidden md:flex relative items-center gap-1 backdrop-blur-md border rounded-full px-2 py-2 ${
+                <div className={`hidden md:flex relative items-center gap-1 backdrop-blur-md border rounded-full px-2 py-2 dark:bg-white/5 ${
                     isHomePage
-                        ? "bg-black/10 dark:bg-white/5 border-black/10 dark:border-white/10"
-                        : "bg-white/80 dark:bg-primary-950/80 border-black/10 dark:border-white/10 shadow-sm"
+                        ? "bg-black/10border-black/10 dark:border-white/10"
+                        : "bg-white/80  border-black/10 dark:border-white/10 shadow-sm"
                 }`}>
                     {/* Sliding indicator */}
                     <div
@@ -73,7 +73,7 @@ export default function Header() {
 
                 {/* Icons */}
                 <div className="flex flex-row items-center gap-4 shrink-0">
-                    <Search size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
+                    <Search size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/search")} />
                     <Heart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/wishlist")} />
                     <ShoppingCart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
                     <User size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/login")} />
