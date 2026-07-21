@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckIcon, Heart, ShoppingBag, Star, StarIcon } from "lucide-react";
+import { CheckIcon, Heart, ShoppingBag, Star} from "lucide-react";
 import { product, reviews } from "../../configs/constants";
 import ProductDescriptionTab from "../../Components/Product/Tab/ProductDescriptionTab";
 import ProductFeaturesTab from "../../Components/Product/Tab/ProductFeaturesTab";
