@@ -50,7 +50,7 @@ export default function NewArrivals() {
   return (
     <section id="newArrivals" className="w-full max-w-6xl mx-auto px-6 py-16">
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex items-start justify-between mb-12">
         <div>
           <h2 className="heading-section">
             New Arrivals

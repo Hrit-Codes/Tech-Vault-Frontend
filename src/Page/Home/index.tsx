@@ -1,4 +1,5 @@
 import HomeBannerSection from "../../Banner/HomeBanner";
+import BrandsSection from "../../Components/Home/BrandsSection";
 import CategorySection from "../../Components/Home/CategorySection";
 import NewArrivals from "../../Components/Home/NewArrivals";
 import OfferSection from "../../Components/Home/OfferSection";
@@ -14,6 +15,7 @@ export default function HomePage(){
             <CategorySection/>
             <NewArrivals/>
             <OfferSection/>
+            <BrandsSection/>
         </div>
         <SubscribeSection/>
         </>
