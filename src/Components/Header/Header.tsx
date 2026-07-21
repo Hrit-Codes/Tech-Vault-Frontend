@@ -69,7 +69,7 @@ export default function Header() {
 
                 {/* Icons */}
                 <div className="flex flex-row items-center gap-4 shrink-0">
-                    <Search size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
+                    <Search size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/search")} />
                     <Heart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/wishlist")} />
                     <ShoppingCart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
                     <User size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/login")} />

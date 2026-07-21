@@ -8,7 +8,7 @@ export default function ShopPage() {
     <div className="w-full mx-auto flex flex-col">
       <ShopHero />
 
-      <div className="w-full mx-auto py-28 bg-section px-6">
+      <div className="w-full mx-auto py-32 bg-section px-6">
         
         {/* Category list */}
         <div className="w-full max-w-6xl mx-auto">
@@ -28,7 +28,7 @@ export default function ShopPage() {
           
           {/* Products Grid */}
           <div>
-            <div className="w-full my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 gap-y-18">
+            <div className="w-full my-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-18">
               {earbuds.map((product, index) => (
                 <ProductCard 
                   key={index}
