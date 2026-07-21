@@ -28,7 +28,7 @@ export default function ShopPage() {
           
           {/* Products Grid */}
           <div>
-            <div className="w-full my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 gap-y-18">
+            <div className="w-full my-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-18">
               {earbuds.map((product, index) => (
                 <ProductCard 
                   key={index}
