@@ -117,7 +117,7 @@ export default function ProductDetailPage() {
         </div>
       </div>
         
-      <div className="border-y border-secondary-400/20 py-32 px-6">
+      <div className="border-y border-secondary-400/20 py-28 px-6">
         <div className="w-full max-w-6xl mx-auto">
           <div className="w-full flex items-center border-b border-secondary-400/20">
             {(
@@ -177,7 +177,7 @@ export default function ProductDetailPage() {
 
       {/* Customer Reviews Section */}
       <div className="w-full bg-section border-t border-secondary-400/5">
-        <div className="w-full max-w-6xl mx-auto py-20 px-6 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12">
+        <div className="w-full max-w-6xl mx-auto py-28 px-6 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12">
 
           {/* Left — Rating Summary */}
           <div className="flex flex-col gap-5">
