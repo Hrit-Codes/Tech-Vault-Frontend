@@ -1,11 +1,11 @@
 import { CheckCircle, ShieldCheck, Zap, Layers } from "lucide-react";
-import { ShopHero } from "../../Components/Shop/ShopHero";
 import { promises, reasons } from "../../configs/constants";
+import { AboutUsHero } from "../../Components/AboutUs/AboutUsHero";
 
 export default function AboutUsPage() {
   return (
     <div className="w-full mx-auto flex flex-col">
-      <ShopHero />
+      <AboutUsHero/>
 
       <div className="w-full mx-auto bg-section">
 
