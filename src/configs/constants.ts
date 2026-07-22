@@ -1,5 +1,6 @@
 import { Battery, Cpu, HardDrive, LayoutGrid, MemoryStick, Monitor, ShoppingBag, SlidersHorizontal, Zap } from "lucide-react";
 import SonicPodPro from '@/Assets/Products/SonicPodPro.webp'
+import type { blog } from "../Page/Blog/BlogCard";
 
 export const product = {
   name: "ProBook Ultra X1",
@@ -178,6 +179,87 @@ export const navItems=[
     },
     {
         label:"Blogs",
-        path:"/"
+        path:"/blogs"
     },
 ]
+
+export const sampleBlogs: blog[] = [
+  {
+    id: "blog-001",
+    title: "SonicPod Pro: The Future of Immersive Audio",
+    slug: "sonicpod-pro-future-immersive-audio",
+    excerpt:
+      "Discover how the SonicPod Pro redefines spatial sound with cutting‑edge DSP and ergonomic design. A deep dive into the engineering behind the sensation.",
+    featured_image: "@/Assets/Products/SonicPodPro.webp",
+    author_id: "author-1",
+    author_name: "Aria Chen",
+    is_published: true,
+    published_at: "2025-07-15T09:30:00Z",
+    created_at: "2025-07-10T14:20:00Z",
+  },
+  {
+    id: "blog-002",
+    title: "Why Every Audiophile Needs a SonicPod Pro",
+    slug: "why-audiophile-needs-sonicpod-pro",
+    excerpt:
+      "From lossless wireless streaming to custom‑tuned drivers, we break down why this earbud is the new must‑have for serious listeners.",
+    featured_image: "@/Assets/Products/SonicPodPro.webp",
+    author_id: "author-2",
+    author_name: "Marcus Rivera",
+    is_published: true,
+    published_at: "2025-07-18T11:15:00Z",
+    created_at: "2025-07-12T16:45:00Z",
+  },
+  {
+    id: "blog-003",
+    title: "SonicPod Pro vs. AirPods Pro: The Ultimate Showdown",
+    slug: "sonicpod-pro-vs-airpods-pro",
+    excerpt:
+      "We pit the SonicPod Pro against Apple’s titan in noise cancellation, battery life, and audio fidelity – the results may surprise you.",
+    featured_image: "@/Assets/Products/SonicPodPro.webp",
+    author_id: "author-3",
+    author_name: "Priya Sharma",
+    is_published: true,
+    published_at: "2025-07-20T13:00:00Z",
+    created_at: "2025-07-14T10:10:00Z",
+  },
+  {
+    id: "blog-004",
+    title: "How SonicPod Pro is Changing Remote Work",
+    slug: "sonicpod-pro-changing-remote-work",
+    excerpt:
+      "With crystal‑clear mics and adaptive ANC, the SonicPod Pro isn’t just for music – it’s the ultimate productivity partner for WFH warriors.",
+    featured_image: "@/Assets/Products/SonicPodPro.webp",
+    author_id: "author-4",
+    author_name: "Jordan Lee",
+    is_published: true,
+    published_at: "2025-07-22T08:45:00Z",
+    created_at: "2025-07-17T11:30:00Z",
+  },
+  {
+    id: "blog-005",
+    title: "The Design Philosophy Behind SonicPod Pro",
+    slug: "design-philosophy-sonicpod-pro",
+    excerpt:
+      "From the sleek charging case to the ergonomic ear tips, every detail of the SonicPod Pro is crafted for comfort and style – meet the designers.",
+    featured_image: "@/Assets/Products/SonicPodPro.webp",
+    author_id: "author-5",
+    author_name: "Emma Watson",
+    is_published: true,
+    published_at: "2025-07-25T10:20:00Z",
+    created_at: "2025-07-19T09:00:00Z",
+  },
+  {
+    id: "blog-006",
+    title: "SonicPod Pro: 5 Hidden Features You’ll Love",
+    slug: "sonicpod-pro-5-hidden-features",
+    excerpt:
+      "Beyond the specs, we uncover five lesser‑known tricks that make the SonicPod Pro a joy to use – from gesture shortcuts to voice assistant integration.",
+    featured_image: "@/Assets/Products/SonicPodPro.webp",
+    author_id: "author-6",
+    author_name: "David Kim",
+    is_published: true,
+    published_at: "2025-07-28T16:00:00Z",
+    created_at: "2025-07-20T13:15:00Z",
+  },
+];

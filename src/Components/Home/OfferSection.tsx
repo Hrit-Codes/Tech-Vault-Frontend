@@ -7,6 +7,7 @@ import SoundCoreMax from '@/Assets/Products/SoundCoreMax.webp'
 import SonicPodPro from '@/Assets/Products/SonicPodPro.webp'
 import { useEffect, useState } from "react";
 import CountdownTimer from "../ui/CountdownTimer";
+import { useNavigate } from "react-router-dom";
 
 const Slider = (SliderComponent as any).default || SliderComponent;
 
@@ -25,6 +26,7 @@ function getSlidesToShow(width: number) {
 }
 
 export default function OfferSection() {
+  const navigate=useNavigate();
   const [slidesToShow, setSlidesToShow] = useState(() =>
     getSlidesToShow(typeof window === "undefined" ? 1280 : window.innerWidth)
   );
@@ -58,7 +60,7 @@ export default function OfferSection() {
           </h2>
           <CountdownTimer targetDate={"2026-07-30T00:00:00"}/>
         </div>
-        <button className="text-sm self-end text-secondary-500 hover:text-secondary-600 font-semibold transition-colors cursor-pointer">
+        <button onClick={()=>navigate("/offer")} className="text-sm self-end text-secondary-500 hover:text-secondary-600 font-semibold transition-colors cursor-pointer">
           View All
         </button>
       </div>

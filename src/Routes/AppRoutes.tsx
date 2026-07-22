@@ -10,6 +10,8 @@ import RegisterPage from "../Page/Register";
 import ShopPage from "../Page/Shop";
 import AboutUsPage from "../Page/AboutUs";
 import SearchPage from "../Page/Search";
+import OfferPage from "../Page/Offer";
+import BlogPage from "../Page/Blog";
 
 export default function AppRoutes(){
     return(
@@ -22,6 +24,8 @@ export default function AppRoutes(){
                 <Route path="/shop" element={<ShopPage/>}/>
                 <Route path="/aboutus" element={<AboutUsPage/>}/>
                 <Route path="/search" element={<SearchPage/>}/>
+                <Route path="/offer" element={<OfferPage/>}/>
+                <Route path="/blogs" element={<BlogPage/>}/>
             </Route>
             <Route element={<PublicRoute/>}>
                 <Route element={<AuthLayout/>}>

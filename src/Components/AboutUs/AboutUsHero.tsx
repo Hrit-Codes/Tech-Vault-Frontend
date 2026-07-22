@@ -6,9 +6,9 @@ export function AboutUsHero() {
             <HeroBackground/>
             <div className="relative z-10 w-full max-w-6xl mx-auto px-6 flex flex-col items-center text-center gap-8">
                 <div className="flex flex-col gap-4">
-                    <span className="text-xs font-semibold tracking-[0.3em] uppercase text-primary-500">
+                    {/* <span className="text-xs font-semibold tracking-[0.3em] uppercase text-primary-500">
                         Who We Are
-                    </span>
+                    </span> */}
                     <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
                         Built for the{" "}
                         <span className="text-primary-500">relentless</span>
