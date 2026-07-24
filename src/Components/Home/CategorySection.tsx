@@ -8,9 +8,15 @@ import { useEffect, useState } from "react";
 const Slider = (SliderComponent as any).default || SliderComponent;
 
 const categories = [
-    { id: 1, image: Laptop, name: "Laptops"},
-    { id: 2, image: Headphones, name: "Audio"},
-    { id: 3, image: Smartwatch, name: "Wearables"},
+    { id: 1, image: "/Categories/laptops.webp", name: "Laptops"},
+    { id: 2, image: "/Categories/earbuds.webp", name: "Earbuds"},
+    { id: 3, image: "/Categories/mobile-phones.webp", name: "Mobile Phones"},
+    { id: 4, image: "/Categories/smartwatches.webp", name: "Smartwatches"},
+    { id: 5, image: "/Categories/speakers.webp", name: "Speakers"},
+    { id: 6, image: "/Categories/tablets.webp", name: "Tablets"},
+    { id: 7, image: "/Categories/drones.webp", name: "Drones"},
+    { id: 8, image: "/Categories/monitor.webp", name: "Monitors"},
+    { id: 9, image: "/Categories/playstation.webp", name: "Playstation"},
 ];
 
 function getSlidesToShow(width: number) {

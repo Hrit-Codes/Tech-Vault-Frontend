@@ -163,14 +163,19 @@ export default function Footer() {
                                     <Phone className="w-4 h-4 text-secondary-400 shrink-0 mt-0.5" />
                                     <div className="flex flex-col gap-0.5">
                                         <a href="tel:+9779742935093" className="hover:text-primary-400 transition-colors">+977 974-2935093</a>
-                                        <a href="tel:+9779861418083" className="hover:text-primary-400 transition-colors">+977 986-1418083</a>
+                                        <a href="tel:+9779865194466" className="hover:text-primary-400 transition-colors">+977 986-1418083</a>
                                     </div>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <Mail className="w-4 h-4 text-secondary-400 shrink-0 mt-0.5" />
-                                    <a href="mailto:support@techvault.com.np" className="hover:text-primary-400 transition-colors break-all">
-                                        support@techvault.com.np
-                                    </a>
+                                    <div className="flex flex-col gap-0.5">
+                                        <a href="mailto:support@techvault.com.np" className="hover:text-primary-400 transition-colors break-all">
+                                            support@techvault.com.np
+                                        </a>
+                                        <a href="mailto:privhritamatya@gmail.com" className="hover:text-primary-400 transition-colors break-all">
+                                            privhritamatya@gmail.com
+                                        </a>
+                                    </div>
                                 </li>
                             </ul>
                         </FooterColumn>

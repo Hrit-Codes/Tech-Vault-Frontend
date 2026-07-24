@@ -11,7 +11,7 @@ export default function CategoryCard({ image, name }: CategoryCardProps) {
             <img
                 src={image}
                 alt={name}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                className="absolute bg-section inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
             />
 
             {/* Gradient for text legibility */}

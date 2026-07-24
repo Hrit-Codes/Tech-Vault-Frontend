@@ -1,3 +1,4 @@
+import { PromotionalBanners } from "../../Components/Home/PromotionalBanners";
 import ProductCard from "../../Components/Product/ProductCard";
 import BrandSpotlight from "../../Components/Shop/BrandSpotLight";
 import { ShopHero } from "../../Components/Shop/ShopHero";
@@ -10,8 +11,8 @@ export default function ShopPage() {
 
       <div className="w-full mx-auto py-32 bg-section px-6">
         
-        {/* Category list */}
         <div className="w-full max-w-6xl mx-auto">
+          {/* Category list */}
           <div className="max-w-2xl flex flex-wrap justify-center gap-2 mx-auto">
             <button className="px-6 py-3 border border-primary-400 hover:bg-primary-400/80 rounded-full hover:cursor-pointer font-semibold hover:text-white transition-colors">
               All
@@ -51,9 +52,11 @@ export default function ShopPage() {
           </div>
           
           {/* Brand Spotlight Divider Layer */}
-          <div className="my-30">
+          {/* <div className="my-30">
             <BrandSpotlight />
-          </div>
+          </div> */}
+
+          <PromotionalBanners/>
         </div>
 
       </div>
