@@ -12,6 +12,7 @@ import AboutUsPage from "../Page/AboutUs";
 import SearchPage from "../Page/Search";
 import OfferPage from "../Page/Offer";
 import BlogPage from "../Page/Blog";
+import NotFoundPage from "../Page/NotFound";
 
 export default function AppRoutes(){
     return(
@@ -26,6 +27,7 @@ export default function AppRoutes(){
                 <Route path="/search" element={<SearchPage/>}/>
                 <Route path="/offer" element={<OfferPage/>}/>
                 <Route path="/blogs" element={<BlogPage/>}/>
+                <Route path="*" element={<NotFoundPage/>}/>
             </Route>
             <Route element={<PublicRoute/>}>
                 <Route element={<AuthLayout/>}>
