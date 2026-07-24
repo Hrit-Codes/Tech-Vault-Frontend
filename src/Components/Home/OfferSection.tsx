@@ -54,7 +54,7 @@ export default function OfferSection() {
     <section id="newArrivals" className="w-full max-w-6xl mx-auto px-6 py-16">
       {/* Header */}
       <div className="flex flex-col gap-4 items-start justify-between mb-12">
-        <div className="w-full flex justify-between">
+        <div className="w-full flex flex-col gap-4 md:gap-2 md:flex-row justify-between">
           <h2 className="heading-section">
             Samsung Cash Back Offer !!!
           </h2>

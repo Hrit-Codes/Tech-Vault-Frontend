@@ -1,5 +1,4 @@
 import SliderComponent from "react-slick";
-import { Headphones as HeadphonesIcon, Laptop as LaptopIcon, Watch as WatchIcon } from "lucide-react";
 import Headphones from "@/Assets/Categories/Headphones.webp";
 import Laptop from "@/Assets/Categories/Laptop.webp";
 import Smartwatch from "@/Assets/Categories/SmartWatch.webp";
