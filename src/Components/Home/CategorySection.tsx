@@ -1,48 +1,34 @@
-import SliderComponent from "react-slick";
-import { Headphones as HeadphonesIcon, Laptop as LaptopIcon, Watch as WatchIcon } from "lucide-react";
 import Headphones from "@/Assets/Categories/Headphones.webp";
 import Laptop from "@/Assets/Categories/Laptop.webp";
 import Smartwatch from "@/Assets/Categories/SmartWatch.webp";
 import CategoryCard from "../Category/CategoryCard";
-import { useEffect, useState } from "react";
-
-const Slider = (SliderComponent as any).default || SliderComponent;
 
 const categories = [
-    { id: 1, image: Laptop, name: "Laptops", subtitle: "Power for professionals", icon: LaptopIcon },
-    { id: 2, image: Headphones, name: "Audio", subtitle: "Immersive sound precision", icon: HeadphonesIcon },
-    { id: 3, image: Smartwatch, name: "Wearables", subtitle: "Stay connected, beautifully", icon: WatchIcon },
+  // === Computing (using Laptop image) ===
+  { id: 1, image: Laptop, name: "Laptops" },
+  { id: 2, image: Laptop, name: "Tablets" },
+  { id: 3, image: Laptop, name: "Monitors" },
+  { id: 4, image: Laptop, name: "PC Components" },
+
+  // === Audio (using Headphones image) ===
+  { id: 5, image: Headphones, name: "Headphones" },
+  { id: 6, image: Headphones, name: "Earbuds" },
+  { id: 7, image: Headphones, name: "Speakers" },
+
+  // === Wearables (using Smartwatch image) ===
+  { id: 8, image: Smartwatch, name: "Smartwatches" },
+
+  // === Mobile & Accessories (using Laptop image as fallback) ===
+  { id: 9, image: Laptop, name: "Smartphones" },
+  { id: 10, image: Laptop, name: "Chargers" },
+  { id: 11, image: Laptop, name: "Cases & Covers" },
+
+  // === Gaming (using Laptop image) ===
+  { id: 12, image: Laptop, name: "Gaming Accessories" },
+
 ];
 
-function getSlidesToShow(width: number) {
-    if (width < 640) return 2;
-    return 3;
-}
-
 export default function CategorySection() {
-    const [slidesToShow, setSlidesToShow] = useState(() =>
-        getSlidesToShow(typeof window === "undefined" ? 1280 : window.innerWidth)
-    );
-
-    useEffect(() => {
-        const onResize = () => setSlidesToShow(getSlidesToShow(window.innerWidth));
-        onResize();
-        window.addEventListener("resize", onResize);
-        return () => window.removeEventListener("resize", onResize);
-    }, []);
-
-    const settings = {
-        dots: false,
-        infinite: true,
-        autoplay: true,
-        autoplaySpeed: 3500,
-        speed: 500,
-        slidesToShow,
-        slidesToScroll: 1,
-        arrows: false,
-        pauseOnHover: true,
-    };
-
     return (
         <div className="w-full max-w-6xl mx-auto px-6 py-16">
             {/* Header */}
@@ -60,19 +46,16 @@ export default function CategorySection() {
                 </button>
             </div>
 
-            {/* Slider */}
-            <Slider {...settings}>
+            {/* Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-5">
                 {categories.map((category) => (
-                    <div key={category.id} className="px-2 sm:px-3 md:px-4">
-                        <CategoryCard
-                            image={category.image}
-                            name={category.name}
-                            subtitle={category.subtitle}
-                            icon={category.icon}
-                        />
-                    </div>
+                    <CategoryCard
+                        key={category.id}
+                        image={category.image}
+                        name={category.name}
+                    />
                 ))}
-            </Slider>
+            </div>
         </div>
     );
 }
