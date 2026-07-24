@@ -1,6 +1,5 @@
 import { PromotionalBanners } from "../../Components/Home/PromotionalBanners";
 import ProductCard from "../../Components/Product/ProductCard";
-import BrandSpotlight from "../../Components/Shop/BrandSpotLight";
 import { ShopHero } from "../../Components/Shop/ShopHero";
 import { categories, earbuds } from "../../configs/constants";
 
