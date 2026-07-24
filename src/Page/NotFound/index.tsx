@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Unplug, Home, Search, ArrowLeft } from "lucide-react";
+import { Home, Search, ArrowLeft } from "lucide-react";
 import HeroBackground from "../../Components/ui/HeroBackground";
 
 const quickLinks = [
