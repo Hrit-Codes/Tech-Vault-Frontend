@@ -9,7 +9,7 @@ export default function BlogPage(){
 
             <div className="w-full mx-auto py-32 bg-section px-6">
                 <div className="w-full max-w-6xl mx-auto">
-                    <div className="w-full mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-fr gap-8">
+                    <div className="w-full mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-fr gap-4 md:gap-8">
                         {sampleBlogs.map((blog,index)=>(
                             <BlogCard key={index} blog={blog}/>
                         ))}
