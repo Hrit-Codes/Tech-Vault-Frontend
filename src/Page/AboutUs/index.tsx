@@ -75,20 +75,22 @@ export default function AboutUsPage() {
         </section>
 
         {/* ── 3. WHY CHOOSE US ── */}
-        <section className="w-full py-24 px-6 bg-section">
-          <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-14">
+        <section className="w-full py-16 sm:py-24 px-4 sm:px-6 bg-section">
+          <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-10 sm:gap-14">
             <div className="flex flex-col items-center text-center gap-3">
-              <span className="text-xs font-bold tracking-[0.2em] uppercase text-secondary-400">Quick Answers</span>
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-secondary-400">
+                Quick Answers
+              </span>
               <h2 className="heading-section">Frequently Asked Questions</h2>
             </div>
 
-              <div className="px-8 lg:px-16 xl:px-24 w-4xl mx-auto">
-                <div className="space-y-4">
-                  {faqItems.map((faq, index) => (
-                    <FaqAccordion key={index} question={faq.question} answer={faq.answer}/>
-                  ))}
-                </div>
+            <div className="w-full px-2 sm:px-4">
+              <div className="space-y-3 sm:space-y-4">
+                {faqItems.map((faq, index) => (
+                  <FaqAccordion key={index} question={faq.question} answer={faq.answer} />
+                ))}
               </div>
+            </div>
           </div>
         </section>
 

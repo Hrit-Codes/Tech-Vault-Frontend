@@ -86,7 +86,7 @@ export default function Header() {
 
             {/* Mobile Menu */}
             {mobileOpen && (
-                <div className="md:hidden mt-3 mx-auto max-w-7xl bg-white dark:bg-primary-950 border border-black/10 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+                <div className="md:hidden mt-3 mx-auto max-w-7xl bg-white dark:bg-section-alternative border border-black/10 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
                     {navItems.map((item: NavItem) => {
                         const isActive = location.pathname === item.path;
                         return (
