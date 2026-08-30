@@ -209,7 +209,7 @@ export default function Footer() {
                 <div className="border-t border-secondary-400/10">
                     <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-description opacity-80">
                         <p>
-                            &copy; 2026 <a href="https://magnas.com.np/" className="hover:text-primary-400 font-semibold transition-colors">Magnas Infotech Solutions</a>. All rights reserved.
+                            &copy; 2026 <a href="https://www.linkedin.com/in/hrit-amatya-b23289379/" className="hover:text-primary-400 font-semibold transition-colors">Hrit Tech Solutions</a>. All rights reserved.
                         </p>
                         <div className="hidden lg:flex items-center gap-6">
                             <a href="/sitemap" className="hover:text-primary-400 transition-colors">Sitemap</a>
