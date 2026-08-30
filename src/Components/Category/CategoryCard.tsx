@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface CategoryCardProps {
     image: string;
@@ -6,8 +7,9 @@ interface CategoryCardProps {
 }
 
 export default function CategoryCard({ image, name }: CategoryCardProps) {
+    const navigate=useNavigate();
     return (
-        <div className="relative rounded-3xl overflow-hidden aspect-square cursor-pointer group">
+        <div onClick={()=>navigate("/shop")} className="relative rounded-3xl overflow-hidden aspect-square cursor-pointer group">
             <img
                 src={image}
                 alt={name}

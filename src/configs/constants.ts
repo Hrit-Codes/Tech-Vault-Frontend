@@ -263,3 +263,30 @@ export const sampleBlogs: blog[] = [
     created_at: "2025-07-20T13:15:00Z",
   },
 ];
+
+export const faqItems=[
+  {
+    question:"What is TechVault?",
+    answer:"TechVault is Nepal's trusted tech e-commerce platform, bringing you a curated selection of authentic electronics, gadgets, and accessories from world-class brands like Apple, Samsung, Sony and more."
+  },
+ {
+    question: "Are the products genuine?",
+    answer: "Absolutely. TechVault is an authorized partner of leading brands. Every product we sell comes with a genuine warranty, original packaging, and full manufacturer support. We never compromise on authenticity."
+  },
+  {
+    question: "What are the delivery options?",
+    answer: "We offer free standard delivery on orders over NPR 5,000. Express delivery is available in major cities including Kathmandu, Pokhara, and Biratnagar. Estimated delivery times: 1-3 business days in Kathmandu Valley, 3-7 days outside the valley."
+  },
+  {
+    question: "What is the return policy?",
+    answer: "We offer a 7-day hassle-free return policy on most products. Items must be in their original condition and packaging. If you're not satisfied with your purchase, simply contact our support team, and we'll arrange a return or exchange."
+  },
+  {
+    question: "What payment methods are accepted?",
+    answer: "We accept a wide range of payment options: Visa and Mastercard credit/debit cards, eSewa, Khalti, Fonepay, mobile banking, and cash on delivery (available in select areas). All online payments are secured with industry-standard encryption."
+  },
+  {
+    question: "I have a query, but it's not listed here. How can I reach you?",
+    answer: "We're here to help! You can reach our support team via phone at +977-1-4XXXXXX during business hours (9:00 AM – 6:00 PM, Monday to Friday), email us at support@techvault.com, or drop a message through our contact form. We typically respond within 2 hours."
+  }
+]

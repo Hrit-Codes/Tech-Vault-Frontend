@@ -8,7 +8,7 @@ export default function ShopPage() {
     <div className="w-full mx-auto flex flex-col">
       <ShopHero />
 
-      <div className="w-full mx-auto py-32 bg-section px-6">
+      <div className="w-full mx-auto py-36 bg-section px-6">
         
         <div className="w-full max-w-6xl mx-auto">
           {/* Category list */}
@@ -31,19 +31,19 @@ export default function ShopPage() {
             <div className="w-full my-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-18">
               {earbuds.map((product, index) => (
                 <ProductCard 
-                  key={index}
-                  image={product.image}
-                  name={product.name}
-                  subtitle={product.subtitle}
-                  price={product.price}
-                  isNew={product.isNew}
-                  bgColor="bg-section-alternative"
+                key={index}
+                name={product.name}
+                subtitle={product.subtitle}
+                image={product.image}
+                price={product.price}
+                isNew={product.isNew}
+                bgColor="bg-section"
                 />
               ))}
             </div>
 
             {/* Pagination / Load More */}
-            <div className="w-full flex justify-center mx-auto">
+            <div className="w-full flex justify-center items-center mx-auto">
               <button className="bg-primary-500 py-4 px-10 rounded-full hover:bg-primary-500/90 hover:cursor-pointer text-white font-semibold transition-colors">
                 View More
               </button>

@@ -1,6 +1,7 @@
-import { CheckCircle, ShieldCheck, Zap, Layers } from "lucide-react";
-import { promises, reasons } from "../../configs/constants";
+import { CheckCircle } from "lucide-react";
+import { faqItems, promises } from "../../configs/constants";
 import { AboutUsHero } from "../../Components/AboutUs/AboutUsHero";
+import FaqAccordion from "./FaqAccordion";
 
 export default function AboutUsPage() {
   return (
@@ -9,7 +10,7 @@ export default function AboutUsPage() {
 
       <div className="w-full mx-auto bg-section">
 
-        {/* ── 1. FOUNDER VISION ── */}
+        {/* ── 1. OUR STORY ── */}
         <section className="w-full py-24 px-6">
           <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -20,24 +21,24 @@ export default function AboutUsPage() {
                   Since 2024
                 </span>
                 <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                  The Pursuit of<br />Visual Silence.
+                  Trusted Tech,<br />Made Accessible.
                 </h1>
               </div>
 
               <div className="flex flex-col gap-4">
                 <p className="text-sm leading-relaxed font-semibold text-description">
-                  TechVault was founded on the principle that the most powerful technology is the one that stays out of your way. Our journey in industrial design began with a simple goal: to eliminate the unnecessary and amplify the essential.
+                  TechVault was built on a simple idea: finding great tech accessories shouldn't mean gambling on authenticity or overpaying for the privilege of trust. We started by connecting a handful of buyers with verified, quality-checked products — and that same standard has guided every decision since.
                 </p>
                 <p className="text-sm leading-relaxed font-semibold text-description">
-                  From our first prototype to our global presence today, we maintain the same obsessive attention to detail that makes every TechVault product feel like a bespoke artifact for the digital age.
+                  Today, thousands of customers rely on TechVault to source everything from everyday essentials to premium gear, backed by careful selection, transparent pricing, and support that actually helps. As our catalog has grown, our commitment to getting the details right hasn't changed.
                 </p>
               </div>
 
               <div className="flex items-center gap-4 pt-2">
                 <div className="w-10 h-px bg-primary-400 dark:bg-primary-600" />
-                <button className="text-xs font-bold tracking-[0.2em] uppercase hover:text-secondary-500 transition-colors italic hover:cursor-pointer">
-                  The Founder's Vision
-                </button>
+                <span className="text-xs font-bold tracking-[0.2em] uppercase text-secondary-400">
+                  Built On Trust, Driven By Detail
+                </span>
               </div>
             </div>
 
@@ -77,28 +78,17 @@ export default function AboutUsPage() {
         <section className="w-full py-24 px-6 bg-section">
           <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-14">
             <div className="flex flex-col items-center text-center gap-3">
-              <span className="text-xs font-bold tracking-[0.2em] uppercase text-secondary-400">The Template Advantage</span>
-              <h2 className="heading-section">Why Leading Brands Trust Us</h2>
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-secondary-400">Quick Answers</span>
+              <h2 className="heading-section">Frequently Asked Questions</h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
-              {reasons.map((reason, index) => (
-                <div key={index} className="group bg-section-alternative border border-secondary-400/5 p-8 rounded-3xl flex flex-col justify-between gap-8 hover:border-primary-400/30 transition-all duration-300 hover:-translate-y-1">
-                  <div className="flex flex-col gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-400 group-hover:bg-primary-500 group-hover:text-white transition-colors duration-300">
-                      {index === 0 && <Zap size={22} />}
-                      {index === 1 && <Layers size={22} />}
-                      {index === 2 && <ShieldCheck size={22} />}
-                    </div>
-                    <h3 className="text-xl font-bold pt-2">{reason.title}</h3>
-                    <p className="text-sm text-description leading-relaxed font-semibold">{reason.description}</p>
-                  </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary-400 bg-primary-500/5 px-3 py-1 w-fit rounded-md border border-primary-500/10">
-                    {reason.highlight}
-                  </span>
+              <div className="px-8 lg:px-16 xl:px-24 w-4xl mx-auto">
+                <div className="space-y-4">
+                  {faqItems.map((faq, index) => (
+                    <FaqAccordion key={index} question={faq.question} answer={faq.answer}/>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
           </div>
         </section>
 
@@ -122,37 +112,6 @@ export default function AboutUsPage() {
             </div>
           </div>
         </section>
-
-        {/* ── 5. STATS ──
-        <section className="w-full py-30 px-6 bg-section">
-          <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-10">
-            <h2 className="w-fit border-b-4 border-secondary-400 pb-1 font-bold text-3xl">By The Numbers</h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full">
-              {stats.map((stat, index) => (
-                <div key={index} className="bg-section-alternative px-5 py-6 flex flex-col items-center gap-2 rounded-2xl border border-secondary-400/5 shadow-sm">
-                  <h4 className="text-2xl font-bold">{stat.value}</h4>
-                  <p className="text-sm text-primary-400 text-center leading-relaxed font-medium">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section> */}
-
-        {/* ── 6. STAY AHEAD ──
-        <section className="w-full py-24 px-6 bg-section flex flex-col gap-6 items-center text-center">
-          <div className="flex flex-col gap-3">
-            <h2 className="text-2xl font-bold">
-              Stay ahead of the curve.
-            </h2>
-            <p className="text-sm text-description max-w-md leading-relaxed font-semibold">
-              Subscribe to get exclusive access to new product drops, technical insights, and premium offers.
-            </p>
-          </div>
-          <button className="px-6 py-3 rounded-full bg-primary-500 hover:bg-primary-500/80 text-white text-sm font-semibold transition-colors hover:cursor-pointer">
-            Start Shopping
-          </button>
-        </section> */}
 
       </div>
     </div>
