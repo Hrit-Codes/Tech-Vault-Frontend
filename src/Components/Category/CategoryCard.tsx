@@ -13,7 +13,7 @@ export default function CategoryCard({ image, name }: CategoryCardProps) {
             <img
                 src={image}
                 alt={name}
-                className="absolute bg-gradient-to-b from-secondary-200 to-secondary-100 inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                className="absolute bg-gradient-to-b from-secondary-200 to-secondary-100 inset-0 w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 ease-out"
             />
 
             {/* Gradient for text legibility */}
