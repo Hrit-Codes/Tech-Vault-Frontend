@@ -26,15 +26,15 @@ export function BrandCard({ image, name }: BrandCardProps) {
 const Slider = (SliderComponent as any).default || SliderComponent;
 
 const defaultBrands = [
-  { id: 1, image: "/Brands/Acer.png", name: "Acer" },
-  { id: 2, image: "/Brands/Anker.png", name: "Anker" },
-  { id: 3, image: "/Brands/Apple.png", name: "Apple" },
-  { id: 4, image: "/Brands/Asus.png", name: "Asus" },
-  { id: 5, image: "/Brands/HikVision.png", name: "HikVision" },
-  { id: 6, image: "/Brands/Lenovo.png", name: "Lenovo" },
-  { id: 7, image: "/Brands/Samsung.png", name: "Samsung" },
-  { id: 8, image: "/Brands/JBL.png", name: "JBL" },
-  { id: 9, image: "/Brands/Sony.png", name: "Sony" },
+  { id: 1, image: "/Brands/Acer.webp", name: "Acer" },
+  { id: 2, image: "/Brands/Anker.webp", name: "Anker" },
+  { id: 3, image: "/Brands/Apple.webp", name: "Apple" },
+  { id: 4, image: "/Brands/Asus.webp", name: "Asus" },
+  { id: 5, image: "/Brands/HikVision.webp", name: "HikVision" },
+  { id: 6, image: "/Brands/Lenovo.webp", name: "Lenovo" },
+  { id: 7, image: "/Brands/Samsung.webp", name: "Samsung" },
+  { id: 8, image: "/Brands/JBL.webp", name: "JBL" },
+  { id: 9, image: "/Brands/Sony.webp", name: "Sony" },
 ];
 
 function getSlidesToShow(width: number) {

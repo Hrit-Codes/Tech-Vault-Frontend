@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 const Slider = (SliderComponent as any).default || SliderComponent;
 
 const categories = [
-    { id: 1, image: "/Categories/laptops.png", name: "Laptops"},
-    { id: 2, image: "/Categories/earbuds.png", name: "Earbuds"},
-    { id: 3, image: "/Categories/mobile-phones.png", name: "Mobile Phones"},
-    { id: 4, image: "/Categories/smartwatches.png", name: "Smartwatches"},
-    { id: 5, image: "/Categories/speakers.png", name: "Speakers"},
-    { id: 6, image: "/Categories/tablets.png", name: "Tablets"},
-    { id: 7, image: "/Categories/drones.png", name: "Drones"},
-    { id: 8, image: "/Categories/headphones.png", name: "Headphones"},
+    { id: 1, image: "/Categories/laptops.webp", name: "Laptops"},
+    { id: 2, image: "/Categories/earbuds.webp", name: "Earbuds"},
+    { id: 3, image: "/Categories/mobile-phones.webp", name: "Mobile Phones"},
+    { id: 4, image: "/Categories/smartwatches.webp", name: "Smartwatches"},
+    { id: 5, image: "/Categories/speakers.webp", name: "Speakers"},
+    { id: 6, image: "/Categories/tablets.webp", name: "Tablets"},
+    { id: 7, image: "/Categories/drones.webp", name: "Drones"},
+    { id: 8, image: "/Categories/headphones.webp", name: "Headphones"},
 ];
 
 function getSlidesToShow(width: number) {
