@@ -33,3 +33,18 @@ export interface IPagination {
   hasNextPage: boolean;
   hasPrevPage: boolean;
 }
+
+export interface IProductVariant {
+  id: string;
+  productId: string;
+  color: string | null;
+  variant: string | null;
+  priceOverride: number | null;
+  stockOverride: number | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type StockFilterValue = "all" | "low-stock" | "out-of-stock";
+export type SortFilterValue="newest"|"price_asc"|"price_desc"|"rating_asc"|"rating_desc";

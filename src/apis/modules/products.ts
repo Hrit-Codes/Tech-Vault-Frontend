@@ -1,6 +1,10 @@
-import type { ApiResponse, IPagination } from "../../Components/utils/types";
+import type { ApiResponse, IPagination, IProductVariant, SortFilterValue, StockFilterValue } from "../../Components/utils/types";
 import api from "../client";
 import urls from "../urls";
+
+type Category = { id: string; name: string };
+type Brand = { id: string; name: string };
+type AppliedOffer = { id: string; title: string };
 
 export interface IAppliedOffer {
   id: string;
@@ -36,10 +40,40 @@ export interface IProduct {
   appliedOffer: IAppliedOffer | null;
 }
 
+export interface IProductListItem {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  images: string[];
+  price: number;
+  stock: number;
+  salePrice: number | null;
+  onSale: boolean;
+  categoryId: string;
+  brandId: string;
+  category: Category;
+  brand: Brand;
+  isActive: boolean;
+  variants: IProductVariant[];
+  createdAt: string;
+  updatedAt: string;
+  appliedOffer?: AppliedOffer;
+  minPrice:number,
+  maxPrice:number,
+  hasPriceRange:boolean,
+  isNew:boolean,
+}
+
 type GetNewProductsResponse={
     message:string,
     data:IProduct[],
     pagination:IPagination
+}
+
+type GetProductsResponse={
+  data:IProductListItem[];
+  pagination:IPagination;
 }
 
 export const getNewProducts=(page=1,limit=12)=>{
@@ -47,3 +81,21 @@ export const getNewProducts=(page=1,limit=12)=>{
         params:{page,limit}
     }).then((res)=>res.data);
 }
+
+export const getProducts = (params?: {
+  page: number;
+  limit: number;
+  search?: string;
+  brandId?: string;
+  categoryId?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  stockStatus?: StockFilterValue;
+  isActive?: boolean;
+  onSale?: boolean;
+  sortBy?: SortFilterValue;
+}) => {
+  return api
+    .get<ApiResponse<GetProductsResponse>>(urls.getProducts, { params })
+    .then((res) => res.data);
+};
