@@ -10,13 +10,8 @@ import {
   getHeroSections,
   type IHeroSection,
 } from "../apis/modules/hero-sections";
-
-const SOCIAL_LINKS = [
-  { id: 1, icon: FaFacebookF, href: "https://facebook.com" },
-  { id: 2, icon: FaInstagram, href: "https://instagram.com" },
-  { id: 3, icon: RiTwitterXLine, href: "https://x.com" },
-  { id: 4, icon: FaLinkedinIn, href: "https://linkedin.com" },
-];
+import { getCompanyInfo } from "../apis/modules/company-info";
+import { FaTiktok } from "react-icons/fa6";
 
 const ROTATE_MS = 7000;
 
@@ -31,7 +26,6 @@ export default function HomeBannerSection() {
     refetchOnWindowFocus: false,
   });
 
-  // API shape: { success, message, data: { data: IHeroSection[] } }
   const heroes: IHeroSection[] = useMemo(
     () =>
       (data?.data?.data ?? [])
@@ -40,7 +34,6 @@ export default function HomeBannerSection() {
     [data],
   );
 
-  // Auto-rotate only when there are 2+ slides
   useEffect(() => {
     if (heroes.length <= 1) return;
     const id = setInterval(() => {
@@ -58,7 +51,6 @@ export default function HomeBannerSection() {
 
   const hero = heroes[activeIndex] ?? null;
 
-  // Reset the blur-up state whenever the visible image changes
   useEffect(() => {
     setImageLoaded(false);
   }, [hero?.mediaUrl]);
@@ -113,7 +105,6 @@ export default function HomeBannerSection() {
     );
   }
 
-  // ── 3. Error / unexpected missing hero ──────────────────────
   if (isError || !hero) {
     return (
       <section className="relative overflow-hidden bg-section">
@@ -167,12 +158,42 @@ export default function HomeBannerSection() {
     Math.min(Math.max(hero.overlayOpacity ?? 0, 0), 100) / 100;
 
   return (
-    <section className="relative overflow-hidden bg-section">
-      <div className="relative max-w-6xl min-h-screen mx-auto py-30 grid grid-cols-1 justify-items-center md:grid-cols-2 gap-12 items-center place-items-center">
-        {/* LEFT: text content */}
+    <section className="relative overflow-hidden min-h-screen w-full flex items-center bg-section">
+      {/* Full-width background image */}
+    <div className="absolute inset-0 z-0">
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/60 to-zinc-900/80 animate-pulse" />
+      )}
+
+      <img
+        src={hero.mediaUrl}
+        alt={hero.headingLine1 ?? "Hero"}
+        loading={activeIndex === 0 ? "eager" : "lazy"}
+        decoding="async"
+        onLoad={() => setImageLoaded(true)}
+        onError={() => setImageLoaded(true)}
+        className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+          imageLoaded
+            ? "opacity-100 blur-none scale-100"
+            : "opacity-0 blur-2xl scale-105"
+        }`}
+      />
+
+      {overlayAlpha > 0 && (
         <div
-          className={`space-y-6 flex flex-col px-2 lg:px-12 ${alignmentClasses[textAlign]}`}
-        >
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundColor: overlay,
+            opacity: overlayAlpha,
+          }}
+        />
+      )}
+    </div>
+
+      {/* Text content, sitting above the background image */}
+      <div className="relative z-10 w-full mx-auto px-20">
+        <div className={`space-y-6 flex flex-col ${alignmentClasses[textAlign]}`}>
           <div className="space-y-4">
             {hero.eyebrow && (
               <span className="inline-block px-4 py-1 text-sm bg-secondary-800/10 text-primary-400 rounded-full border border-secondary-400/30 font-semibold">
@@ -181,7 +202,7 @@ export default function HomeBannerSection() {
             )}
 
             {(hero.headingLine1 || hero.headingLine2) && (
-              <h2 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">
+              <h2 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight text-white">
                 {hero.headingLine1}{" "}
                 {hero.headingLine2 && (
                   <>
@@ -196,7 +217,7 @@ export default function HomeBannerSection() {
           </div>
 
           {hero.description && (
-            <p className="max-w-sm md:max-w-lg lg:max-w-xl text-base md:text-lg leading-relaxed text-description font-normal">
+            <p className="max-w-sm md:max-w-lg lg:max-w-xl text-base md:text-lg leading-relaxed text-white/80 font-normal">
               {hero.description}
             </p>
           )}
@@ -214,7 +235,7 @@ export default function HomeBannerSection() {
               {hero.secondaryButtonText && hero.secondaryButtonLink && (
                 <Link
                   to={hero.secondaryButtonLink}
-                  className="px-6 py-3 border border-secondary-400 rounded-xl text-description hover:bg-secondary-200/30 font-semibold transition"
+                  className="px-6 py-3 border border-white/40 rounded-xl text-white hover:bg-white/10 font-semibold transition"
                 >
                   {hero.secondaryButtonText}
                 </Link>
@@ -222,54 +243,15 @@ export default function HomeBannerSection() {
             </div>
           )}
         </div>
-
-        {/* RIGHT: hero image with inlined blur-up effect */}
-        <div className="flex justify-center lg:justify-end w-full">
-          <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl overflow-hidden border border-[var(--primary)]/40 shadow-2xl bg-zinc-800/60">
-            {/* Blur + shimmer placeholder */}
-            {!imageLoaded && (
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/60 to-zinc-900/80 backdrop-blur-2xl animate-pulse" />
-            )}
-
-            <img
-              key={hero.mediaUrl}
-              src={hero.mediaUrl}
-              alt={hero.headingLine1 ?? "Hero"}
-              loading={activeIndex === 0 ? "eager" : "lazy"}
-              decoding="async"
-              onLoad={() => setImageLoaded(true)}
-              className={`w-full h-full object-cover transition-all duration-700 ease-out ${
-                imageLoaded
-                  ? "opacity-100 blur-0 scale-100"
-                  : "opacity-0 blur-2xl scale-105"
-              }`}
-            />
-
-            {/* Optional tint overlay from API */}
-            {overlayAlpha > 0 && (
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  backgroundColor: overlay,
-                  opacity: overlayAlpha,
-                }}
-              />
-            )}
-          </div>
-        </div>
       </div>
 
-      {/* Slide indicators (only if multiple) */}
       {heroes.length > 1 && (
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
           <button
             onClick={() =>
-              setActiveIndex(
-                (i) => (i - 1 + heroes.length) % heroes.length,
-              )
+              setActiveIndex((i) => (i - 1 + heroes.length) % heroes.length)
             }
-            className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white transition"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white transition hover:cursor-pointer"
             aria-label="Previous slide"
           >
             <ChevronLeft size={16} />
@@ -292,7 +274,7 @@ export default function HomeBannerSection() {
 
           <button
             onClick={() => setActiveIndex((i) => (i + 1) % heroes.length)}
-            className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white transition"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white transition hover:cursor-pointer"
             aria-label="Next slide"
           >
             <ChevronRight size={16} />
@@ -306,12 +288,31 @@ export default function HomeBannerSection() {
   );
 }
 
-/* ── Extracted sub-components ── */
 
 function SocialBar() {
+  
+  const {
+    data: companyInfoResponse,
+  } = useQuery({
+    queryKey: ["companyInfo"],
+    queryFn: () => getCompanyInfo(),
+    staleTime: 10 * 60 * 1000,
+    refetchOnWindowFocus: false,
+    retry: 3,
+  });
+
+  const info = companyInfoResponse?.data?.info;
+
+  const SOCIAL_LINKS = [
+    { id: 1, icon: FaFacebookF, href: info?.socialLinks.facebook },
+    { id: 2, icon: FaInstagram, href: info?.socialLinks.instagram },
+    { id: 3, icon: FaTiktok, href: info?.socialLinks?.tiktok },
+    { id: 4, icon: RiTwitterXLine, href: info?.socialLinks.twitter },
+    { id: 5, icon: FaLinkedinIn, href: info?.socialLinks.linkedin },
+  ];
   return (
-    <div className="absolute text-description flex flex-row lg:flex-col z-10 bottom-14 left-4 gap-4">
-      {SOCIAL_LINKS.map(({ id, icon: Icon, href }) => (
+    <div className="absolute text-secondary-500 flex flex-row lg:flex-col z-10 bottom-14 left-4 gap-4">
+      {SOCIAL_LINKS.map(({ id, icon: Icon, href }) => href? (
         <a
           key={id}
           href={href}
@@ -321,7 +322,7 @@ function SocialBar() {
         >
           <Icon size={20} />
         </a>
-      ))}
+      ):null )}
     </div>
   );
 }
@@ -332,9 +333,9 @@ function RotateShopBar() {
       onClick={() => scrollToSection("newArrivals")}
       className="absolute z-20 bottom-18 right-0 flex flex-row gap-4 items-center justify-center rotate-90 font-bold cursor-pointer border-r-2 border-t-2 border-zinc-200/40 text-description"
     >
-      <span className="uppercase tracking-widest text-md">Shop</span>
+      <span className="uppercase tracking-widest text-md text-secondary-500">Shop</span>
       <span className="flex items-center justify-center -rotate-90">
-        <span className="animate-bounce text-[var(--primary)]">
+        <span className="animate-bounce text-secondary-500">
           <ArrowDown size={34} />
         </span>
       </span>

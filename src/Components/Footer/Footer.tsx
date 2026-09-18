@@ -1,24 +1,11 @@
-import companyLogo from "@/Assets/Logo.webp"
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { Mail, Phone, MapPin, ChevronDown, ArrowUp } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter, FaTiktok } from "react-icons/fa6";
 import { SiVisa, SiMastercard } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
-
-// const trustBadges = [
-//     { icon: Truck, title: "Nationwide Delivery", desc: "2–5 day dispatch across Nepal" },
-//     { icon: ShieldCheck, title: "Secure Checkout", desc: "Encrypted payments, every order" },
-//     { icon: BadgeCheck, title: "100% Genuine", desc: "Authorized dealer warranty" },
-//     { icon: Headset, title: "Real Support", desc: "Humans on call, not bots" },
-// ];
-
-const socials = [
-    { label: "Facebook", icon: FaFacebookF, url: "#" },
-    { label: "Instagram", icon: FaInstagram, url: "#" },
-    { label: "X", icon: FaXTwitter, url: "#" },
-    { label: "LinkedIn", icon: FaLinkedinIn, url: "#" },
-];
+import { useQuery } from "@tanstack/react-query";
+import { getCompanyInfo } from "../../apis/modules/company-info";
 
 const shopLinks = [
     { label: "Browse Categories", href: "/shop" },
@@ -62,63 +49,65 @@ function FooterColumn({ title, children }: { title: string; children: ReactNode 
 export default function Footer() {
     const navigate = useNavigate();
 
+    const {
+        data: companyInfoResponse,
+    } = useQuery({
+        queryKey: ["companyInfo"],
+        queryFn: () => getCompanyInfo(),
+        staleTime: 10 * 60 * 1000,
+        refetchOnWindowFocus: false,
+        retry: 3,
+    });
+
+    const info = companyInfoResponse?.data?.info;
+
+    const socials = [
+        { label: "Facebook", icon: FaFacebookF, url: info?.socialLinks?.facebook },
+        { label: "Instagram", icon: FaInstagram, url: info?.socialLinks?.instagram },
+        { label: "Tiktok", icon: FaTiktok, url: info?.socialLinks?.tiktok },
+        { label: "X", icon: FaXTwitter, url: info?.socialLinks?.twitter },
+        { label: "LinkedIn", icon: FaLinkedinIn, url: info?.socialLinks?.linkedin },
+    ];
+
     return (
         <footer className="relative w-full bg-section-alternative border-t-6 border-secondary-400/10 overflow-hidden">
 
-            
-
             <div className="relative z-10">
-
-                {/* Trust badge strip
-                <div className="border-b border-secondary-400/10">
-                    <div className="max-w-6xl mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {trustBadges.map(({ icon: Icon, title, desc }) => (
-                            <div key={title} className="flex items-start gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-section border border-secondary-400/10 flex items-center justify-center shrink-0">
-                                    <Icon className="w-4 h-4 text-primary-400" />
-                                </div>
-                                <div>
-                                    <p className="text-base font-bold">{title}</p>
-                                    <p className="text-[11px] text-description leading-snug">{desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
-
                 {/* Main content grid */}
                 <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-12 gap-10">
 
                     {/* Brand column */}
                     <div className="md:col-span-4 flex flex-col gap-5">
                         <div className="flex items-center gap-3">
-                            <img src={companyLogo} alt="TechVault Logo" className="w-10 h-10 object-contain rounded-md bg-section border border-secondary-400/10 p-1" />
+                            <img src={info?.logo} alt="Company Logo" className="w-10 h-10 object-contain rounded-md bg-section border border-secondary-400/10 p-1" />
                             <div>
-                                <h2 className="font-bold text-lg tracking-tight">TechVault</h2>
+                                <h2 className="font-bold text-lg tracking-tight">{info?.companyName}</h2>
                                 <p className="text-[10px] tracking-[0.2em] uppercase text-primary-400 font-semibold">&amp; Pvt. Ltd.</p>
                             </div>
                         </div>
 
                         <p className="text-sm leading-relaxed max-w-xs text-description">
-                            Premium tech accessories engineered for performance and visual silence — curated and shipped across Nepal.
+                            {info?.description}
                         </p>
 
                         <div className="flex items-center gap-2 text-xs text-description">
                             <MapPin className="w-3.5 h-3.5 text-secondary-400 shrink-0" />
-                            Kathmandu, Nepal
+                            {info?.officeAddress}
                         </div>
 
                         <div className="flex flex-row gap-2 pt-1">
-                            {socials.map(({ label, icon: Icon, url }) => (
+                            {socials.map(({ label, icon: Icon, url }) => url ? (
                                 <a
                                     key={label}
                                     href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     aria-label={label}
                                     className="w-9 h-9 rounded-lg bg-section border border-secondary-400/10 flex items-center justify-center text-description hover:text-primary-400 hover:border-primary-400/40 hover:bg-primary-400/5 transition-all duration-200"
                                 >
                                     <Icon className="text-sm" />
                                 </a>
-                            ))}
+                            ) : null)}
                         </div>
                     </div>
 
@@ -162,19 +151,39 @@ export default function Footer() {
                                 <li className="flex items-start gap-3">
                                     <Phone className="w-4 h-4 text-secondary-400 shrink-0 mt-0.5" />
                                     <div className="flex flex-col gap-0.5">
-                                        <a href="tel:+9779742935093" className="hover:text-primary-400 transition-colors">+977 974-2935093</a>
-                                        <a href="tel:+9779865194466" className="hover:text-primary-400 transition-colors">+977 986-1418083</a>
+                                        {info?.phones && info.phones.length > 0 ? (
+                                            info.phones.map((phone, idx) => (
+                                                <a 
+                                                    key={idx} 
+                                                    href={`tel:${phone}`} 
+                                                    className="hover:text-primary-400 transition-colors"
+                                                >
+                                                    {phone}
+                                                </a>
+                                            ))
+                                        ) : (
+                                            <span className="text-xs italic opacity-70">Not available</span>
+                                        )}
                                     </div>
                                 </li>
+                                
+                                {/* Dynamic Emails */}
                                 <li className="flex items-start gap-3">
                                     <Mail className="w-4 h-4 text-secondary-400 shrink-0 mt-0.5" />
                                     <div className="flex flex-col gap-0.5">
-                                        <a href="mailto:support@techvault.com.np" className="hover:text-primary-400 transition-colors break-all">
-                                            support@techvault.com.np
-                                        </a>
-                                        <a href="mailto:privhritamatya@gmail.com" className="hover:text-primary-400 transition-colors break-all">
-                                            privhritamatya@gmail.com
-                                        </a>
+                                        {info?.emails && info.emails.length > 0 ? (
+                                            info.emails.map((email, idx) => (
+                                                <a 
+                                                    key={idx} 
+                                                    href={`mailto:${email}`} 
+                                                    className="hover:text-primary-400 transition-colors break-all"
+                                                >
+                                                    {email}
+                                                </a>
+                                            ))
+                                        ) : (
+                                            <span className="text-xs italic opacity-70">Not available</span>
+                                        )}
                                     </div>
                                 </li>
                             </ul>

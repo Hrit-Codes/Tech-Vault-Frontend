@@ -1,4 +1,3 @@
-// src/lib/urls.ts
 const urls = {
   // ========== AUTH ==========
   loginUser: "/auth/login",
@@ -13,6 +12,7 @@ const urls = {
   getCategories: "/categories",
   // ========== PRODUCTS ==========
   getProductBySlug: "/products",
+  getNewProducts:"/products/new",
   getProducts: "/products",
   getProductById: "/products/admin",
 
