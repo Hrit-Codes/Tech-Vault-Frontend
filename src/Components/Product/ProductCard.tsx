@@ -10,7 +10,7 @@ interface ProductCardProps {
   bgColor: string;
 }
 
-export default function ProductCard({ image, name, subtitle, price, isNew, bgColor }: ProductCardProps) {
+export default function ProductCard({ image, name, subtitle, price, isNew }: ProductCardProps) {
   const navigate = useNavigate();
 
   return (
@@ -19,7 +19,7 @@ export default function ProductCard({ image, name, subtitle, price, isNew, bgCol
       className="relative flex flex-col cursor-pointer group overflow-hidden"
     >
       {/* Image Container */}
-      <div className={`relative rounded-2xl overflow-hidden aspect-square ${bgColor} p-2`}>
+      <div className={`relative rounded-2xl overflow-hidden aspect-square bg-white p-2`}>
 
         {/* Badges */}
         {isNew && (
