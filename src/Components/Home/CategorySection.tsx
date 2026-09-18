@@ -1,19 +1,43 @@
 import SliderComponent from "react-slick";
 import CategoryCard from "../Category/CategoryCard";
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getCategories, type ICategory } from "../../apis/modules/categories";
 
 const Slider = (SliderComponent as any).default || SliderComponent;
 
-const categories = [
-    { id: 1, image: "/Categories/laptops.webp", name: "Laptops"},
-    { id: 2, image: "/Categories/earbuds.webp", name: "Earbuds"},
-    { id: 3, image: "/Categories/mobile-phones.webp", name: "Mobile Phones"},
-    { id: 4, image: "/Categories/smartwatches.webp", name: "Smartwatches"},
-    { id: 5, image: "/Categories/speakers.webp", name: "Speakers"},
-    { id: 6, image: "/Categories/tablets.webp", name: "Tablets"},
-    { id: 7, image: "/Categories/drones.webp", name: "Drones"},
-    { id: 8, image: "/Categories/headphones.webp", name: "Headphones"},
-];
+function CategoryCardSkeleton() {
+    return (
+        <div className="flex flex-col items-center overflow-hidden">
+            <div className="w-full h-64 bg-neutral-200 animate-pulse rounded-xl" />
+            <div className="h-4 w-24 bg-neutral-200 animate-pulse rounded mt-3" />
+        </div>
+    );
+}
+
+function ErrorState() {
+    return (
+        <div className="flex flex-col items-center justify-center py-12 px-4">
+            <svg className="w-12 h-12 text-red-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <h3 className="text-lg font-semibold text-red-800 mb-1">Failed to load categories</h3>
+            <p className="text-sm text-red-600 mb-6 text-center">Something went wrong while fetching the categories. Please try again.</p>
+        </div>
+    );
+}
+
+function EmptyState() {
+    return (
+        <div className="flex flex-col items-center justify-center py-16 px-4">
+            <svg className="w-12 h-12 text-neutral-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+            <h3 className="text-lg font-semibold text-neutral-700 mb-1">No Categories Found</h3>
+            <p className="text-sm text-neutral-500 text-center">We couldn't find any categories at the moment. Please check back later.</p>
+        </div>
+    );
+}
 
 function getSlidesToShow(width: number) {
     if (width < 640) return 2;
@@ -24,6 +48,18 @@ export default function CategorySection() {
     const [slidesToShow, setSlidesToShow] = useState(() =>
         getSlidesToShow(typeof window === "undefined" ? 1280 : window.innerWidth)
     );
+
+    const {
+        data: categoriesResponse,
+        isLoading: isCategoriesLoading,
+        isError: isCategoriesError,
+    } = useQuery({
+        queryKey: ["categories"],
+        queryFn: () => getCategories(),
+        staleTime: 10 * 60 * 1000,
+        refetchOnWindowFocus: false,
+        retry:2
+    });
 
     useEffect(() => {
         const onResize = () => setSlidesToShow(getSlidesToShow(window.innerWidth));
@@ -44,6 +80,45 @@ export default function CategorySection() {
         pauseOnHover: true,
     };
 
+    const categories: ICategory[] = categoriesResponse?.data.data || [];
+
+    const skeletonSlides = Array.from({ length: slidesToShow }).map((_, index) => (
+        <div key={`skeleton-${index}`} className="px-2 sm:px-3 md:px-4">
+            <CategoryCardSkeleton />
+        </div>
+    ));
+
+    const renderContent = () => {
+        if (isCategoriesLoading) {
+            return (
+                <Slider {...settings}>
+                    {skeletonSlides}
+                </Slider>
+            );
+        }
+
+        if (isCategoriesError) {
+            return <ErrorState />;
+        }
+
+        if (categories.length === 0) {
+            return <EmptyState />;
+        }
+
+        return (
+            <Slider {...settings}>
+                {categories.map((category: ICategory) => (
+                    <div key={category.id} className="px-2 sm:px-3 md:px-4">
+                        <CategoryCard
+                            image={category.image}
+                            name={category.name}
+                        />
+                    </div>
+                ))}
+            </Slider>
+        );
+    };
+
     return (
         <div className="w-full max-w-6xl mx-auto px-6 py-16">
             {/* Header */}
@@ -61,17 +136,8 @@ export default function CategorySection() {
                 </button>
             </div>
 
-            {/* Slider */}
-            <Slider {...settings}>
-                {categories.map((category) => (
-                    <div key={category.id} className="px-2 sm:px-3 md:px-4">
-                        <CategoryCard
-                            image={category.image}
-                            name={category.name}
-                        />
-                    </div>
-                ))}
-            </Slider>
+            {/* Render the appropriate state */}
+            {renderContent()}
         </div>
     );
 }
