@@ -24,9 +24,7 @@ const urls = {
   getCompanyInfo: "/company-info",
 
   // ========== ABOUT US ==========
-  getAboutUsStory: "/about-us/story",
-  getAboutUsPromises: "/about-us/promises",
-  getAboutUsFAQs: "/about-us/faqs",
+  getAboutUsPage: "/about-us",
 
   // ========== HERO SECTIONS ==========
   getHeroSections: "/hero-sections",
