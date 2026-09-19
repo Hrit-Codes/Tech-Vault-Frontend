@@ -202,6 +202,8 @@ export default function ShopPage() {
                     price={product.onSale && product.salePrice ? product.salePrice : product.price}
                     isNew={product.isNew}
                     bgColor="bg-section"
+                    id={product.id}
+                    slug={product.slug}
                   />
                 ))}
               </div>

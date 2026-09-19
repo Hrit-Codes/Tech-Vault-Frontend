@@ -37,7 +37,7 @@ export default function MainLayout() {
                     </div>
 
                     {/* Error Message */}
-                    <h1 className="text-2xl font-bold text-neutral-900 mb-3 tracking-tight">
+                    <h1 className="text-2xl font-bold mb-3 tracking-tight">
                         Oops! Something went wrong.
                     </h1>
                     <p className="text-sm text-description leading-relaxed mb-8">

@@ -1,19 +1,9 @@
 import { CheckCircle } from "lucide-react";
 
-const defaultProductFeatures = [
-    'Compact Charging Case',
-    'Touch Controls',
-    'Comfortable In-Ear Design',
-    'Clear Audio Performance',
-    'Stylish Blue Finish',
-    'Portable & Lightweight',
-    'Easy Device Pairing',
-    'Wireless Connectivity',
-    'Everyday Use Design'
-]
-
-export default function ProductFeaturesTab() {
-    const features = defaultProductFeatures;
+type ProductFeaturesTabProps={
+    features:string[];
+}
+export default function ProductFeaturesTab({features}:ProductFeaturesTabProps) {
     return (
         <div className="w-full py-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

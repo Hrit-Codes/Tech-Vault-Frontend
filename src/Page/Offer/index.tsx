@@ -18,6 +18,8 @@ export default function OfferPage(){
                             price={product.price}
                             isNew={product.isNew}
                             bgColor="bg-section-alternative"
+                            id={product.id}
+                            slug={product.slug}
                         />
                     ))}
                 </div>

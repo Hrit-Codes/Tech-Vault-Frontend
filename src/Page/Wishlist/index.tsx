@@ -13,7 +13,7 @@ const Slider = (SliderComponent as any).default || SliderComponent;
 
 const initialWishlist = [
   {
-    id: 1,
+    id: "1",
     image: UltraWatch,
     name: "UltraWatch Series 8",
     subtitle: "Midnight Aluminum",
@@ -23,7 +23,7 @@ const initialWishlist = [
       "The ultimate smartwatch with advanced health tracking, 18-hour battery life, and always-on Retina display.",
   },
   {
-    id: 2,
+    id: "2",
     image: SonicPodPro,
     name: "SonicPod Pro",
     subtitle: "Noise Cancelling",
@@ -33,7 +33,7 @@ const initialWishlist = [
       "Premium wireless earbuds with active noise cancellation, spatial audio, and 24-hour total battery life.",
   },
   {
-    id: 3,
+    id: "3",
     image: MacbookAir,
     name: "TechBook Air 15",
     subtitle: "M2 Chip / 16GB RAM",
@@ -43,7 +43,7 @@ const initialWishlist = [
       "Ultra-slim laptop featuring the M2 chip, 16GB unified memory, and all-day battery life for ultimate productivity.",
   },
   {
-    id: 4,
+    id: "4",
     image: IpadPro,
     name: "PadVision Pro",
     subtitle: "Retina XDR Display",
@@ -53,7 +53,7 @@ const initialWishlist = [
       "Revolutionary tablet with Retina XDR display, M2 chip, and Pencil hover support for creatives and professionals.",
   },
   {
-    id: 5,
+    id: "5",
     image: SoundCoreMax,
     name: "SoundCore Max",
     subtitle: "360° Audio",
@@ -65,11 +65,47 @@ const initialWishlist = [
 ];
 
 const recommendations = [
-  { id: 1, image: UltraWatch, name: "UltraWatch Series 8", subtitle: "Midnight Aluminum", price: 399.0, isNew: true },
-  { id: 2, image: SonicPodPro, name: "SonicPod Pro", subtitle: "Noise Cancelling", price: 249.0 },
-  { id: 3, image: MacbookAir, name: "TechBook Air 15", subtitle: "M2 Chip / 16GB RAM", price: 1299.0 },
-  { id: 4, image: IpadPro, name: "PadVision Pro", subtitle: "Retina XDR Display", price: 899.0 },
-  { id: 5, image: SoundCoreMax, name: "SoundCore Max", subtitle: "360° Audio", price: 199.0 },
+  {
+    id: "1",
+    slug: "ultrawatch-series-8",
+    image: UltraWatch,
+    name: "UltraWatch Series 8",
+    subtitle: "Midnight Aluminum",
+    price: 399.0,
+    isNew: true,
+  },
+  {
+    id: "2",
+    slug: "sonicpod-pro",
+    image: SonicPodPro,
+    name: "SonicPod Pro",
+    subtitle: "Noise Cancelling",
+    price: 249.0,
+  },
+  {
+    id: "3",
+    slug: "techbook-air-15",
+    image: MacbookAir,
+    name: "TechBook Air 15",
+    subtitle: "M2 Chip / 16GB RAM",
+    price: 1299.0,
+  },
+  {
+    id: "4",
+    slug: "padvision-pro",
+    image: IpadPro,
+    name: "PadVision Pro",
+    subtitle: "Retina XDR Display",
+    price: 899.0,
+  },
+  {
+    id: "5",
+    slug: "soundcore-max",
+    image: SoundCoreMax,
+    name: "SoundCore Max",
+    subtitle: "360° Audio",
+    price: 199.0,
+  },
 ];
 
 function getSlidesToShow(width: number) {
@@ -92,7 +128,7 @@ export default function WishlistPage() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const removeItem = (id: number) => {
+  const removeItem = (id: string) => {
     setWishlistItems((items) => items.filter((item) => item.id !== id));
   };
 
@@ -233,6 +269,8 @@ export default function WishlistPage() {
                   price={product.price}
                   isNew={product.isNew}
                   bgColor="bg-section"
+                  id={product.id}
+                  slug={product.slug}
                 />
               </div>
             ))}
