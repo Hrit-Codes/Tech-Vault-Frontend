@@ -20,7 +20,7 @@ const urls = {
   getOfferById: "/offers/admin",
 
   // ========== COMPANY INFO ==========
-  getCompanyInfo: "/company-infoo",
+  getCompanyInfo: "/company-info",
 
   // ========== ABOUT US ==========
   getAboutUsPage: "/about-us",

@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProductBySlug } from "../../apis/modules/products";
 import ProductDetailSkeleton from "../../Components/Product/LoadingSkeleton";
 import ProductNotFoundPage from "../../Components/Product/ProductNotFound";
-import ProductServerErrorPage from "../../Components/Product/ProductServerErrorPage";
+import ServerError from "../../Components/ui/ServerError";
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -18,8 +18,8 @@ export default function ProductDetailPage() {
     data: productResponse,
     isLoading: isProductLoading,
     isError: isProductError,
-    error:productError,
-    refetch:refetchProduct
+    error: productError,
+    refetch: refetchProduct,
   } = useQuery({
     queryKey: ["product", slug],
     queryFn: () => getProductBySlug(slug!),
@@ -27,7 +27,8 @@ export default function ProductDetailPage() {
     refetchOnWindowFocus: false,
     enabled: !!slug,
   });
-  const isProductNotFound=(productError as any)?.response?.status===404;
+
+  const isProductNotFound = (productError as any)?.response?.status === 404;
   const product = productResponse?.data.data;
 
   const [selectedImage, setSelectedImage] = useState(0);
@@ -82,17 +83,20 @@ export default function ProductDetailPage() {
   const isSelectedInStock =
     (selectedVariant?.stockOverride ?? product?.stock ?? 0) > 0;
 
-  if(isProductLoading){
-    return <ProductDetailSkeleton/>
+  if (isProductLoading) {
+    return <ProductDetailSkeleton />;
   }
 
-  if(isProductError && isProductNotFound){
-    return <ProductNotFoundPage/>
-  }
-
-  const isProductErrorr=true
-  if(isProductErrorr){
-    return <ProductServerErrorPage onRetry={()=>refetchProduct()}/>
+  if (isProductError) {
+    if (isProductNotFound) {
+      return <ProductNotFoundPage />;
+    }
+    return (
+      <ServerError
+        description="We couldn't load this product. This might be a temporary network issue. Please try again."
+        onRetry={() => refetchProduct()}
+      />
+    );
   }
 
   return (
