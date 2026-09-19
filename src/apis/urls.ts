@@ -1,5 +1,7 @@
 const urls = {
   // ========== AUTH ==========
+  registerUser:"/auth/register/initiate",
+  verifyUser:"/auth/register/verify",
   loginUser: "/auth/login",
   refreshAccess: "/auth/refresh",
 
