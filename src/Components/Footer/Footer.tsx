@@ -79,7 +79,7 @@ export default function Footer() {
                     {/* Brand column */}
                     <div className="md:col-span-4 flex flex-col gap-5">
                         <div className="flex items-center gap-3">
-                            <img src={info?.logo} alt="Company Logo" className="w-10 h-10 object-contain rounded-md bg-section border border-secondary-400/10 p-1" />
+                            <img src={info?.logo} alt="Company Logo" className="w-12 h-12 object-contain rounded-md p-1" />
                             <div>
                                 <h2 className="font-bold text-lg tracking-tight">{info?.companyName}</h2>
                                 <p className="text-[10px] tracking-[0.2em] uppercase text-primary-400 font-semibold">&amp; Pvt. Ltd.</p>

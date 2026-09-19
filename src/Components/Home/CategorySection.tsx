@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getCategories, type ICategory } from "../../apis/modules/categories";
 import ServerError from "../ui/ServerError";
+import { useNavigate } from "react-router-dom";
 
 const Slider = (SliderComponent as any).default || SliderComponent;
 
@@ -34,6 +35,7 @@ function getSlidesToShow(width: number) {
 }
 
 export default function CategorySection() {
+  const navigate=useNavigate();
   const [slidesToShow, setSlidesToShow] = useState(() =>
     getSlidesToShow(typeof window === "undefined" ? 1280 : window.innerWidth)
   );
@@ -103,7 +105,7 @@ export default function CategorySection() {
     return (
       <Slider {...settings}>
         {categories.map((category: ICategory) => (
-          <div key={category.id} className="px-2 sm:px-3 md:px-4">
+          <div key={category.id} onClick={()=>navigate(`/shop?category=${category.slug}`)} className="px-2 sm:px-3 md:px-4">
             <CategoryCard
               image={category.image}
               name={category.name}

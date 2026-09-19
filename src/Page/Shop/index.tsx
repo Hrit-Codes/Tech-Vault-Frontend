@@ -7,6 +7,7 @@ import { getCategories } from "../../apis/modules/categories";
 import { getProducts } from "../../apis/modules/products";
 import type { IProductListItem } from "../../apis/modules/products";
 import ServerError from "../../Components/ui/ServerError";
+import { useSearchParams } from "react-router-dom";
 
 const PRODUCTS_PER_PAGE = 12;
 const PILL_WIDTHS = ["w-20", "w-24", "w-32", "w-28", "w-24", "w-36", "w-20", "w-28"];
@@ -35,7 +36,8 @@ function CategoryPillsSkeleton({ count = 6 }: { count?: number }) {
 }
 
 export default function ShopPage() {
-  const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [searchParams, setSearchParams]=useSearchParams();
+  const [selectedCategorySlug, setSelectedCategorySlug] = useState(searchParams.get("category")??"");
   const [page, setPage] = useState(1);
   const [displayedProducts, setDisplayedProducts] = useState<IProductListItem[]>([]);
 
@@ -58,12 +60,12 @@ export default function ShopPage() {
     isError: isProductsError,
     refetch: refetchProducts,
   } = useQuery({
-    queryKey: ["shopProducts", selectedCategoryId, page],
+    queryKey: ["shopProducts", selectedCategorySlug, page],
     queryFn: () =>
       getProducts({
         page,
         limit: PRODUCTS_PER_PAGE,
-        categoryId: selectedCategoryId || undefined,
+        categorySlug: selectedCategorySlug || undefined,
       }),
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
@@ -73,19 +75,26 @@ export default function ShopPage() {
   const pagination = productsResponse?.data.pagination;
   const hasMorePages = pagination ? page < pagination.totalPages : false;
 
+  useEffect(()=>{
+    const slugFromUrl=searchParams.get("category")??"";
+    if(slugFromUrl!==selectedCategorySlug){
+      setSelectedCategorySlug(slugFromUrl);
+      setPage(1);
+    }
+  },[searchParams])
+
   useEffect(() => {
     if (!productsResponse) return;
-
     const newProducts = productsResponse.data.data;
-
     setDisplayedProducts((prev) =>
       page === 1 ? newProducts : [...prev, ...newProducts]
     );
   }, [productsResponse]);
 
-  const handleCategoryClick = (categoryId: string) => {
-    setSelectedCategoryId(categoryId);
+  const handleCategoryClick = (slug: string) => {
+    setSelectedCategorySlug(slug);
     setPage(1);
+    setSearchParams(slug?{category:slug}:{});
   };
 
   const handleViewMore = () => {
@@ -122,7 +131,7 @@ export default function ShopPage() {
             <button
               onClick={() => handleCategoryClick("")}
               className={`px-6 py-3 border border-primary-400 rounded-full hover:cursor-pointer font-semibold transition-colors ${
-                selectedCategoryId === ""
+                selectedCategorySlug === ""
                   ? "bg-primary-400 text-white"
                   : "hover:bg-primary-400/80 hover:text-white"
               }`}
@@ -134,10 +143,10 @@ export default function ShopPage() {
 
             {categories.map((category) => (
               <button
-                key={category.id}
-                onClick={() => handleCategoryClick(category.id)}
+                key={category.slug}
+                onClick={() => handleCategoryClick(category.slug)}
                 className={`px-6 py-3 border border-primary-400 rounded-full hover:cursor-pointer font-semibold transition-colors ${
-                  selectedCategoryId === category.id
+                  selectedCategorySlug === category.slug
                     ? "bg-primary-400 text-white"
                     : "hover:bg-primary-400/80 hover:text-white"
                 }`}
