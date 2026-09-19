@@ -143,7 +143,9 @@ export const getProducts = (params?: {
   limit: number;
   search?: string;
   brandId?: string;
+  brandSlug?:string;
   categoryId?: string;
+  categorySlug?:string;
   minPrice?: number;
   maxPrice?: number;
   stockStatus?: StockFilterValue;
