@@ -8,14 +8,16 @@ interface ProductCardProps {
   price: number;
   isNew?: boolean;
   bgColor: string;
+  slug:string;
+  id:string;
 }
 
-export default function ProductCard({ image, name, subtitle, price, isNew }: ProductCardProps) {
+export default function ProductCard({ image, name, subtitle, price, isNew, slug, id }: ProductCardProps) {
   const navigate = useNavigate();
-
+  console.log("Product id::",id);
   return (
     <div
-      onClick={() => navigate("/product")}
+      onClick={() => navigate(`/product/${slug}`)}
       className="relative flex flex-col cursor-pointer group overflow-hidden"
     >
       {/* Image Container */}

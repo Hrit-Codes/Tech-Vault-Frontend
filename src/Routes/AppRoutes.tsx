@@ -21,7 +21,7 @@ export default function AppRoutes(){
             <Route element={<MainLayout/>}>
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/wishlist" element={<WishlistPage/>}/>
-                <Route path="/product" element={<ProductDetailPage/>}/>
+                <Route path="/product/:slug" element={<ProductDetailPage/>}/>
                 <Route path="/shop" element={<ShopPage/>}/>
                 <Route path="/aboutus" element={<AboutUsPage/>}/>
                 <Route path="/search" element={<SearchPage/>}/>

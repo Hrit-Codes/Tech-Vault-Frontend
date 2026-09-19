@@ -84,13 +84,13 @@ export const categories=[
 ]
 
 export const earbuds = [
-  { id: 1, image: SonicPodPro, name: "EarBuds Pro", subtitle: "Active Noise Cancellation", price: 179.00, isNew: true },
-  { id: 2, image: SonicPodPro, name: "AirBeam Elite", subtitle: "Spatial Audio", price: 149.00 },
-  { id: 3, image: SonicPodPro, name: "SonicBuds X", subtitle: "30Hr Battery Life", price: 99.00 },
-  { id: 4, image: SonicPodPro, name: "NoiseFree Max", subtitle: "Hybrid ANC", price: 219.00, isNew: true },
-  { id: 5, image: SonicPodPro, name: "BassDrop Pro", subtitle: "Deep Bass Edition", price: 129.00 },
-  { id: 6, image: SonicPodPro, name: "ClearTone X", subtitle: "Crystal Clear Audio", price: 89.00 },
-  { id: 7, image: SonicPodPro, name: "StudioBuds Max", subtitle: "Studio Quality Sound", price: 259.00, isNew: true },
+  { id: "1", slug: "earbuds-pro",      image: SonicPodPro, name: "EarBuds Pro",     subtitle: "Active Noise Cancellation", price: 179.00, isNew: true  },
+  { id: "2", slug: "airbeam-elite",    image: SonicPodPro, name: "AirBeam Elite",   subtitle: "Spatial Audio",             price: 149.00 },
+  { id: "3", slug: "sonicbuds-x",      image: SonicPodPro, name: "SonicBuds X",     subtitle: "30Hr Battery Life",         price: 99.00  },
+  { id: "4", slug: "noisefree-max",    image: SonicPodPro, name: "NoiseFree Max",   subtitle: "Hybrid ANC",                price: 219.00, isNew: true  },
+  { id: "5", slug: "bassdrop-pro",     image: SonicPodPro, name: "BassDrop Pro",    subtitle: "Deep Bass Edition",         price: 129.00 },
+  { id: "6", slug: "cleartone-x",      image: SonicPodPro, name: "ClearTone X",     subtitle: "Crystal Clear Audio",       price: 89.00  },
+  { id: "7", slug: "studiobuds-max",   image: SonicPodPro, name: "StudioBuds Max",  subtitle: "Studio Quality Sound",      price: 259.00, isNew: true  },
 ];
 
 export const promises = [
@@ -152,20 +152,20 @@ export const reasons = [
 export const brands = ["SonicWave", "AeroSound", "PulseTech", "NovaTech"];
 
 export const searchProducts = [
-  { id: 1, image: SonicPodPro, name: "EarBuds Pro", subtitle: "Active Noise Cancellation", category: "Earbuds", brand: "SonicWave", price: 179.00, rating: 4.8, isNew: true, onSale: false },
-  { id: 2, image: SonicPodPro, name: "AirBeam Elite", subtitle: "Spatial Audio", category: "Earbuds", brand: "AeroSound", price: 149.00, rating: 4.5, isNew: false, onSale: true },
-  { id: 3, image: SonicPodPro, name: "SonicBuds X", subtitle: "30Hr Battery Life", category: "Earbuds", brand: "PulseTech", price: 99.00, rating: 4.2, isNew: false, onSale: false },
-  { id: 4, image: SonicPodPro, name: "NoiseFree Max", subtitle: "Hybrid ANC", category: "Earbuds", brand: "NovaTech", price: 219.00, rating: 4.9, isNew: true, onSale: false },
-  { id: 5, image: SonicPodPro, name: "BassDrop Pro", subtitle: "Deep Bass Edition", category: "Earbuds", brand: "SonicWave", price: 129.00, rating: 4.0, isNew: false, onSale: true },
-  { id: 6, image: SonicPodPro, name: "PulseWatch Ultra", subtitle: "GPS + Heart Rate", category: "Smartwatches", brand: "PulseTech", price: 249.00, rating: 4.6, isNew: true, onSale: false },
-  { id: 7, image: SonicPodPro, name: "AeroFit Watch", subtitle: "Fitness Tracker", category: "Smartwatches", brand: "AeroSound", price: 179.00, rating: 4.3, isNew: false, onSale: true },
-  { id: 8, image: SonicPodPro, name: "NovaTime Pro", subtitle: "AMOLED Display", category: "Smartwatches", brand: "NovaTech", price: 299.00, rating: 4.7, isNew: false, onSale: false },
-  { id: 9, image: SonicPodPro, name: "ProBook Air", subtitle: "13-inch Ultralight", category: "Laptops", brand: "NovaTech", price: 1299.00, rating: 4.8, isNew: true, onSale: false },
-  { id: 10, image: SonicPodPro, name: "WorkStation X", subtitle: "16-core Performance", category: "Laptops", brand: "PulseTech", price: 1899.00, rating: 4.9, isNew: false, onSale: false },
-  { id: 11, image: SonicPodPro, name: "StudioBook 14", subtitle: "OLED Creator Edition", category: "Laptops", brand: "SonicWave", price: 1599.00, rating: 4.5, isNew: false, onSale: true },
-  { id: 12, image: SonicPodPro, name: "TabletPro 11", subtitle: "Liquid Retina Display", category: "Tablets", brand: "AeroSound", price: 599.00, rating: 4.4, isNew: true, onSale: false },
-  { id: 13, image: SonicPodPro, name: "AeroPad Mini", subtitle: "Compact & Portable", category: "Tablets", brand: "NovaTech", price: 399.00, rating: 4.1, isNew: false, onSale: true },
-  { id: 14, image: SonicPodPro, name: "PulsePad Max", subtitle: "Stylus Included", category: "Tablets", brand: "PulseTech", price: 749.00, rating: 4.6, isNew: false, onSale: false },
+  { id: "1",  slug: "earbuds-pro",           image: SonicPodPro, name: "EarBuds Pro",     subtitle: "Active Noise Cancellation", category: "Earbuds",       brand: "SonicWave", price: 179.00,  rating: 4.8, isNew: true,  onSale: false },
+  { id: "2",  slug: "airbeam-elite",         image: SonicPodPro, name: "AirBeam Elite",   subtitle: "Spatial Audio",             category: "Earbuds",       brand: "AeroSound", price: 149.00,  rating: 4.5, isNew: false, onSale: true  },
+  { id: "3",  slug: "sonicbuds-x",           image: SonicPodPro, name: "SonicBuds X",     subtitle: "30Hr Battery Life",         category: "Earbuds",       brand: "PulseTech", price: 99.00,   rating: 4.2, isNew: false, onSale: false },
+  { id: "4",  slug: "noisefree-max",         image: SonicPodPro, name: "NoiseFree Max",   subtitle: "Hybrid ANC",                category: "Earbuds",       brand: "NovaTech",  price: 219.00,  rating: 4.9, isNew: true,  onSale: false },
+  { id: "5",  slug: "bassdrop-pro",          image: SonicPodPro, name: "BassDrop Pro",    subtitle: "Deep Bass Edition",         category: "Earbuds",       brand: "SonicWave", price: 129.00,  rating: 4.0, isNew: false, onSale: true  },
+  { id: "6",  slug: "pulsewatch-ultra",      image: SonicPodPro, name: "PulseWatch Ultra",subtitle: "GPS + Heart Rate",          category: "Smartwatches",  brand: "PulseTech", price: 249.00,  rating: 4.6, isNew: true,  onSale: false },
+  { id: "7",  slug: "aerofit-watch",         image: SonicPodPro, name: "AeroFit Watch",   subtitle: "Fitness Tracker",           category: "Smartwatches",  brand: "AeroSound", price: 179.00,  rating: 4.3, isNew: false, onSale: true  },
+  { id: "8",  slug: "novatime-pro",          image: SonicPodPro, name: "NovaTime Pro",    subtitle: "AMOLED Display",            category: "Smartwatches",  brand: "NovaTech",  price: 299.00,  rating: 4.7, isNew: false, onSale: false },
+  { id: "9",  slug: "probook-air",           image: SonicPodPro, name: "ProBook Air",     subtitle: "13-inch Ultralight",        category: "Laptops",       brand: "NovaTech",  price: 1299.00, rating: 4.8, isNew: true,  onSale: false },
+  { id: "10", slug: "workstation-x",         image: SonicPodPro, name: "WorkStation X",   subtitle: "16-core Performance",       category: "Laptops",       brand: "PulseTech", price: 1899.00, rating: 4.9, isNew: false, onSale: false },
+  { id: "11", slug: "studiobook-14",         image: SonicPodPro, name: "StudioBook 14",   subtitle: "OLED Creator Edition",      category: "Laptops",       brand: "SonicWave", price: 1599.00, rating: 4.5, isNew: false, onSale: true  },
+  { id: "12", slug: "tabletpro-11",          image: SonicPodPro, name: "TabletPro 11",    subtitle: "Liquid Retina Display",     category: "Tablets",       brand: "AeroSound", price: 599.00,  rating: 4.4, isNew: true,  onSale: false },
+  { id: "13", slug: "aeropad-mini",          image: SonicPodPro, name: "AeroPad Mini",    subtitle: "Compact & Portable",        category: "Tablets",       brand: "NovaTech",  price: 399.00,  rating: 4.1, isNew: false, onSale: true  },
+  { id: "14", slug: "pulsepad-max",          image: SonicPodPro, name: "PadVision Max",   subtitle: "Stylus Included",           category: "Tablets",       brand: "PulseTech", price: 749.00,  rating: 4.6, isNew: false, onSale: false },
 ];
 
 export const navItems=[

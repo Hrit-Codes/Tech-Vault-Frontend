@@ -129,6 +129,8 @@ export default function OfferSection() {
                     price={product.price}
                     isNew={product.isNew}
                     bgColor="bg-section"
+                    id={product.id}
+                    slug={product.slug}
                   />
                 </div>
               ))}

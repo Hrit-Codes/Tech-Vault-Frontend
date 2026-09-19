@@ -14,14 +14,13 @@ const urls = {
   getProductBySlug: "/products",
   getNewProducts:"/products/new",
   getProducts: "/products",
-  getProductById: "/products/admin",
 
   // ========== OFFERS ==========
   getOffers: "/offers",
   getOfferById: "/offers/admin",
 
   // ========== COMPANY INFO ==========
-  getCompanyInfo: "/company-info",
+  getCompanyInfo: "/company-infoo",
 
   // ========== ABOUT US ==========
   getAboutUsPage: "/about-us",

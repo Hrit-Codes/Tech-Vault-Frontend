@@ -82,6 +82,62 @@ export const getNewProducts=(page=1,limit=12)=>{
     }).then((res)=>res.data);
 }
 
+export interface IProductCategoryRef {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export interface IProductBrandRef {
+  id: string;
+  name: string;
+  slug: string;
+  logo: string | null;
+}
+
+export interface IProductDetail{
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+
+  price: number;
+  stock:number;
+  salePrice: number | null;
+  onSale: boolean;
+  minPrice: number;
+  maxPrice: number;
+  hasPriceRange: boolean;
+
+  images: string[];
+  badge: string | null;
+  freeShipping: boolean;
+  trustBadges: string[];
+
+  rating: number;
+  reviewCount: number;
+
+  specifications: Record<string, string> | null;
+  features: string[];
+
+  categoryId: string;
+  brandId: string;
+  category: IProductCategoryRef;
+  brand: IProductBrandRef;
+  variants: IProductVariant[];
+
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+
+  isNew: boolean;
+  appliedOffer: AppliedOffer | null;
+}
+
+type getProductBySlugResponse={
+  data:IProductDetail
+}
+
 export const getProducts = (params?: {
   page: number;
   limit: number;
@@ -99,3 +155,7 @@ export const getProducts = (params?: {
     .get<ApiResponse<GetProductsResponse>>(urls.getProducts, { params })
     .then((res) => res.data);
 };
+
+export const getProductBySlug=(slug:string)=>{
+  return api.get<ApiResponse<getProductBySlugResponse>>(`${urls.getProductBySlug}/${slug}`).then((res)=>res.data)
+}

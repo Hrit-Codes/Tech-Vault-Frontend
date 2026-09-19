@@ -120,6 +120,8 @@ export default function NewArrivals() {
               price={product.salePrice ?? product.price} 
               isNew={product.isNew}
               bgColor="bg-section"
+              id={product.id}
+              slug={product.slug}
             />
           </div>
         ))}
