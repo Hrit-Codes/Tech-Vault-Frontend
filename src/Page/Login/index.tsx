@@ -1,10 +1,37 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { BackgroundEffects } from "../../Components/ui/BackgroundEffects";
+import { useForm } from "react-hook-form";
+import { loginUser, type ILoginFormValue } from "../../apis/modules/auth";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export default function LoginPage() {
+  const navigate=useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const { register, handleSubmit}=useForm<ILoginFormValue>()
+
+  const loginMutation=useMutation({
+    mutationFn:(data:ILoginFormValue)=>loginUser(data),
+    onSuccess:(data)=>{
+      console.log(data);
+      toast.success("Welcome back");
+      localStorage.setItem("user",JSON.stringify(data.data.user))
+      navigate("/");
+    },
+    onError:(error:any)=>{
+      const message=error.response?.data?.message || "Invalid email or password";
+      toast.error(message);
+      console.error(message);
+    }
+  })
+
+  const onSubmit=(data:ILoginFormValue)=>{
+    console.log(data);
+    loginMutation.mutate(data);
+  }
 
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center px-4 py-16">
@@ -19,7 +46,7 @@ export default function LoginPage() {
         </div>
 
         {/* Form */}
-        <form className="flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
 
           {/* Email */}
           <div className="flex flex-col gap-2">
@@ -29,7 +56,8 @@ export default function LoginPage() {
             <input
               id="email"
               type="email"
-              placeholder="name@company.com"
+              {...register("email",{required:true})}
+              placeholder="name@gmail.com"
               className="px-4 py-3 rounded-xl border border-secondary-400/10 bg-transparent text-sm placeholder:text-description/50 font-semibold outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all"
             />
           </div>
@@ -48,6 +76,7 @@ export default function LoginPage() {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
+                {...register("password")}
                 placeholder="••••••••"
                 className="w-full px-4 py-3 rounded-xl border border-secondary-400/10 bg-transparent text-sm placeholder:text-description/50 font-semibold outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all pr-11"
               />
@@ -64,9 +93,10 @@ export default function LoginPage() {
           {/* Submit Button */}
           <button
             type="submit"
+            disabled={loginMutation.isPending}
             className="w-full bg-primary-500 hover:bg-primary-600 text-white py-3.5 rounded-xl font-semibold text-sm transition-colors mt-2 hover:cursor-pointer"
           >
-            Sign In
+            {loginMutation.isPending?"Login User...":"Login"}
           </button>
         </form>
 
@@ -84,7 +114,7 @@ export default function LoginPage() {
 
         {/* Google Login Button */}
         <div className="flex gap-3">
-          <button className="w-full flex items-center justify-center gap-2 border border-secondary-400/10 text-description bg-section-alternative py-3 rounded-xl text-sm font-bold hover:bg-secondary-500/5 transition-colors hover:cursor-pointer">
+          <button disabled={loginMutation.isPending} className="w-full flex items-center justify-center gap-2 border border-secondary-400/10 text-description bg-section-alternative py-3 rounded-xl text-sm font-bold hover:bg-secondary-500/5 transition-colors hover:cursor-pointer">
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />

@@ -25,13 +25,21 @@ export interface LoginRequest{
     password:string;
 }
 
-export interface InitiateRegistrationResponse{
+type InitiateRegistrationResponse={
     message:string;
 }
 
-export interface VerifyOtpResponse{
+type VerifyOtpResponse={
     user:AuthUser
-    
+}
+
+export interface ILoginFormValue{
+  email:string;
+  password:string;
+}
+
+type LoginUserResponse={
+    user:AuthUser
 }
 
 
@@ -41,4 +49,8 @@ export const register=(payload:RegisterRequest)=>{
 
 export const verifyOtp=(payload:VerifyOtpRequest)=>{
     return api.post<ApiResponse<VerifyOtpResponse>>(urls.verifyUser,payload).then((res)=>res.data);
+}
+
+export const loginUser=(data:ILoginFormValue)=>{
+    return api.post<ApiResponse<LoginUserResponse>>(urls.loginUser,data).then((res)=>res.data);
 }
