@@ -96,7 +96,7 @@ export default function LoginPage() {
             disabled={loginMutation.isPending}
             className="w-full bg-primary-500 hover:bg-primary-600 text-white py-3.5 rounded-xl font-semibold text-sm transition-colors mt-2 hover:cursor-pointer"
           >
-            {loginMutation.isPending?"Login User...":"Login"}
+            {loginMutation.isPending?"Logging User...":"Login"}
           </button>
         </form>
 
