@@ -13,6 +13,9 @@ import SearchPage from "../Page/Search";
 import OfferPage from "../Page/Offer";
 import BlogPage from "../Page/Blog";
 import NotFoundPage from "../Page/NotFound";
+import PrivateLayout from "../Layout/PrivateLayout";
+import UserProfilePage from "../Page/UserProfile";
+import ForgotPasswordPage from "../Page/ForgotPassword";
 
 export default function AppRoutes(){
     return(
@@ -20,7 +23,6 @@ export default function AppRoutes(){
         <Routes>
             <Route element={<MainLayout/>}>
                 <Route path="/" element={<HomePage/>}/>
-                <Route path="/wishlist" element={<WishlistPage/>}/>
                 <Route path="/product/:slug" element={<ProductDetailPage/>}/>
                 <Route path="/shop" element={<ShopPage/>}/>
                 <Route path="/aboutus" element={<AboutUsPage/>}/>
@@ -28,11 +30,17 @@ export default function AppRoutes(){
                 <Route path="/offer" element={<OfferPage/>}/>
                 <Route path="/blogs" element={<BlogPage/>}/>
                 <Route path="*" element={<NotFoundPage/>}/>
+
+                <Route element={<PrivateLayout/>}>
+                    <Route path="/wishlist" element={<WishlistPage/>}/>
+                    <Route path="/profile" element={<UserProfilePage/>}/>
+                </Route>
             </Route>
             <Route element={<PublicRoute/>}>
                 <Route element={<AuthLayout/>}>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/register" element={<RegisterPage/>}/>
+                    <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
                 </Route>
             </Route>
         </Routes>

@@ -3,7 +3,12 @@ const urls = {
   registerUser:"/auth/register/initiate",
   verifyUser:"/auth/register/verify",
   loginUser: "/auth/login",
+  logoutUser:"/auth/logout",
   refreshAccess: "/auth/refresh",
+  getCurrentUser:"/auth/me",
+  changePassword:"/auth/change-password",
+  forgotPassword:"/auth/forgot-password",
+  resetPassword:"/auth/reset-password",
 
   // ========== BRANDS ==========
   getBrandBySlug: "/brands",
