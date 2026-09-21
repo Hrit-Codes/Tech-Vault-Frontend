@@ -7,6 +7,7 @@ import { getCompanyInfo } from "../apis/modules/company-info";
 import { LoadingSpinner } from "../Components/ui/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import ServerError from "../Components/ui/ServerError";
+import OfferPopup from "../Components/Home/OfferPopup";
 
 export default function MainLayout() {
     const {
@@ -35,6 +36,7 @@ export default function MainLayout() {
             <BackgroundEffects />
             
             <div className="relative z-10">
+                <OfferPopup/>
                 <Header />
                 <main className="min-h-screen">
                     <Outlet />
