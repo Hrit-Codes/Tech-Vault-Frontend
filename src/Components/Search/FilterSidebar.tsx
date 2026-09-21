@@ -241,7 +241,7 @@ export default function FilterSidebar({ filters, onChange }: FilterSidebarProps)
         )}
       </div>
 
-      {/* Offers */}
+      {/* Offers
       <div className="flex flex-col gap-1">
         <h4 className="font-bold text-sm mb-2">Available Offers</h4>
         <FilterCheckbox
@@ -249,7 +249,7 @@ export default function FilterSidebar({ filters, onChange }: FilterSidebarProps)
           checked={filters.onSaleOnly}
           onToggle={() => onChange({ ...filters, onSaleOnly: !filters.onSaleOnly })}
         />
-      </div>
+      </div> */}
     </aside>
   );
 }
