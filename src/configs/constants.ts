@@ -84,13 +84,13 @@ export const categories=[
 ]
 
 export const earbuds = [
-  { id: "1", slug: "earbuds-pro",      image: SonicPodPro, name: "EarBuds Pro",     subtitle: "Active Noise Cancellation", price: 179.00, isNew: true  },
-  { id: "2", slug: "airbeam-elite",    image: SonicPodPro, name: "AirBeam Elite",   subtitle: "Spatial Audio",             price: 149.00 },
-  { id: "3", slug: "sonicbuds-x",      image: SonicPodPro, name: "SonicBuds X",     subtitle: "30Hr Battery Life",         price: 99.00  },
-  { id: "4", slug: "noisefree-max",    image: SonicPodPro, name: "NoiseFree Max",   subtitle: "Hybrid ANC",                price: 219.00, isNew: true  },
-  { id: "5", slug: "bassdrop-pro",     image: SonicPodPro, name: "BassDrop Pro",    subtitle: "Deep Bass Edition",         price: 129.00 },
-  { id: "6", slug: "cleartone-x",      image: SonicPodPro, name: "ClearTone X",     subtitle: "Crystal Clear Audio",       price: 89.00  },
-  { id: "7", slug: "studiobuds-max",   image: SonicPodPro, name: "StudioBuds Max",  subtitle: "Studio Quality Sound",      price: 259.00, isNew: true  },
+  { id: "1", slug: "earbuds-pro",     image: SonicPodPro, name: "EarBuds Pro",    subtitle: "Active Noise Cancellation", price: 179.00, salePrice: 149.00, isNew: true  },
+  { id: "2", slug: "airbeam-elite",   image: SonicPodPro, name: "AirBeam Elite",  subtitle: "Spatial Audio",             price: 149.00, salePrice: null   },
+  { id: "3", slug: "sonicbuds-x",     image: SonicPodPro, name: "SonicBuds X",    subtitle: "30Hr Battery Life",         price: 99.00,  salePrice: 79.00  },
+  { id: "4", slug: "noisefree-max",   image: SonicPodPro, name: "NoiseFree Max",  subtitle: "Hybrid ANC",                price: 219.00, salePrice: 189.00, isNew: true  },
+  { id: "5", slug: "bassdrop-pro",    image: SonicPodPro, name: "BassDrop Pro",   subtitle: "Deep Bass Edition",         price: 129.00, salePrice: null   },
+  { id: "6", slug: "cleartone-x",     image: SonicPodPro, name: "ClearTone X",    subtitle: "Crystal Clear Audio",       price: 89.00,  salePrice: 69.00  },
+  { id: "7", slug: "studiobuds-max",  image: SonicPodPro, name: "StudioBuds Max", subtitle: "Studio Quality Sound",      price: 259.00, salePrice: 229.00, isNew: true  },
 ];
 
 export const promises = [

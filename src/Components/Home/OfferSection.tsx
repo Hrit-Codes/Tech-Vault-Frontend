@@ -126,7 +126,8 @@ export default function OfferSection() {
                     image={product.image}
                     name={product.name}
                     subtitle={product.subtitle}
-                    price={product.price}
+                    basePrice={product.price}
+                    salePrice={product.salePrice}
                     isNew={product.isNew}
                     bgColor="bg-section"
                     id={product.id}

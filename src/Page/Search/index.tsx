@@ -1,74 +1,92 @@
-import { useMemo, useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "../../Components/Product/ProductCard";
 import FilterSidebar from "../../Components/Search/FilterSidebar";
 import { defaultFilters, type SearchFilters } from "../../Components/Search/searchFilters";
-import { searchProducts } from "../../configs/constants";
+import { useSearchParams } from "react-router-dom";
+import type { SortFilterValue } from "../../Components/utils/types";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts, type IProductListItem } from "../../apis/modules/products";
+import Pagination from "../../Components/Search/Pagination";
+
+const PRODUCTS_PER_PAGE = 12;
+
+const sortOptions: { label: string; value: SortFilterValue }[] = [
+  { label: "Newest", value: "newest" },
+  { label: "Price: Low to High", value: "price_asc" },
+  { label: "Price: High to Low", value: "price_desc" },
+];
 
 export default function SearchPage() {
-  const [query, setQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const initialQuery = searchParams.get("q") ?? "";
+
+  const [query, setQuery] = useState(initialQuery);
   const [filters, setFilters] = useState<SearchFilters>(defaultFilters);
+  const [sortBy, setSortBy] = useState<SortFilterValue>("newest");
+  const [currentPage, setCurrentPage] = useState(1);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [sortBy, setSortBy] = useState("newest");
 
   // Prevent body scrolling when mobile sidebar overlay is active
   useEffect(() => {
-    if (mobileFiltersOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = mobileFiltersOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileFiltersOpen]);
 
-  const filteredProducts = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
+  // Note: the sidebar lets someone check MULTIPLE categories/brands, but the
+  // backend currently only accepts one categorySlug/brandSlug at a time. We
+  // send whichever one was checked first — good enough for now, but worth
+  // upgrading the backend to accept a list if multi-select filtering matters.
+  const queryParams = {
+    page: currentPage,
+    limit: PRODUCTS_PER_PAGE,
+    search: query.trim() || undefined,
+    categorySlug: filters.categories[0] || undefined,
+    brandSlug: filters.brands[0] || undefined,
+    minPrice: filters.minPrice !== "" ? Number(filters.minPrice) : undefined,
+    maxPrice: filters.maxPrice !== "" ? Number(filters.maxPrice) : undefined,
+    minRating:filters.minRating >0 ? filters.minRating : undefined,
+    maxRating: filters.maxRating<5 ? filters.maxRating : undefined,
+    isNew: filters.newOnly || undefined,
+    onSale: filters.onSaleOnly || undefined,
+    sortBy,
+  };
 
-    let results = searchProducts.filter((product) => {
-      const matchesQuery =
-        normalizedQuery === "" ||
-        product.name.toLowerCase().includes(normalizedQuery) ||
-        product.subtitle.toLowerCase().includes(normalizedQuery);
+  const {
+    data: productsResponse,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["searchProducts", queryParams],
+    queryFn: () => getProducts(queryParams),
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
 
-      const matchesCategory =
-        filters.categories.length === 0 || filters.categories.includes(product.category);
+  const fetchedProducts = productsResponse?.data.data ?? [];
+  const pagination = productsResponse?.data.pagination;
+  const totalPages = pagination?.totalPages ?? 1;
 
-      const matchesBrand =
-        filters.brands.length === 0 || filters.brands.includes(product.brand);
-
-      const matchesMinPrice = filters.minPrice === "" || product.price >= Number(filters.minPrice);
-      const matchesMaxPrice = filters.maxPrice === "" || product.price <= Number(filters.maxPrice);
-
-      const matchesRating = filters.minRating === 0 || product.rating >= filters.minRating;
-
-      const matchesNew = !filters.newOnly || product.isNew;
-      const matchesSale = !filters.onSaleOnly || product.onSale;
-
-      return (
-        matchesQuery &&
-        matchesCategory &&
-        matchesBrand &&
-        matchesMinPrice &&
-        matchesMaxPrice &&
-        matchesRating &&
-        matchesNew &&
-        matchesSale
-      );
-    });
-
-    if (sortBy === "newest") results = [...results].sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
-    if (sortBy === "price-asc") results = [...results].sort((a, b) => a.price - b.price);
-    if (sortBy === "price-desc") results = [...results].sort((a, b) => b.price - a.price);
-
-    return results;
-  }, [query, filters, sortBy]);
 
   const clearAll = () => {
     setFilters(defaultFilters);
     setQuery("");
     setSortBy("newest");
+    setCurrentPage(1);
+  };
+
+  const handleFiltersChange = (next: SearchFilters) => {
+    setFilters(next);
+    setCurrentPage(1); // any filter change should jump back to page 1
+  };
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   return (
@@ -105,7 +123,7 @@ export default function SearchPage() {
 
         {/* Mobile Content (Scrollable) */}
         <div className="p-5 flex-1 overflow-y-auto space-y-6">
-          <FilterSidebar filters={filters} onChange={setFilters} />
+          <FilterSidebar filters={filters} onChange={handleFiltersChange} />
         </div>
 
         {/* Mobile Action Footer */}
@@ -128,6 +146,16 @@ export default function SearchPage() {
 
         {/* Top Bar: Search Input & Mobile Filter Toggle */}
         <div className="flex items-center gap-3 mb-8">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setCurrentPage(1);
+            }}
+            placeholder="Search products..."
+            className="flex-1 px-4 py-3.5 rounded-xl border border-secondary-400/10 bg-section-alternative text-sm font-semibold placeholder:text-description/50 outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all"
+          />
 
           {/* Filter Toggle Button for Mobile Screens */}
           <button
@@ -147,7 +175,7 @@ export default function SearchPage() {
           <aside className="hidden lg:flex flex-col gap-4 w-64 shrink-0 sticky top-28">
             <div className="bg-section-alternative rounded-2xl p-5 border border-secondary-400/10">
               <h3 className="font-bold text-base mb-4">Filters</h3>
-              <FilterSidebar filters={filters} onChange={setFilters} />
+              <FilterSidebar filters={filters} onChange={handleFiltersChange} />
             </div>
             <button
               type="button"
@@ -166,48 +194,98 @@ export default function SearchPage() {
               <h2 className="text-lg font-bold">
                 All Products{" "}
                 <span className="text-description font-normal text-sm">
-                  ({filteredProducts.length})
+                  ({pagination?.total ?? 0})
                 </span>
               </h2>
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                onChange={(e) => {
+                  setSortBy(e.target.value as SortFilterValue);
+                  setCurrentPage(1);
+                }}
                 className="text-sm font-semibold px-4 py-2.5 rounded-xl border border-secondary-400/10 bg-section-alternative outline-none focus:border-primary-500 transition-all hover:cursor-pointer"
               >
-                <option value="newest">Sort by: Newest</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
+                {sortOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
               </select>
             </div>
 
-            {/* Product Display Grid */}
-            {filteredProducts.length > 0 ? (
+            {/* Loading state */}
+            {isLoading && (
               <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-10">
-                {filteredProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    image={product.image}
-                    name={product.name}
-                    subtitle={product.subtitle}
-                    price={product.price}
-                    isNew={product.isNew}
-                    bgColor="bg-section-alternative"
-                    id={product.id}
-                    slug={product.slug}
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="aspect-[3/4] rounded-2xl bg-section-alternative animate-pulse"
                   />
                 ))}
               </div>
-            ) : (
+            )}
+
+            {/* Error state */}
+            {!isLoading && isError && (
               <div className="w-full flex flex-col items-center justify-center gap-4 py-24 bg-section-alternative rounded-3xl border border-secondary-400/5">
-                <p className="font-semibold text-description">No products match your filters.</p>
+                <p className="font-semibold text-description">
+                  We couldn't load products right now.
+                </p>
                 <button
                   type="button"
-                  onClick={clearAll}
+                  onClick={() => refetch()}
                   className="bg-primary-500 py-3 px-8 rounded-full hover:bg-primary-500/90 text-white font-semibold transition-colors"
                 >
-                  Clear Filters
+                  Try Again
                 </button>
               </div>
+            )}
+
+            {/* Product Display Grid */}
+            {!isLoading && !isError && (
+              fetchedProducts.length > 0 ? (
+                <>
+                  <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-10">
+                    {fetchedProducts.map((product: IProductListItem) => (
+                      <ProductCard
+                        key={product.id}
+                        id={product.id}
+                        slug={product.slug}
+                        image={product.images?.[0] ?? ""}
+                        name={product.name}
+                        subtitle={product.category?.name ?? ""}
+                        basePrice={product.price}
+                        salePrice={product.salePrice??0}
+                        isNew={product.isNew}
+                        bgColor="bg-section-alternative"
+                      />
+                    ))}
+                  </div>
+
+                  {totalPages > 1 && (
+                    <div className="w-full flex justify-center mt-6">
+                      <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        totalItems={pagination?.total}
+                        itemsPerPage={PRODUCTS_PER_PAGE}
+                      />
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="w-full flex flex-col items-center justify-center gap-4 py-24 bg-section-alternative rounded-3xl border border-secondary-400/5">
+                  <p className="font-semibold text-description">No products match your filters.</p>
+                  <button
+                    type="button"
+                    onClick={clearAll}
+                    className="bg-primary-500 py-3 px-8 rounded-full hover:bg-primary-500/90 text-white font-semibold transition-colors"
+                  >
+                    Clear Filters
+                  </button>
+                </div>
+              )
             )}
           </section>
 

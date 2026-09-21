@@ -1,4 +1,4 @@
-import type { ApiResponse, IPagination, IProductVariant, SortFilterValue, StockFilterValue } from "../../Components/utils/types";
+import type { ApiResponse, IPagination, IProductVariant, SortFilterValue } from "../../Components/utils/types";
 import api from "../client";
 import urls from "../urls";
 
@@ -17,7 +17,7 @@ export interface IProduct {
   slug: string;
   description: string;
   price: number;
-  salePrice: number | null;
+  salePrice: number ;
   onSale: boolean;
   images: string[];
   badge: string | null;
@@ -148,8 +148,6 @@ export const getProducts = (params?: {
   categorySlug?:string;
   minPrice?: number;
   maxPrice?: number;
-  stockStatus?: StockFilterValue;
-  isActive?: boolean;
   onSale?: boolean;
   sortBy?: SortFilterValue;
 }) => {
