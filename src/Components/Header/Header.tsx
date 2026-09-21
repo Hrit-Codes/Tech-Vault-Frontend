@@ -16,8 +16,12 @@ export default function Header() {
     const navigate = useNavigate();
     const location = useLocation();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen]=useState(false);
+    const [isMobileSearchOpen, setIsMobileSearchOpen]=useState(false);
     const menuItemsRef = useRef<(HTMLButtonElement | null)[]>([]);
     const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0, opacity: 0 });
+    const [query, setQuery]=useState("");
+    
 
     // Controls whether the little "Profile / Log Out" popout is showing.
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -69,9 +73,41 @@ export default function Header() {
         setIsUserMenuOpen((prev) => !prev);
     };
 
+    const handleSearch=()=>{
+        if(!query.trim()) return;
+        setIsSearchOpen(false);
+        setIsMobileSearchOpen(false);
+        navigate(`/search?q=${query}`)
+        setQuery("");
+    }
+
     return (
         <>
         <header className="absolute top-0 left-0 right-0 z-50 px-6 py-4">
+            {isMobileSearchOpen && (
+                <div className='fixed inset-0 z-[80] lg:hidden transition-all duration-500'>
+                    <div className='absolute inset-0 bg-black/80 backdrop-blur-md' onClick={()=>{setIsMobileSearchOpen(false); setIsSearchOpen(false)}}>
+                        <div className='w-full h-full flex flex-col justify-center my-20 items-center'>
+                            <div className='relative w-full flex justify-center' onClick={(e)=>e.stopPropagation()}>
+                                <input 
+                                    type="text"
+                                    placeholder='Search...'
+                                    className='bg-transparent text-sm px-4 py-2 outline-1 outline-secondary-50 rounded-2xl w-64'
+                                    autoFocus
+                                    value={query}
+                                    onChange={(e)=>setQuery(e.target.value)}
+                                    onKeyDown={(e)=>{
+                                        if(e.key==="Enter") handleSearch();
+                                    }}/>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            )}
             <div className="w-full max-w-7xl mx-auto flex flex-row justify-between items-center">
 
                 {/* Logo */}
@@ -111,7 +147,33 @@ export default function Header() {
 
                 {/* Icons */}
                 <div className="flex flex-row items-center gap-4 shrink-0">
-                    <Search size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/search")} />
+                    <div className='relative'>
+                    {!isSearchOpen?(
+                        <button onClick={()=>{setIsSearchOpen(true); setIsMobileSearchOpen(true)}}>
+                            <Search size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
+                        </button>
+                        ):(
+                            <div className='relative hidden lg:flex'>
+                                <input
+                                    type="text"
+                                    placeholder='Search...'
+                                    className='bg-transparent text-sm px-4 py-2 outline-1 outline-secondary-50 rounded-2xl w-48'
+                                    autoFocus
+                                    value={query}
+                                    onChange={(e)=>setQuery(e.target.value)}
+                                    onKeyDown={(e)=>{
+                                        if(e.key==="Enter") handleSearch();
+                                    }}
+                                />
+                                <button
+                                    onClick={()=>setIsSearchOpen(false)}
+                                    className='p-2'>
+                                        <X size={20} className='hover:cursor-pointer hover:text-primary-400 transition-colors'/>
+                                </button>
+
+                            </div>
+                        )}
+                    </div>
                     {user && (
                         <>
                         <Heart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/wishlist")} />

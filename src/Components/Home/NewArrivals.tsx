@@ -112,7 +112,8 @@ export default function NewArrivals() {
               image={product.images?.[0] || ""}
               name={product.name}
               subtitle={product.description || ""}
-              price={product.salePrice ?? product.price}
+              basePrice={product.price}
+              salePrice={product.salePrice}
               isNew={product.isNew}
               bgColor="bg-section"
               id={product.id}

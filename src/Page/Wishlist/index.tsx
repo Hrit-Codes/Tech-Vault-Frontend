@@ -72,6 +72,7 @@ const recommendations = [
     name: "UltraWatch Series 8",
     subtitle: "Midnight Aluminum",
     price: 399.0,
+    salePrice: 349.0,     
     isNew: true,
   },
   {
@@ -81,6 +82,7 @@ const recommendations = [
     name: "SonicPod Pro",
     subtitle: "Noise Cancelling",
     price: 249.0,
+    salePrice: null,     
   },
   {
     id: "3",
@@ -89,6 +91,7 @@ const recommendations = [
     name: "TechBook Air 15",
     subtitle: "M2 Chip / 16GB RAM",
     price: 1299.0,
+    salePrice: 1099.0,       
   },
   {
     id: "4",
@@ -97,6 +100,7 @@ const recommendations = [
     name: "PadVision Pro",
     subtitle: "Retina XDR Display",
     price: 899.0,
+    salePrice: null,
   },
   {
     id: "5",
@@ -105,6 +109,7 @@ const recommendations = [
     name: "SoundCore Max",
     subtitle: "360° Audio",
     price: 199.0,
+    salePrice: 149.0,     
   },
 ];
 
@@ -266,7 +271,8 @@ export default function WishlistPage() {
                   image={product.image}
                   name={product.name}
                   subtitle={product.subtitle}
-                  price={product.price}
+                  basePrice={product.price}
+                  salePrice={product.salePrice??0}
                   isNew={product.isNew}
                   bgColor="bg-section"
                   id={product.id}

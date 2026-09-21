@@ -15,7 +15,8 @@ export default function OfferPage(){
                             image={product.image}
                             name={product.name}
                             subtitle={product.subtitle}
-                            price={product.price}
+                            basePrice={product.price}
+                            salePrice={product.salePrice??0}
                             isNew={product.isNew}
                             bgColor="bg-section-alternative"
                             id={product.id}

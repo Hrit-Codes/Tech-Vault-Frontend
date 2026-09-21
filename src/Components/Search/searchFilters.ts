@@ -3,7 +3,8 @@ export interface SearchFilters {
   brands: string[];
   minPrice: string;
   maxPrice: string;
-  minRating: number;
+  minRating:number;
+  maxRating:number;
   newOnly: boolean;
   onSaleOnly: boolean;
 }
@@ -14,6 +15,7 @@ export const defaultFilters: SearchFilters = {
   minPrice: "",
   maxPrice: "",
   minRating: 0,
+  maxRating:5,
   newOnly: false,
   onSaleOnly: false,
 };

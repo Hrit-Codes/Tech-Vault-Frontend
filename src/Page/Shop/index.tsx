@@ -176,7 +176,8 @@ export default function ShopPage() {
                     name={product.name}
                     subtitle={product.category?.name ?? ""}
                     image={product.images?.[0] ?? ""}
-                    price={product.onSale && product.salePrice ? product.salePrice : product.price}
+                    basePrice={product.price}
+                    salePrice={product.salePrice??0}
                     isNew={product.isNew}
                     bgColor="bg-section"
                     id={product.id}

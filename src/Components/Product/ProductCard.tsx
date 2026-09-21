@@ -5,30 +5,54 @@ interface ProductCardProps {
   image: string;
   name: string;
   subtitle: string;
-  price: number;
+  basePrice: number;
+  salePrice: number;
   isNew?: boolean;
   bgColor: string;
-  slug:string;
-  id:string;
+  slug: string;
+  id: string;
 }
 
-export default function ProductCard({ image, name, subtitle, price, isNew, slug, id }: ProductCardProps) {
+export default function ProductCard({
+  image,
+  name,
+  subtitle,
+  basePrice,
+  salePrice,
+  isNew,
+  slug,
+  id,
+}: ProductCardProps) {
   const navigate = useNavigate();
-  console.log("Product id::",id);
+
+  // A sale is only real if salePrice exists, is > 0, and is cheaper than basePrice.
+  // The `> 0` check protects against the `salePrice: 0` bug from your DB.
+  const hasSale = salePrice !== undefined && salePrice > 0 && salePrice < basePrice;
+  const discountPercent = hasSale
+    ? Math.round(((basePrice - salePrice) / basePrice) * 100)
+    : 0;
+
   return (
     <div
+      key={id}
       onClick={() => navigate(`/product/${slug}`)}
       className="relative flex flex-col cursor-pointer group overflow-hidden"
     >
       {/* Image Container */}
-      <div className={`relative rounded-2xl overflow-hidden aspect-square bg-white p-2`}>
-
+      <div className="relative rounded-2xl overflow-hidden aspect-square bg-white p-2">
         {/* Badges */}
-        {isNew && (
-          <span className="absolute top-3 left-3 z-10 bg-secondary-500 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide uppercase shadow-sm">
-            New
-          </span>
-        )}
+        <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">
+          {isNew && (
+            <span className="bg-secondary-500 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide uppercase shadow-sm">
+              New
+            </span>
+          )}
+          {hasSale && discountPercent > 0 && (
+            <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide uppercase shadow-sm">
+              -{discountPercent}%
+            </span>
+          )}
+        </div>
 
         {/* Wishlist */}
         <button
@@ -36,7 +60,11 @@ export default function ProductCard({ image, name, subtitle, price, isNew, slug,
           className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm hover:scale-110 transition-transform hover:cursor-pointer border border-secondary-400/5"
           aria-label="Add to wishlist"
         >
-          <Heart size={20} strokeWidth={3.5} className="text-secondary-400 hover:fill-secondary-400 transition-all" />
+          <Heart
+            size={20}
+            strokeWidth={3.5}
+            className="text-secondary-400 hover:fill-secondary-400 transition-all"
+          />
         </button>
 
         {/* Image */}
@@ -62,11 +90,28 @@ export default function ProductCard({ image, name, subtitle, price, isNew, slug,
       <div className="flex items-start justify-between gap-2 mt-3 px-1">
         <div className="flex flex-col gap-0.5 min-w-0">
           <h3 className="font-semibold text-base truncate">{name}</h3>
-          <p className="text-sm font-semibold text-description truncate">{subtitle}</p>
+          <p className="text-sm font-semibold text-description truncate">
+            {subtitle}
+          </p>
         </div>
-        <h3 className="font-bold shrink-0 mt-0.5 text-sm sm:text-base whitespace-nowrap">
-          ${price.toFixed(2)}
-        </h3>
+
+        {/* Price — column layout when on sale, single line otherwise */}
+        <div className="shrink-0 flex flex-col items-end mt-0.5">
+          {hasSale ? (
+            <>
+              <span className="text-xs sm:text-sm font-semibold text-description line-through">
+                Rs. {basePrice.toLocaleString("en-IN")}
+              </span>
+              <span className="font-bold text-sm sm:text-base text-red-500 whitespace-nowrap">
+                Rs. {salePrice.toLocaleString("en-IN")}
+              </span>
+            </>
+          ) : (
+            <span className="font-bold text-sm sm:text-base whitespace-nowrap">
+              Rs. {basePrice.toLocaleString("en-IN")}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
