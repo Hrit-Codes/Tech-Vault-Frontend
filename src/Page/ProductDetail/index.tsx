@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { CheckIcon, Heart, ShoppingBag, Star } from "lucide-react";
+import { CheckIcon, Heart, ShoppingBag, Star, Tag } from "lucide-react";
 import { reviews } from "../../configs/constants";
 import ProductDescriptionTab from "../../Components/Product/Tab/ProductDescriptionTab";
 import ProductFeaturesTab from "../../Components/Product/Tab/ProductFeaturesTab";
@@ -82,6 +82,24 @@ export default function ProductDetailPage() {
   const displayedPrice = selectedVariant?.priceOverride ?? product?.price ?? 0;
   const isSelectedInStock =
     (selectedVariant?.stockOverride ?? product?.stock ?? 0) > 0;
+
+  // On-sale derivation — a sale is only real when the flag is on and the
+  // sale price is a positive number below the base price.
+  const basePrice = product?.price ?? 0;
+  const salePrice = product?.salePrice ?? 0;
+  const displayedHasSale = Boolean(
+    product?.onSale &&
+      displayedPrice > 0 &&
+      salePrice > 0 &&
+      salePrice < basePrice &&
+      (selectedVariant?.priceOverride ?? basePrice) > salePrice
+  );
+  const displayedOriginalPrice = selectedVariant?.priceOverride ?? basePrice;
+  const displayedDiscountPercent = displayedHasSale
+    ? Math.round(
+        ((displayedOriginalPrice - salePrice) / displayedOriginalPrice) * 100
+      )
+    : 0;
 
   if (isProductLoading) {
     return <ProductDetailSkeleton />;
@@ -231,14 +249,30 @@ export default function ProductDetailPage() {
           <div className="bg-section-alternative rounded-2xl px-6 py-5 flex flex-col gap-5 border border-secondary-400/5">
             <div className="flex items-end justify-between">
               <div className="flex flex-col gap-0.5">
-                <p className="text-xs text-description font-semibold">
-                  {product?.hasPriceRange ? "Starting from" : "Price"}
-                </p>
-                <h2 className="text-3xl font-bold">
-                  ${displayedPrice.toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
-                  })}
-                </h2>
+                <div className="flex items-center gap-2">
+                  <p className="text-xs text-description font-semibold">
+                    {product?.hasPriceRange ? "Starting from" : "Price"}
+                  </p>
+                  {displayedHasSale && (
+                    <span className="bg-red-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full tracking-wide uppercase shadow-sm">
+                      -{displayedDiscountPercent}%
+                    </span>
+                  )}
+                </div>
+                {displayedHasSale ? (
+                  <>
+                    <span className="text-sm sm:text-base font-semibold text-description line-through">
+                      Rs. {displayedOriginalPrice.toLocaleString("en-IN")}
+                    </span>
+                    <h2 className="text-3xl font-bold text-red-500 leading-tight">
+                      Rs. {displayedPrice.toLocaleString("en-IN")}
+                    </h2>
+                  </>
+                ) : (
+                  <h2 className="text-3xl font-bold leading-tight">
+                    Rs. {displayedPrice.toLocaleString("en-IN")}
+                  </h2>
+                )}
               </div>
               {product?.freeShipping && (
                 <span className="text-sm font-bold text-secondary-500 uppercase tracking-wider">
@@ -246,6 +280,15 @@ export default function ProductDetailPage() {
                 </span>
               )}
             </div>
+
+            {displayedHasSale && product?.appliedOffer && (
+              <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2.5">
+                <Tag size={16} className="text-red-500 shrink-0" />
+                <p className="text-xs sm:text-sm font-bold text-red-500">
+                  {product.appliedOffer.title}
+                </p>
+              </div>
+            )}
 
             <div className="flex flex-col gap-3">
               <button
