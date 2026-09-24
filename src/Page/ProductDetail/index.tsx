@@ -10,6 +10,7 @@ import { getProductBySlug } from "../../apis/modules/products";
 import ProductDetailSkeleton from "../../Components/Product/LoadingSkeleton";
 import ProductNotFoundPage from "../../Components/Product/ProductNotFound";
 import ServerError from "../../Components/ui/ServerError";
+import { useAddProductToWishlist } from "../../hooks/useWishlist";
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -100,6 +101,8 @@ export default function ProductDetailPage() {
         ((displayedOriginalPrice - salePrice) / displayedOriginalPrice) * 100
       )
     : 0;
+
+  const {mutate:addToWishlist, isPending:isAddingToWishlist}=useAddProductToWishlist();
 
   if (isProductLoading) {
     return <ProductDetailSkeleton />;
@@ -304,9 +307,12 @@ export default function ProductDetailPage() {
                 <ShoppingBag size={18} />
                 {isSelectedInStock ? "Add to Cart" : "Out of Stock"}
               </button>
-              <button className="w-full flex items-center justify-center gap-2 border-2 border-primary-400/30 py-4 rounded-xl font-semibold text-sm hover:bg-section transition-colors hover:cursor-pointer text-description">
+              <button
+                disabled={isAddingToWishlist || !product?.id}
+                onClick={()=>addToWishlist(product?.id as string)}
+               className="w-full flex items-center justify-center gap-2 border-2 border-primary-400/30 py-4 rounded-xl font-semibold text-sm hover:bg-section transition-colors hover:cursor-pointer text-description">
                 <Heart size={18} />
-                Add to Wishlist
+                {isAddingToWishlist?"Adding...":"Add to Wishlist"}
               </button>
             </div>
           </div>
