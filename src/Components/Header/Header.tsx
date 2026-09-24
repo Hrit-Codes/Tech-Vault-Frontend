@@ -131,12 +131,10 @@ export default function Header() {
                                 onClick={() => navigate(item.path)}
                                 onMouseEnter={() => updateSlider(idx)}
                                 onMouseLeave={() => updateSlider(null)}
-                                className={`relative z-10 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 hover:cursor-pointer ${
+                                className={`relative z-10 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 hover:cursor-pointer text-white ${
                                     isActive
-                                        ? "bg-primary-500 text-white"
-                                        : isHomePage
-                                            ? " hover:text-white"
-                                            : " hover:text-white"
+                                        ? "bg-primary-500 "
+                                        : "bg-none"
                                 }`}
                             >
                                 {item.label}
@@ -149,8 +147,8 @@ export default function Header() {
                 <div className="flex flex-row items-center gap-4 shrink-0">
                     <div className='relative'>
                     {!isSearchOpen?(
-                        <button onClick={()=>{setIsSearchOpen(true); setIsMobileSearchOpen(true)}}>
-                            <Search size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
+                        <button onClick={()=>{setIsSearchOpen(true); setIsMobileSearchOpen(true)}} className='flex items-center'>
+                            <Search size={20} className="hover:cursor-pointer hover:text-primary-400 text-white transition-colors" />
                         </button>
                         ):(
                             <div className='relative hidden lg:flex'>
@@ -176,8 +174,8 @@ export default function Header() {
                     </div>
                     {user && (
                         <>
-                        <Heart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" onClick={() => navigate("/wishlist")} />
-                        <ShoppingCart size={20} className="hover:cursor-pointer hover:text-primary-400 transition-colors" />
+                        <Heart size={20} className="hover:cursor-pointer hover:text-primary-400 text-white transition-colors" onClick={() => navigate("/wishlist")} />
+                        <ShoppingCart size={20} className="hover:cursor-pointer hover:text-primary-400 text-white transition-colors" />
                         </>
                     )}
 
@@ -185,7 +183,7 @@ export default function Header() {
                     <div className="relative" ref={userMenuRef}>
                         <User
                             size={20}
-                            className="hover:cursor-pointer hover:text-primary-400 transition-colors"
+                            className="hover:cursor-pointer hidden lg:flex hover:text-primary-400 text-white transition-colors"
                             onClick={handleUserIconClick}
                         />
 
