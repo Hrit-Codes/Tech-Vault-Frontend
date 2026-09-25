@@ -44,6 +44,8 @@ export interface IProductVariant {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+  price:number|null;
+  salePrice:number|null;
 }
 
 export type StockFilterValue = "all" | "low-stock" | "out-of-stock";
