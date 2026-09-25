@@ -78,29 +78,21 @@ export default function ProductDetailPage() {
     );
   }, [product, colors.length, variantTypes.length, selectedColor, selectedVariantType]);
 
-  // Effective price + stock for the current selection
-  const displayedPrice = selectedVariant?.priceOverride ?? product?.price ?? 0;
-  const isSelectedInStock =
-    (selectedVariant?.stockOverride ?? product?.stock ?? 0) > 0;
+  const variantBase=selectedVariant?.priceOverride??selectedVariant?.price??null;
+  const variantSale=selectedVariant?.salePrice?? null;
 
-  // On-sale derivation — a sale is only real when the flag is on and the
-  // sale price is a positive number below the base price.
-  const basePrice = product?.price ?? 0;
-  const salePrice = product?.salePrice ?? 0;
-  const displayedHasSale = Boolean(
-    product?.onSale &&
-      displayedPrice > 0 &&
-      salePrice > 0 &&
-      salePrice < basePrice &&
-      (selectedVariant?.priceOverride ?? basePrice) > salePrice
+  const effectiveBase=variantBase?? product?.price??0;
+  const effectiveSale=variantSale?? (product?.salePrice && product.salePrice>0? product.salePrice : null);
+  
+  const displayedHasSale=Boolean(
+    product?.onSale && effectiveSale!==null && effectiveSale>0 && effectiveSale<effectiveBase
   );
-  const displayedOriginalPrice = selectedVariant?.priceOverride ?? basePrice;
-  const displayedDiscountPercent = displayedHasSale
-    ? Math.round(
-        ((displayedOriginalPrice - salePrice) / displayedOriginalPrice) * 100
-      )
-    : 0;
 
+  const displayedPrice=displayedHasSale?effectiveSale : effectiveBase;
+  const displayedOriginalPrice=effectiveBase;
+  const displayedDiscountPercentage=displayedHasSale? Math.round(((displayedOriginalPrice - effectiveSale!)/displayedOriginalPrice)*100):0;
+
+  const isSelectedInStock=selectedVariant?.stockOverride??0>0;
   if (isProductLoading) {
     return <ProductDetailSkeleton />;
   }
@@ -255,7 +247,7 @@ export default function ProductDetailPage() {
                   </p>
                   {displayedHasSale && (
                     <span className="bg-red-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full tracking-wide uppercase shadow-sm">
-                      -{displayedDiscountPercent}%
+                      -{displayedDiscountPercentage}%
                     </span>
                   )}
                 </div>
@@ -265,12 +257,12 @@ export default function ProductDetailPage() {
                       Rs. {displayedOriginalPrice.toLocaleString("en-IN")}
                     </span>
                     <h2 className="text-3xl font-bold text-red-500 leading-tight">
-                      Rs. {displayedPrice.toLocaleString("en-IN")}
+                      Rs. {displayedPrice?.toLocaleString("en-IN")}
                     </h2>
                   </>
                 ) : (
                   <h2 className="text-3xl font-bold leading-tight">
-                    Rs. {displayedPrice.toLocaleString("en-IN")}
+                    Rs. {displayedPrice?.toLocaleString("en-IN")}
                   </h2>
                 )}
               </div>
