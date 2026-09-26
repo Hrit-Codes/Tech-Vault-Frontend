@@ -90,7 +90,6 @@ export default function ProductDetailPage() {
 
   const displayedPrice=displayedHasSale?effectiveSale : effectiveBase;
   const displayedOriginalPrice=effectiveBase;
-  const displayedDiscountPercentage=displayedHasSale? Math.round(((displayedOriginalPrice - effectiveSale!)/displayedOriginalPrice)*100):0;
 
   const isSelectedInStock=selectedVariant?.stockOverride??0>0;
   if (isProductLoading) {
@@ -245,11 +244,6 @@ export default function ProductDetailPage() {
                   <p className="text-xs text-description font-semibold">
                     {product?.hasPriceRange ? "Starting from" : "Price"}
                   </p>
-                  {displayedHasSale && (
-                    <span className="bg-red-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full tracking-wide uppercase shadow-sm">
-                      -{displayedDiscountPercentage}%
-                    </span>
-                  )}
                 </div>
                 {displayedHasSale ? (
                   <>
