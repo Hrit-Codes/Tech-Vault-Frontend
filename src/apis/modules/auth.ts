@@ -97,3 +97,13 @@ export const forgotPassword=(data:ForgotPasswordInput)=>{
 export const resetPassword=(data:ResetPasswordInput)=>{
     return api.post<ApiResponse<null>>(urls.resetPassword,data).then((res)=>res.data);
 }
+
+export const updateAvatar = async (file: File) => {
+  const formData = new FormData();
+  formData.append("avatar", file);   
+
+  const res = await api.patch("/users/me/avatar", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return res.data;
+};

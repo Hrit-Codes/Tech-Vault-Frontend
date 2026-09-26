@@ -6,6 +6,7 @@ const urls = {
   logoutUser:"/auth/logout",
   refreshAccess: "/auth/refresh",
   getCurrentUser:"/auth/me",
+  updateAvatar:"/users/me/avatar",
   changePassword:"/auth/change-password",
   forgotPassword:"/auth/forgot-password",
   resetPassword:"/auth/reset-password",
