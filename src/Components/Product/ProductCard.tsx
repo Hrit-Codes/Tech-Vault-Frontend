@@ -16,7 +16,6 @@ interface ProductCardProps {
 export default function ProductCard({
   image,
   name,
-  subtitle,
   basePrice,
   salePrice,
   isNew,
@@ -25,12 +24,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   const navigate = useNavigate();
 
-  // A sale is only real if salePrice exists, is > 0, and is cheaper than basePrice.
-  // The `> 0` check protects against the `salePrice: 0` bug from your DB.
   const hasSale = salePrice !== undefined && salePrice > 0 && salePrice < basePrice;
-  const discountPercent = hasSale
-    ? Math.round(((basePrice - salePrice) / basePrice) * 100)
-    : 0;
 
   return (
     <div
@@ -47,9 +41,9 @@ export default function ProductCard({
               New
             </span>
           )}
-          {hasSale && discountPercent > 0 && (
+          {hasSale && (
             <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide uppercase shadow-sm">
-              -{discountPercent}%
+              On Sale
             </span>
           )}
         </div>
@@ -90,9 +84,6 @@ export default function ProductCard({
       <div className="flex items-start justify-between gap-2 mt-3 px-1">
         <div className="flex flex-col gap-0.5 min-w-0">
           <h3 className="font-semibold text-base truncate">{name}</h3>
-          <p className="text-sm font-semibold text-description truncate">
-            {subtitle}
-          </p>
         </div>
 
         {/* Price — column layout when on sale, single line otherwise */}
