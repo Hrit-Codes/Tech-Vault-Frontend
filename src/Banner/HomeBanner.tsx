@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
@@ -17,7 +17,11 @@ const ROTATE_MS = 7000;
 
 export default function HomeBannerSection() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [readyUrls, setReadyUrls] = useState<Set<string>>(() => new Set());
+
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const isInView = useRef(true);
+  const preloadedUrls = useRef(new Set<string>());
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["heroSections"],
@@ -34,26 +38,74 @@ export default function HomeBannerSection() {
     [data],
   );
 
+  // Move the carousel by `delta`, wrapping around and staying in bounds.
+  const step = useCallback(
+    (delta: number) => (current: number) => {
+      if (heroes.length === 0) return 0;
+      const from = Math.min(current, heroes.length - 1);
+      return (from + delta + heroes.length) % heroes.length;
+    },
+    [heroes.length]
+  );
+
+  // Only advance while the hero is actually on screen, so an offscreen
+  // slide can never blank out the image the user scrolls back to.
   useEffect(() => {
-    if (heroes.length <= 1) return;
+    const node = sectionRef.current;
+    if (!node || heroes.length <= 1) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isInView.current = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(node);
+
     const id = setInterval(() => {
-      setActiveIndex((i) => (i + 1) % heroes.length);
+      if (!isInView.current) return;
+      setActiveIndex(step(1));
     }, ROTATE_MS);
-    return () => clearInterval(id);
-  }, [heroes.length]);
 
-  // Reset index if the list shrinks
+    return () => {
+      observer.disconnect();
+      clearInterval(id);
+    };
+  }, [heroes.length, step]);
+
+  // Clamped during render so a shrinking list can never leave the carousel
+  // pointing past the end, without a corrective extra render.
+  const safeIndex = Math.min(activeIndex, Math.max(heroes.length - 1, 0));
+  const hero = heroes[safeIndex] ?? null;
+
+  const markReady = useCallback((url: string) => {
+    setReadyUrls((prev) => (prev.has(url) ? prev : new Set(prev).add(url)));
+  }, []);
+
+  // Warm every slide up front so switching is instant and never shows a gap.
   useEffect(() => {
-    if (activeIndex >= heroes.length && heroes.length > 0) {
-      setActiveIndex(0);
-    }
-  }, [heroes.length, activeIndex]);
+    heroes.forEach(({ mediaUrl }) => {
+      if (!mediaUrl || preloadedUrls.current.has(mediaUrl)) return;
+      preloadedUrls.current.add(mediaUrl);
 
-  const hero = heroes[activeIndex] ?? null;
+      const preloader = new Image();
+      preloader.onload = () => markReady(mediaUrl);
+      preloader.src = mediaUrl;
+    });
+  }, [heroes, markReady]);
 
-  useEffect(() => {
-    setImageLoaded(false);
-  }, [hero?.mediaUrl]);
+  // An image served from cache can finish loading before React attaches
+  // onLoad, which would otherwise strand the slide at opacity-0.
+  const markImageReady = useCallback(
+    (node: HTMLImageElement | null) => {
+      if (!node?.complete || node.naturalWidth === 0) return;
+      const url = node.dataset.heroUrl;
+      if (url) markReady(url);
+    },
+    [markReady]
+  );
+
+  const imageReady = hero ? readyUrls.has(hero.mediaUrl) : false;
 
   const alignmentClasses = {
     LEFT: "items-center lg:items-start text-center lg:text-left",
@@ -158,38 +210,42 @@ export default function HomeBannerSection() {
     Math.min(Math.max(hero.overlayOpacity ?? 0, 0), 100) / 100;
 
   return (
-    <section className="relative overflow-hidden min-h-screen w-full flex items-center bg-section">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden min-h-screen w-full flex items-center bg-section"
+    >
       {/* Full-width background image */}
-    <div className="absolute inset-0 z-0">
-      {!imageLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/60 to-zinc-900/80 animate-pulse" />
-      )}
-
-      <img
-        src={hero.mediaUrl}
-        alt={hero.headingLine1 ?? "Hero"}
-        loading={activeIndex === 0 ? "eager" : "lazy"}
-        decoding="async"
-        onLoad={() => setImageLoaded(true)}
-        onError={() => setImageLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-700 ease-out ${
-          imageLoaded
-            ? "opacity-100 blur-none scale-100"
-            : "opacity-0 blur-2xl scale-105"
-        }`}
-      />
-
-      {overlayAlpha > 0 && (
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
         <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundColor: overlay,
-            opacity: overlayAlpha,
-          }}
+          className={`absolute inset-0 bg-gradient-to-br from-zinc-800/60 to-zinc-900/80 transition-opacity duration-700 ${
+            imageReady ? "opacity-0" : "opacity-100 animate-pulse"
+          }`}
         />
-      )}
-    </div>
+
+        <img
+          ref={markImageReady}
+          src={hero.mediaUrl}
+          data-hero-url={hero.mediaUrl}
+          alt={hero.headingLine1 ?? "Hero"}
+          loading="eager"
+          decoding="async"
+          onLoad={() => markReady(hero.mediaUrl)}
+          className={`w-full h-full object-cover transition-[opacity,transform] duration-700 ease-out ${
+            imageReady ? "opacity-100 scale-100" : "opacity-0 scale-[1.03]"
+          }`}
+        />
+
+        {overlayAlpha > 0 && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundColor: overlay,
+              opacity: overlayAlpha,
+            }}
+          />
+        )}
+      </div>
 
       {/* Text content, sitting above the background image */}
       <div className="relative z-10 w-full mx-auto px-20">
@@ -248,9 +304,7 @@ export default function HomeBannerSection() {
       {heroes.length > 1 && (
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
           <button
-            onClick={() =>
-              setActiveIndex((i) => (i - 1 + heroes.length) % heroes.length)
-            }
+            onClick={() => setActiveIndex(step(-1))}
             className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white transition hover:cursor-pointer"
             aria-label="Previous slide"
           >
@@ -263,7 +317,7 @@ export default function HomeBannerSection() {
                 key={i}
                 onClick={() => setActiveIndex(i)}
                 className={`h-2 rounded-full transition-all ${
-                  i === activeIndex
+                  i === safeIndex
                     ? "w-8 bg-primary-400"
                     : "w-2 bg-white/40 hover:bg-white/60"
                 }`}
@@ -273,7 +327,7 @@ export default function HomeBannerSection() {
           </div>
 
           <button
-            onClick={() => setActiveIndex((i) => (i + 1) % heroes.length)}
+            onClick={() => setActiveIndex(step(1))}
             className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white transition hover:cursor-pointer"
             aria-label="Next slide"
           >
