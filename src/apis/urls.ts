@@ -3,6 +3,7 @@ const urls = {
   registerUser:"/auth/register/initiate",
   verifyUser:"/auth/register/verify",
   loginUser: "/auth/login",
+  googleLogin:"/auth/google",
   logoutUser:"/auth/logout",
   refreshAccess: "/auth/refresh",
   getCurrentUser:"/auth/me",

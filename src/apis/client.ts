@@ -1,8 +1,9 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
 import urls from "./urls";
+import { API_BASE_URL } from "./config";
 
 const api = axios.create({
-  baseURL: import.meta.env.PUBLIC_API_URL || "http://localhost:3000/api/v1",
+  baseURL: API_BASE_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -79,7 +80,7 @@ api.interceptors.response.use(
     try {
       // Attempt to refresh the access token (refresh token is in HttpOnly cookie)
       const refreshResponse = await axios.post(
-        `${import.meta.env.PUBLIC_API_URL || "http://localhost:3000/api/v1"}${urls.refreshAccess}`,
+        `${API_BASE_URL}${urls.refreshAccess}`,
         {},
         { withCredentials: true }
       );

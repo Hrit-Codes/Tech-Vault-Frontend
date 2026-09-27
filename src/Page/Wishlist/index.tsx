@@ -242,6 +242,7 @@ export default function WishlistPage() {
         )}
 
         {/* ─── Recommendations Slider ───────────────────────────── */}
+        {wishlistItems.length!==0 && (
         <div className="w-full max-w-6xl mx-auto px-6 py-20">
           <div className="flex items-start justify-between mb-8">
             <div>
@@ -286,6 +287,7 @@ export default function WishlistPage() {
             ))}
           </Slider>
         </div>
+        )}
       </div>
     </div>
   );

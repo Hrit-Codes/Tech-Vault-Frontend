@@ -16,6 +16,7 @@ import NotFoundPage from "../Page/NotFound";
 import PrivateLayout from "../Layout/PrivateLayout";
 import UserProfilePage from "../Page/UserProfile";
 import ForgotPasswordPage from "../Page/ForgotPassword";
+import GoogleAuthSuccessPage from "../Page/GoogleAuthSuccess";
 
 export default function AppRoutes(){
     return(
@@ -43,6 +44,7 @@ export default function AppRoutes(){
                     <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
                 </Route>
             </Route>
+            <Route path="/auth/google/success" element={<GoogleAuthSuccessPage/>}/>
         </Routes>
         </>
     )

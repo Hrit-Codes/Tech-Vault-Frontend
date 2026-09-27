@@ -9,6 +9,7 @@ import {
   register as registerApi,
   type RegisterRequest,
 } from "../../apis/modules/auth";
+import { redirectToGoogleAuth } from "../../apis/config";
 
 type RegisterFormProps = {
   onOtpSent: (payload: RegisterRequest) => void;
@@ -237,7 +238,7 @@ export default function RegisterForm({ onOtpSent }: RegisterFormProps) {
         <button
           type="button"
           onClick={() => {
-            window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
+            redirectToGoogleAuth();
           }}
           className="w-full flex items-center justify-center gap-2 border border-secondary-400/10 text-description bg-section-alternative py-3 rounded-xl text-sm font-bold hover:bg-secondary-500/5 transition-colors hover:cursor-pointer"
         >
