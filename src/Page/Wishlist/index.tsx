@@ -5,7 +5,7 @@ import SliderComponent from "react-slick";
 import ProductCard from "../../Components/Product/ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { getWishlist, type WishlistItem } from "../../apis/modules/wishlist";
-import { useRemoveProductFromWishlist } from "../../hooks/useWishlist";
+import { useWishlist } from "../../hooks/useWishlist";
 
 const Slider = (SliderComponent as any).default || SliderComponent;
 
@@ -57,7 +57,7 @@ export default function WishlistPage() {
     refetchOnWindowFocus: false,
   });
 
-  const { mutate: removeFromWishlist, isPending: isRemovingFromWishlist } = useRemoveProductFromWishlist();
+  const { isProductInWishlist, toggleWishlist } = useWishlist();
 
   // ─── Handle Data Appending & Deduplication ─────────────────
   useEffect(() => {
@@ -77,14 +77,6 @@ export default function WishlistPage() {
 
   const handleViewMore = () => {
     setPage((p) => p + 1);
-  };
-
-  const handleRemoveItem = (productId: string) => {
-    removeFromWishlist(productId, {
-      onSuccess: () => {
-        setWishlistItems((prev) => prev.filter((item) => item.product.id !== productId));
-      },
-    });
   };
 
   const isInitialLoad = isWishlistLoading && page === 1;
@@ -144,6 +136,7 @@ export default function WishlistPage() {
             {wishlistItems.map((item) => {
               const product = item.product;
               const hasSale = product.onSale && product.salePrice && product.salePrice < product.price;
+              const isLoved=isProductInWishlist(product.id);
 
               return (
                 <div
@@ -162,9 +155,9 @@ export default function WishlistPage() {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleRemoveItem(product.id); 
+                        setWishlistItems((prev)=>prev.filter((w)=>w.id!==item.id))
+                        toggleWishlist({productId:product?.id,isCurrentlyLoved:isLoved}); 
                       }}
-                      disabled={isRemovingFromWishlist}
                       className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm hover:scale-110 transition-transform hover:cursor-pointer border border-secondary-400/5 disabled:opacity-50"
                       aria-label="Remove from wishlist"
                     >
@@ -174,7 +167,7 @@ export default function WishlistPage() {
                     <img
                       src={product.images[0]}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 p-6"
+                      className="w-full h-full bg-white object-cover group-hover:scale-105 transition-transform duration-300 p-6"
                     />
                   </div>
 

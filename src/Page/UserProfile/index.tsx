@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { changePasswordSchema, type ChangePasswordInput } from "../../Components/utils/schema";
+import ProfilePicSection from "../../Components/ui/ProfilePicSection";
 
 export default function UserProfilePage() {
   const [isPasswordChangeActive, setIsPasswordChangeActive] = useState(false);
@@ -115,9 +116,7 @@ export default function UserProfilePage() {
           <>
             {/* Header */}
             <div className="flex flex-col items-center gap-3">
-              <div className="w-20 h-20 rounded-full bg-primary-500/10 border border-primary-400/20 flex items-center justify-center text-2xl font-bold text-primary-500">
-                {user?.avatar ? user.avatar : user?.fullName?.charAt(0).toUpperCase() ?? "?"}
-              </div>
+              <ProfilePicSection avatar={user?.avatar as string}/>
               <div className="flex flex-col items-center gap-1">
                 <h1 className="text-xl font-bold">
                   {user?.fullName ?? "Your Account"}

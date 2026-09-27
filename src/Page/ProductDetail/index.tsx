@@ -10,7 +10,7 @@ import { getProductBySlug } from "../../apis/modules/products";
 import ProductDetailSkeleton from "../../Components/Product/LoadingSkeleton";
 import ProductNotFoundPage from "../../Components/Product/ProductNotFound";
 import ServerError from "../../Components/ui/ServerError";
-import { useAddProductToWishlist } from "../../hooks/useWishlist";
+import { useWishlist } from "../../hooks/useWishlist";
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -31,6 +31,9 @@ export default function ProductDetailPage() {
 
   const isProductNotFound = (productError as any)?.response?.status === 404;
   const product = productResponse?.data.data;
+
+  const { isProductInWishlist, toggleWishlist, isToggling } = useWishlist();
+  const isLoved=isProductInWishlist(product?.id as string);
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedButton, setSelectedButton] = useState<
@@ -79,31 +82,21 @@ export default function ProductDetailPage() {
     );
   }, [product, colors.length, variantTypes.length, selectedColor, selectedVariantType]);
 
-  // Effective price + stock for the current selection
-  const displayedPrice = selectedVariant?.priceOverride ?? product?.price ?? 0;
-  const isSelectedInStock =
-    (selectedVariant?.stockOverride ?? product?.stock ?? 0) > 0;
+  const variantBase=selectedVariant?.priceOverride??selectedVariant?.price??null;
+  const variantSale=selectedVariant?.salePrice?? null;
 
-  // On-sale derivation — a sale is only real when the flag is on and the
-  // sale price is a positive number below the base price.
-  const basePrice = product?.price ?? 0;
-  const salePrice = product?.salePrice ?? 0;
-  const displayedHasSale = Boolean(
-    product?.onSale &&
-      displayedPrice > 0 &&
-      salePrice > 0 &&
-      salePrice < basePrice &&
-      (selectedVariant?.priceOverride ?? basePrice) > salePrice
+  const effectiveBase=variantBase?? product?.price??0;
+  const effectiveSale=variantSale?? (product?.salePrice && product.salePrice>0? product.salePrice : null);
+  
+  const displayedHasSale=Boolean(
+    product?.onSale && effectiveSale!==null && effectiveSale>0 && effectiveSale<effectiveBase
   );
-  const displayedOriginalPrice = selectedVariant?.priceOverride ?? basePrice;
-  const displayedDiscountPercent = displayedHasSale
-    ? Math.round(
-        ((displayedOriginalPrice - salePrice) / displayedOriginalPrice) * 100
-      )
-    : 0;
 
-  const {mutate:addToWishlist, isPending:isAddingToWishlist}=useAddProductToWishlist();
 
+  const displayedPrice=displayedHasSale?effectiveSale : effectiveBase;
+  const displayedOriginalPrice=effectiveBase;
+
+  const isSelectedInStock=selectedVariant?.stockOverride??product?.stock??0>0;
   if (isProductLoading) {
     return <ProductDetailSkeleton />;
   }
@@ -256,11 +249,6 @@ export default function ProductDetailPage() {
                   <p className="text-xs text-description font-semibold">
                     {product?.hasPriceRange ? "Starting from" : "Price"}
                   </p>
-                  {displayedHasSale && (
-                    <span className="bg-red-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full tracking-wide uppercase shadow-sm">
-                      -{displayedDiscountPercent}%
-                    </span>
-                  )}
                 </div>
                 {displayedHasSale ? (
                   <>
@@ -268,12 +256,12 @@ export default function ProductDetailPage() {
                       Rs. {displayedOriginalPrice.toLocaleString("en-IN")}
                     </span>
                     <h2 className="text-3xl font-bold text-red-500 leading-tight">
-                      Rs. {displayedPrice.toLocaleString("en-IN")}
+                      Rs. {displayedPrice?.toLocaleString("en-IN")}
                     </h2>
                   </>
                 ) : (
                   <h2 className="text-3xl font-bold leading-tight">
-                    Rs. {displayedPrice.toLocaleString("en-IN")}
+                    Rs. {displayedPrice?.toLocaleString("en-IN")}
                   </h2>
                 )}
               </div>
@@ -308,11 +296,10 @@ export default function ProductDetailPage() {
                 {isSelectedInStock ? "Add to Cart" : "Out of Stock"}
               </button>
               <button
-                disabled={isAddingToWishlist || !product?.id}
-                onClick={()=>addToWishlist(product?.id as string)}
+                onClick={()=>toggleWishlist({productId:product?.id as string, isCurrentlyLoved:isLoved})}
                className="w-full flex items-center justify-center gap-2 border-2 border-primary-400/30 py-4 rounded-xl font-semibold text-sm hover:bg-section transition-colors hover:cursor-pointer text-description">
-                <Heart size={18} />
-                {isAddingToWishlist?"Adding...":"Add to Wishlist"}
+                <Heart size={18} className={`${isLoved?"fill-secondary-400":""}`}/>
+                {isLoved?isToggling?"Removing...":"Remove from wishlist":isToggling?"Adding...":"Add to wishlist"}
               </button>
             </div>
           </div>

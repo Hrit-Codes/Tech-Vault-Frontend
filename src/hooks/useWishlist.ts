@@ -1,39 +1,72 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { addProductToWishlist, removeProductFromWishlist } from "../apis/modules/wishlist";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { addProductToWishlist, getWishlistIds, removeProductFromWishlist } from "../apis/modules/wishlist";
 import { toast } from "sonner";
 
-export const useAddProductToWishlist=()=>{
+export function useWishlist(){
+    const user=localStorage.getItem("user");
     const queryClient=useQueryClient();
+    const isAuthenticated=!!user;
 
-    return useMutation({
-        mutationFn:(productId:string)=>addProductToWishlist(productId),
-        onSuccess:()=>{
-            toast.success("Added to wishlist successfully"),
-            queryClient.invalidateQueries({queryKey:["wishlist"]})
+    const{
+        data:wishlistIds=[],
+        isLoading
+    }=useQuery({
+        queryKey:["wishlistIds"],
+        queryFn:getWishlistIds,
+        staleTime:10*60*1000,
+        refetchOnWindowFocus:false,
+        enabled:isAuthenticated
+    });
+
+
+    const isProductInWishlist=(productId:string)=>{
+        return wishlistIds.includes(productId);
+    }
+
+    const toggle=useMutation({
+        mutationFn:async({productId,isCurrentlyLoved}:{productId:string, isCurrentlyLoved:boolean})=>{
+            return isCurrentlyLoved?
+                removeProductFromWishlist(productId)
+            :
+                addProductToWishlist(productId)
         },
-        onError:(err:any)=>{
-            const message =
-                err?.response?.data?.message ??
-                    "Something went wrong. Please try again.";
-            toast.error(message);
-        }
-    })
-}
+        onMutate:async({productId, isCurrentlyLoved})=>{
+            await queryClient.invalidateQueries({queryKey:["wishlistIds"]});
 
-export const useRemoveProductFromWishlist=()=>{
-    const queryClient=useQueryClient();
+            const previousIds=queryClient.getQueryData<string[]>(["wishlistIds"])??[];
 
-    return useMutation({
-        mutationFn:(productId:string)=>removeProductFromWishlist(productId),
-        onSuccess:()=>{
-            toast.success("Removed from wishlist successfully");
+            queryClient.setQueryData<string[]>(["wishlistIds"], (old = []) =>
+                isCurrentlyLoved
+                ? old.filter((id) => id !== productId)
+                : old.includes(productId)
+                    ? old
+                    : [...old, productId],
+            );
+
+            return { previousIds }
+        },
+        onError:(_err,_vars,context)=>{
+            if(context?.previousIds){
+                queryClient.setQueryData(["wishlistIds"],context.previousIds);
+            }
+            toast.error("Failed to update wishlist. Please try again");
+        },
+        onSuccess:(_data,{isCurrentlyLoved})=>{
+            toast.success(isCurrentlyLoved?"Removed from wishlist":"Added to wishlist");
+        },
+        onSettled:()=>{
+            queryClient.invalidateQueries({queryKey:["wishlistIds"]});
             queryClient.invalidateQueries({queryKey:["wishlist"]});
-        },
-        onError:(err:any)=>{
-             const message =
-                err?.response?.data?.message ??
-                    "Something went wrong. Please try again.";
-            toast.error(message);
         }
     })
+
+    return{
+        wishlistIds,
+        isLoading,
+        isProductInWishlist,
+        toggleWishlist:toggle.mutate,
+        isToggling:toggle.isPending
+    }
+
+
 }

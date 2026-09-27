@@ -35,16 +35,12 @@ export default function SearchPage() {
     };
   }, [mobileFiltersOpen]);
 
-  // Note: the sidebar lets someone check MULTIPLE categories/brands, but the
-  // backend currently only accepts one categorySlug/brandSlug at a time. We
-  // send whichever one was checked first — good enough for now, but worth
-  // upgrading the backend to accept a list if multi-select filtering matters.
   const queryParams = {
     page: currentPage,
     limit: PRODUCTS_PER_PAGE,
     search: query.trim() || undefined,
-    categorySlug: filters.categories[0] || undefined,
-    brandSlug: filters.brands[0] || undefined,
+    categorySlug: filters.categories.length? filters.categories.join(",") : undefined,
+    brandSlug: filters.brands.length? filters.brands.join(",") : undefined,
     minPrice: filters.minPrice !== "" ? Number(filters.minPrice) : undefined,
     maxPrice: filters.maxPrice !== "" ? Number(filters.maxPrice) : undefined,
     minRating:filters.minRating >0 ? filters.minRating : undefined,
@@ -80,7 +76,7 @@ export default function SearchPage() {
 
   const handleFiltersChange = (next: SearchFilters) => {
     setFilters(next);
-    setCurrentPage(1); // any filter change should jump back to page 1
+    setCurrentPage(1); 
   };
 
   const handlePageChange = (page: number) => {

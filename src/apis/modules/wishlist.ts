@@ -48,6 +48,10 @@ type GetWishlistResponse={
     pagination:IPagination,
 }
 
+type GetWishlistIdsResponse={
+    data:string[],
+}
+
 export const getWishlist=(page=1, limit=12)=>{
     return api.get<ApiResponse<GetWishlistResponse>>(urls.getWishlist,{
         params:{
@@ -55,6 +59,10 @@ export const getWishlist=(page=1, limit=12)=>{
             limit
         }
     }).then((res)=>res.data);
+}
+
+export const getWishlistIds=()=>{
+    return api.get<ApiResponse<GetWishlistIdsResponse>>(urls.getWishlistIds).then((res)=>res.data.data.data);
 }
 
 export const addProductToWishlist=(productId:string)=>{

@@ -1,6 +1,6 @@
 import { Heart, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useAddProductToWishlist } from "../../hooks/useWishlist";
+import { useWishlist } from "../../hooks/useWishlist";
 
 interface ProductCardProps {
   image: string;
@@ -17,7 +17,6 @@ interface ProductCardProps {
 export default function ProductCard({
   image,
   name,
-  subtitle,
   basePrice,
   salePrice,
   isNew,
@@ -26,17 +25,10 @@ export default function ProductCard({
 }: ProductCardProps) {
   const navigate = useNavigate();
 
-  // A sale is only real if salePrice exists, is > 0, and is cheaper than basePrice.
-  // The `> 0` check protects against the `salePrice: 0` bug from your DB.
   const hasSale = salePrice !== undefined && salePrice > 0 && salePrice < basePrice;
-  const discountPercent = hasSale
-    ? Math.round(((basePrice - salePrice) / basePrice) * 100)
-    : 0;
 
-  const {
-    mutate:addToWishlist,
-    isPending:isAddingToWishlist
-  }=useAddProductToWishlist();
+  const { isProductInWishlist,toggleWishlist}=useWishlist();
+  const loved=isProductInWishlist(id);
 
   return (
     <div
@@ -53,24 +45,23 @@ export default function ProductCard({
               New
             </span>
           )}
-          {hasSale && discountPercent > 0 && (
+          {hasSale && (
             <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide uppercase shadow-sm">
-              -{discountPercent}%
+              On Sale
             </span>
           )}
         </div>
 
         {/* Wishlist */}
         <button
-          disabled={isAddingToWishlist}
-          onClick={(e)=>{e.stopPropagation(); addToWishlist(id)}}
+          onClick={(e)=>{e.stopPropagation(); toggleWishlist({productId:id,isCurrentlyLoved:loved})}}
           className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm hover:scale-110 transition-transform hover:cursor-pointer border border-secondary-400/5"
           aria-label="Add to wishlist"
         >
           <Heart
             size={20}
             strokeWidth={3.5}
-            className="text-secondary-400 hover:fill-secondary-400 transition-all"
+            className={`text-secondary-400 hover:fill-secondary-400 transition-all ${loved?"fill-secondary-400":""}`}
           />
         </button>
 
@@ -97,9 +88,6 @@ export default function ProductCard({
       <div className="flex items-start justify-between gap-2 mt-3 px-1">
         <div className="flex flex-col gap-0.5 min-w-0">
           <h3 className="font-semibold text-base truncate">{name}</h3>
-          <p className="text-sm font-semibold text-description truncate">
-            {subtitle}
-          </p>
         </div>
 
         {/* Price — column layout when on sale, single line otherwise */}
