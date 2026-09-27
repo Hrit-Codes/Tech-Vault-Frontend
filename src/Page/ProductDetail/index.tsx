@@ -10,6 +10,7 @@ import { getProductBySlug } from "../../apis/modules/products";
 import ProductDetailSkeleton from "../../Components/Product/LoadingSkeleton";
 import ProductNotFoundPage from "../../Components/Product/ProductNotFound";
 import ServerError from "../../Components/ui/ServerError";
+import { useWishlist } from "../../hooks/useWishlist";
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -30,6 +31,9 @@ export default function ProductDetailPage() {
 
   const isProductNotFound = (productError as any)?.response?.status === 404;
   const product = productResponse?.data.data;
+
+  const { isProductInWishlist, toggleWishlist, isToggling } = useWishlist();
+  const isLoved=isProductInWishlist(product?.id as string);
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedButton, setSelectedButton] = useState<
@@ -88,10 +92,11 @@ export default function ProductDetailPage() {
     product?.onSale && effectiveSale!==null && effectiveSale>0 && effectiveSale<effectiveBase
   );
 
+
   const displayedPrice=displayedHasSale?effectiveSale : effectiveBase;
   const displayedOriginalPrice=effectiveBase;
 
-  const isSelectedInStock=selectedVariant?.stockOverride??0>0;
+  const isSelectedInStock=selectedVariant?.stockOverride??product?.stock??0>0;
   if (isProductLoading) {
     return <ProductDetailSkeleton />;
   }
@@ -290,9 +295,11 @@ export default function ProductDetailPage() {
                 <ShoppingBag size={18} />
                 {isSelectedInStock ? "Add to Cart" : "Out of Stock"}
               </button>
-              <button className="w-full flex items-center justify-center gap-2 border-2 border-primary-400/30 py-4 rounded-xl font-semibold text-sm hover:bg-section transition-colors hover:cursor-pointer text-description">
-                <Heart size={18} />
-                Add to Wishlist
+              <button
+                onClick={()=>toggleWishlist({productId:product?.id as string, isCurrentlyLoved:isLoved})}
+               className="w-full flex items-center justify-center gap-2 border-2 border-primary-400/30 py-4 rounded-xl font-semibold text-sm hover:bg-section transition-colors hover:cursor-pointer text-description">
+                <Heart size={18} className={`${isLoved?"fill-secondary-400":""}`}/>
+                {isLoved?isToggling?"Removing...":"Remove from wishlist":isToggling?"Adding...":"Add to wishlist"}
               </button>
             </div>
           </div>

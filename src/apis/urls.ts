@@ -36,6 +36,13 @@ const urls = {
   // ========== HERO SECTIONS ==========
   getHeroSections: "/hero-sections",
   getHeroSectionById: "/hero-sections/admin",
+
+  // ========== Wishlist ==========
+  getWishlist:"/wishlist",
+  getWishlistIds:'/wishlist/ids',
+  addProductToWishlist:"/wishlist",
+  deleteWishlist:"/wishlist",
+  clearWishlist:"/wishlist"
 };
 
 export default urls;

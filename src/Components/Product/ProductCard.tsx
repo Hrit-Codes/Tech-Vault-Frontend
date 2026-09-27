@@ -1,5 +1,6 @@
 import { Heart, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useWishlist } from "../../hooks/useWishlist";
 
 interface ProductCardProps {
   image: string;
@@ -26,6 +27,9 @@ export default function ProductCard({
 
   const hasSale = salePrice !== undefined && salePrice > 0 && salePrice < basePrice;
 
+  const { isProductInWishlist,toggleWishlist}=useWishlist();
+  const loved=isProductInWishlist(id);
+
   return (
     <div
       key={id}
@@ -50,14 +54,14 @@ export default function ProductCard({
 
         {/* Wishlist */}
         <button
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e)=>{e.stopPropagation(); toggleWishlist({productId:id,isCurrentlyLoved:loved})}}
           className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm hover:scale-110 transition-transform hover:cursor-pointer border border-secondary-400/5"
           aria-label="Add to wishlist"
         >
           <Heart
             size={20}
             strokeWidth={3.5}
-            className="text-secondary-400 hover:fill-secondary-400 transition-all"
+            className={`text-secondary-400 hover:fill-secondary-400 transition-all ${loved?"fill-secondary-400":""}`}
           />
         </button>
 
