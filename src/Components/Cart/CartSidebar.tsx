@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { X, ShoppingBag, Trash2, Loader2, Minus, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../Context/CartContext";
@@ -8,6 +8,7 @@ const CartSidebar = () => {
     items = [],
     updateQuantity,
     removeFromCart,
+    clearCart,
     isCartOpen,
     setIsCartOpen,
     isLoading,
@@ -16,6 +17,8 @@ const CartSidebar = () => {
   } = useCart();
 
   const navigate = useNavigate();
+  const [confirmingClear, setConfirmingClear] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
 
   // Lock body scroll when the drawer is open
   useEffect(() => {
@@ -35,7 +38,21 @@ const CartSidebar = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [isCartOpen, setIsCartOpen]);
 
-  // Block checkout if any line is out of stock
+  // Reset confirm state whenever the drawer closes
+  useEffect(() => {
+    if (!isCartOpen) setConfirmingClear(false);
+  }, [isCartOpen]);
+
+  const handleClearCart = async () => {
+    setIsClearing(true);
+    try {
+      await clearCart();
+      setConfirmingClear(false);
+    } finally {
+      setIsClearing(false);
+    }
+  };
+
   const hasUnavailable = items.some((i) => !i.isAvailable);
 
   return (
@@ -75,7 +92,7 @@ const CartSidebar = () => {
             type="button"
             onClick={() => setIsCartOpen(false)}
             aria-label="Close cart"
-            className="w-9 h-9 rounded-full bg-section-alternative flex items-center justify-center text-description hover:text-foreground transition-colors"
+            className="w-9 h-9 rounded-full bg-section-alternative flex items-center justify-center text-description hover:text-foreground transition-colors hover:cursor-pointer"
           >
             <X size={18} />
           </button>
@@ -106,13 +123,53 @@ const CartSidebar = () => {
                   setIsCartOpen(false);
                   navigate("/shop");
                 }}
-                className="mt-2 bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-2xl font-semibold text-sm transition-colors"
+                className="mt-2 bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-2xl font-semibold text-sm transition-colors hover:cursor-pointer"
               >
                 Continue Shopping
               </button>
             </div>
           ) : (
             <div className="flex flex-col gap-4">
+              {/* ── Toolbar: item count + clear all ── */}
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-description uppercase tracking-widest">
+                  {totalItems} {totalItems === 1 ? "Item" : "Items"}
+                </span>
+
+                {!confirmingClear ? (
+                  <button
+                    type="button"
+                    onClick={() => setConfirmingClear(true)}
+                    className="text-xs font-semibold text-description hover:text-red-500 transition-colors hover:cursor-pointer"
+                  >
+                    Clear all
+                  </button>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setConfirmingClear(false)}
+                      disabled={isClearing}
+                      className="text-xs font-semibold text-description hover:text-foreground transition-colors disabled:opacity-50 hover:cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleClearCart}
+                      disabled={isClearing}
+                      className="text-xs font-bold text-red-500 hover:text-red-400 transition-colors disabled:opacity-50 flex items-center gap-1.5 hover:cursor-pointer"
+                    >
+                      {isClearing && (
+                        <Loader2 size={12} className="animate-spin" />
+                      )}
+                      {isClearing ? "Clearing…" : "Confirm clear"}
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* ── Item list ── */}
               {items.map((item) => {
                 const product = item.product;
                 const variant = item.variant;
@@ -251,7 +308,7 @@ const CartSidebar = () => {
                 navigate("/checkout");
               }}
               disabled={isLoading || hasUnavailable}
-              className="w-full bg-primary-500 hover:bg-primary-600 text-white py-4 rounded-xl font-semibold text-sm uppercase tracking-wider transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-primary-500 hover:bg-primary-600 text-white py-4 rounded-xl font-semibold text-sm uppercase tracking-wider transition-colors disabled:opacity-60 disabled:cursor-not-allowed hover:cursor-pointer"
             >
               {hasUnavailable
                 ? "Remove Unavailable Items"
