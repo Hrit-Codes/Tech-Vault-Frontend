@@ -6,6 +6,7 @@ import { navItems } from '../../configs/constants';
 import { toast } from 'sonner';
 import { useMutation } from '@tanstack/react-query';
 import { logoutUser } from '../../apis/modules/auth';
+import { useCart } from '../../Context/CartContext';
 
 interface NavItem {
     label: string;
@@ -28,6 +29,8 @@ export default function Header() {
     const userMenuRef = useRef<HTMLDivElement>(null);
 
     const isHomePage = location.pathname === "/";
+
+    const {isCartOpen, setIsCartOpen}=useCart();
 
     const logoutMutation=useMutation({
         mutationFn:()=>logoutUser(),
@@ -175,7 +178,7 @@ export default function Header() {
                     {user && (
                         <>
                         <Heart size={20} className="hover:cursor-pointer hover:text-primary-400 text-white transition-colors" onClick={() => navigate("/wishlist")} />
-                        <ShoppingCart size={20} className="hover:cursor-pointer hover:text-primary-400 text-white transition-colors" />
+                        <ShoppingCart size={20} className="hover:cursor-pointer hover:text-primary-400 text-white transition-colors" onClick={()=>setIsCartOpen(!isCartOpen)}/>
                         </>
                     )}
 

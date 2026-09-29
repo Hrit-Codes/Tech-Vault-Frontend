@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Heart, ShoppingCart, X } from "lucide-react";
+import { Heart, X } from "lucide-react";
 import SliderComponent from "react-slick";
 import ProductCard from "../../Components/Product/ProductCard";
 import { useQuery } from "@tanstack/react-query";
@@ -18,16 +18,25 @@ function getSlidesToShow(width: number) {
 // ─── Loading Skeleton Component ──────────────────────────────
 const WishlistCardSkeleton = () => (
   <div className="animate-pulse flex flex-col bg-section-alternative rounded-2xl overflow-hidden border border-secondary-400/5">
+    {/* Image */}
     <div className="aspect-square bg-secondary-400/20 w-full" />
+
+    {/* Info */}
     <div className="flex flex-col gap-4 px-5 py-6">
+      {/* Name + price row */}
       <div className="flex flex-row items-start justify-between gap-2">
         <div className="h-6 bg-secondary-400/20 rounded w-2/3" />
         <div className="h-6 bg-secondary-400/20 rounded w-1/4" />
       </div>
+
+      {/* Applied offer / subtitle */}
       <div className="h-4 bg-secondary-400/20 rounded w-1/2" />
-      <div className="h-4 bg-secondary-400/20 rounded w-5/6 mt-2" />
-      <div className="h-12 bg-secondary-400/20 rounded-xl w-full mt-4" />
-      <div className="h-6 bg-secondary-400/20 rounded w-1/3 mx-auto mt-2" />
+
+      {/* Free shipping line */}
+      <div className="h-4 bg-secondary-400/20 rounded w-5/6" />
+
+      {/* View Details link — smaller, centered */}
+      <div className="h-4 bg-secondary-400/20 rounded w-24 mx-auto mt-4" />
     </div>
   </div>
 );
@@ -204,15 +213,6 @@ export default function WishlistPage() {
 
                     {/* Actions */}
                     <div className="w-full flex flex-col gap-3 text-center font-medium mt-1">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                        className="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-2xl hover:cursor-pointer transition-colors text-sm"
-                      >
-                        <ShoppingCart size={16} />
-                        Move to Cart
-                      </button>
                       <button
                         onClick={() => navigate(`/product/${product.slug}`)}
                         className="cursor-pointer text-secondary-500 hover:underline hover:text-secondary-400 transition-colors text-sm"
