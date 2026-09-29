@@ -8,6 +8,7 @@ import { LoadingSpinner } from "../Components/ui/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import ServerError from "../Components/ui/ServerError";
 import OfferPopup from "../Components/Home/OfferPopup";
+import CartSidebar from "../Components/Cart/CartSidebar";
 
 export default function MainLayout() {
     const {
@@ -42,6 +43,7 @@ export default function MainLayout() {
                     <Outlet />
                 </main>
                 <Footer />
+                <CartSidebar/>
                 <ScrollToTopButton />
             </div>
         </div>

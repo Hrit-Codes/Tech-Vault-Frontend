@@ -43,7 +43,13 @@ const urls = {
   getWishlistIds:'/wishlist/ids',
   addProductToWishlist:"/wishlist",
   deleteWishlist:"/wishlist",
-  clearWishlist:"/wishlist"
+  clearWishlist:"/wishlist",
+
+  getCart:"/cart",
+  addToCart:"/cart",
+  updateCartItem:"/cart",
+  removeFromCart:"/cart",
+  clearCart:"/cart"
 };
 
 export default urls;

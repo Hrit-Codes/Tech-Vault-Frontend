@@ -11,6 +11,7 @@ import ProductDetailSkeleton from "../../Components/Product/LoadingSkeleton";
 import ProductNotFoundPage from "../../Components/Product/ProductNotFound";
 import ServerError from "../../Components/ui/ServerError";
 import { useWishlist } from "../../hooks/useWishlist";
+import { useCart } from "../../Context/CartContext";
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -34,6 +35,8 @@ export default function ProductDetailPage() {
 
   const { isProductInWishlist, toggleWishlist, isToggling } = useWishlist();
   const isLoved=isProductInWishlist(product?.id as string);
+
+  const {addToCart, isLoading:isCartLoading}=useCart();
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedButton, setSelectedButton] = useState<
@@ -283,17 +286,20 @@ export default function ProductDetailPage() {
 
             <div className="flex flex-col gap-3">
               <button
-                disabled={!isSelectedInStock}
+                disabled={!isSelectedInStock || isCartLoading}
                 onClick={() => {
-                  const cartItem = selectedVariant
-                    ? { variantId: selectedVariant.id, productId: product?.id }
-                    : { productId: product?.id };
-                  console.log("Add to cart:", cartItem);
+                  if(!product) return;
+
+                  addToCart({
+                    productId:product.id,
+                    variantId:selectedVariant?.id,
+                    quantity:1
+                  })
                 }}
                 className="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white py-4 rounded-xl font-semibold text-sm transition-colors hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary-500"
               >
                 <ShoppingBag size={18} />
-                {isSelectedInStock ? "Add to Cart" : "Out of Stock"}
+                {isCartLoading?"Adding...":isSelectedInStock?"Add to Cart":"Out of Stock"}
               </button>
               <button
                 onClick={()=>toggleWishlist({productId:product?.id as string, isCurrentlyLoved:isLoved})}
