@@ -52,6 +52,14 @@ type GetWishlistIdsResponse={
     data:string[],
 }
 
+interface RecommendationsProductItem extends WishlistProductItem{
+    description:string,
+}
+
+type GetRecommendationsResponse={
+    data:RecommendationsProductItem[]
+}
+
 export const getWishlist=(page=1, limit=12)=>{
     return api.get<ApiResponse<GetWishlistResponse>>(urls.getWishlist,{
         params:{
@@ -75,4 +83,8 @@ export const removeProductFromWishlist=(productId:string)=>{
 
 export const clearWishlist=()=>{
     return api.delete(urls.clearWishlist).then((res)=>res.data);
+}
+
+export const getRecommendations=()=>{
+    return api.get<ApiResponse<GetRecommendationsResponse>>(urls.getRecommendations).then((res)=>res.data.data.data);
 }

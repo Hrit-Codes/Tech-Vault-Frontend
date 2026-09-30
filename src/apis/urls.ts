@@ -44,6 +44,7 @@ const urls = {
   addProductToWishlist:"/wishlist",
   deleteWishlist:"/wishlist",
   clearWishlist:"/wishlist",
+  getRecommendations:"/wishlist/recommendations",
 
   getCart:"/cart",
   addToCart:"/cart",
