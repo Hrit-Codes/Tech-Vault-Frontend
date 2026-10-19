@@ -17,6 +17,8 @@ import PrivateLayout from "../Layout/PrivateLayout";
 import UserProfilePage from "../Page/UserProfile";
 import ForgotPasswordPage from "../Page/ForgotPassword";
 import GoogleAuthSuccessPage from "../Page/GoogleAuthSuccess";
+import UnsubscribePage from "../Page/UnSubscribe";
+import ResubscribePage from "../Page/Subscribe";
 
 export default function AppRoutes(){
     return(
@@ -45,6 +47,8 @@ export default function AppRoutes(){
                 </Route>
             </Route>
             <Route path="/auth/google/success" element={<GoogleAuthSuccessPage/>}/>
+            <Route path="/unsubscribe" element={<UnsubscribePage/>}/>
+            <Route path="/subscribe" element={<ResubscribePage/>}/>
         </Routes>
         </>
     )

@@ -38,6 +38,11 @@ const urls = {
   getHeroSections: "/hero-sections",
   getHeroSectionById: "/hero-sections/admin",
 
+  // ========== NEWSLETTER ==========
+  subscribeToNewsletter: "/newsletter/subscribe",
+  checkSubscriptionStatus: "/newsletter/check-status",
+  unsubscribeFromNewsletter: "/newsletter/unsubscribe",
+
   // ========== Wishlist ==========
   getWishlist:"/wishlist",
   getWishlistIds:'/wishlist/ids',
