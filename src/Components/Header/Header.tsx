@@ -1,4 +1,4 @@
-import { Heart, ShoppingCart, Search, User, Menu, X, LogOut, UserCircle } from 'lucide-react';
+import { Heart, ShoppingCart, Search, User, Menu, X, LogOut, UserCircle, Package } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import MainLogo from './MainLogo';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -201,6 +201,16 @@ export default function Header() {
                                 >
                                     <UserCircle size={18} className="text-primary-500" />
                                     My Profile
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setIsUserMenuOpen(false);
+                                        navigate("/orders");
+                                    }}
+                                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors hover:cursor-pointer border-t border-black/5 dark:border-white/5"
+                                >
+                                    <Package size={18} className="text-primary-500" />
+                                    View Orders
                                 </button>
                                 <button
                                     onClick={()=>logoutMutation.mutate()}

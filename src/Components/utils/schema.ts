@@ -112,3 +112,20 @@ export const subscribeSchema = z.object({
 });
 
 export type SubscribeInput = z.infer<typeof subscribeSchema>;
+
+export const checkoutShippingSchema = z.object({
+  fullName: fullNameField,
+  phoneNumber: phoneNumberField,
+  city: z
+    .string()
+    .trim()
+    .min(2, "City is required")
+    .max(80, "City is too long"),
+  street: z
+    .string()
+    .trim()
+    .min(5, "Street is required")
+    .max(200, "Street is too long"),
+});
+
+export type CheckoutShippingInput = z.infer<typeof checkoutShippingSchema>;

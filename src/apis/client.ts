@@ -114,4 +114,11 @@ api.interceptors.response.use(
   }
 );
 
+// --- ERROR HELPER (read the API message out of an axios error) ---
+export function getApiErrorMessage(error: unknown, fallback: string): string {
+  const message = (error as AxiosError<{ message?: string }>)?.response?.data
+    ?.message;
+  return message ?? fallback;
+}
+
 export default api;
