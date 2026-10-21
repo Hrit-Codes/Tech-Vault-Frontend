@@ -19,10 +19,10 @@ import ForgotPasswordPage from "../Page/ForgotPassword";
 import GoogleAuthSuccessPage from "../Page/GoogleAuthSuccess";
 import UnsubscribePage from "../Page/UnSubscribe";
 import ResubscribePage from "../Page/Subscribe";
-import PaymentSuccessPage from "../Page/PaymentSuccess";
 import CheckoutPage from "../Page/Checkout";
 import OrdersPage from "../Page/Orders";
 import OrderDetailPage from "../Page/OrderDetail";
+import KhaltiCallbackPage from "../Page/KhaltiCallbackPage";
 
 export default function AppRoutes(){
     return(
@@ -54,7 +54,7 @@ export default function AppRoutes(){
                 </Route>
             </Route>
             <Route path="/auth/google/success" element={<GoogleAuthSuccessPage/>}/>
-            <Route path="/payment/khalti/callback" element={<PaymentSuccessPage/>}/>
+            <Route path="/payment/khalti/callback" element={<KhaltiCallbackPage/>}/>
             <Route path="/unsubscribe" element={<UnsubscribePage/>}/>
             <Route path="/subscribe" element={<ResubscribePage/>}/>
         </Routes>
