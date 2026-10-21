@@ -41,7 +41,7 @@ const RESULT_UI: Record<
   },
 };
 
-export default function PaymentSuccessPage() {
+export default function KhaltiCallbackPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
