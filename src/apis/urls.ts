@@ -55,7 +55,16 @@ const urls = {
   addToCart:"/cart",
   updateCartItem:"/cart",
   removeFromCart:"/cart",
-  clearCart:"/cart"
+  clearCart:"/cart",
+
+  // ========== ORDERS ==========
+  createOrder:"/orders",
+  getMyOrders:"/orders/my-orders",
+  getOrderById:"/orders",
+
+  // ========== PAYMENTS ==========
+  initiateKhalti:"/payments/khalti/initiate",
+  verifyKhalti:"/payments/khalti/verify"
 };
 
 export default urls;

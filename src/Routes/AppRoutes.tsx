@@ -19,6 +19,10 @@ import ForgotPasswordPage from "../Page/ForgotPassword";
 import GoogleAuthSuccessPage from "../Page/GoogleAuthSuccess";
 import UnsubscribePage from "../Page/UnSubscribe";
 import ResubscribePage from "../Page/Subscribe";
+import PaymentSuccessPage from "../Page/PaymentSuccess";
+import CheckoutPage from "../Page/Checkout";
+import OrdersPage from "../Page/Orders";
+import OrderDetailPage from "../Page/OrderDetail";
 
 export default function AppRoutes(){
     return(
@@ -37,6 +41,9 @@ export default function AppRoutes(){
                 <Route element={<PrivateLayout/>}>
                     <Route path="/wishlist" element={<WishlistPage/>}/>
                     <Route path="/profile" element={<UserProfilePage/>}/>
+                    <Route path="/checkout" element={<CheckoutPage/>}/>
+                    <Route path="/orders" element={<OrdersPage/>}/>
+                    <Route path="/orders/:orderId" element={<OrderDetailPage/>}/>
                 </Route>
             </Route>
             <Route element={<PublicRoute/>}>
@@ -47,6 +54,7 @@ export default function AppRoutes(){
                 </Route>
             </Route>
             <Route path="/auth/google/success" element={<GoogleAuthSuccessPage/>}/>
+            <Route path="/payment/khalti/callback" element={<PaymentSuccessPage/>}/>
             <Route path="/unsubscribe" element={<UnsubscribePage/>}/>
             <Route path="/subscribe" element={<ResubscribePage/>}/>
         </Routes>

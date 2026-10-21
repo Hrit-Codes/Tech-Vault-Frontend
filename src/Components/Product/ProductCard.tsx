@@ -1,4 +1,4 @@
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useWishlist } from "../../hooks/useWishlist";
 
@@ -72,16 +72,6 @@ export default function ProductCard({
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out p-4"
         />
 
-        {/* Add to Cart — slides up on hover */}
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
-        >
-          <button className="w-full flex items-center justify-center gap-2 bg-primary-500 text-white py-3.5 text-sm font-semibold tracking-wide hover:bg-primary-600 transition-colors hover:cursor-pointer">
-            <ShoppingCart size={16} />
-            Add to Cart
-          </button>
-        </div>
       </div>
 
       {/* Info */}

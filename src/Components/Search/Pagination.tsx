@@ -7,6 +7,7 @@ interface PaginationProps {
   totalItems?: number;
   itemsPerPage?: number;
   siblingCount?: number;
+  itemLabel?: string;
 }
 
 function buildPageList(
@@ -44,6 +45,7 @@ export default function Pagination({
   totalItems,
   itemsPerPage,
   siblingCount = 1,
+  itemLabel = "products",
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
@@ -74,7 +76,7 @@ export default function Pagination({
           <span className="text-foreground">{rangeStart}</span>
           {"–"}
           <span className="text-foreground">{rangeEnd}</span> of{" "}
-          <span className="text-foreground">{totalItems}</span> products
+          <span className="text-foreground">{totalItems}</span> {itemLabel}
         </p>
       )}
 
