@@ -5,6 +5,8 @@ import { LoadingSpinner } from "../../Components/ui/LoadingSpinner";
 import { PAYMENT_METHOD_LABELS, formatAmount, formatDateTime } from "../../Components/utils/order";
 import { useOrderById } from "../../hooks/useOrders";
 import { useVerifyKhalti } from "../../hooks/usePayments";
+import { deleteAbandonedOrder } from "../../apis/modules/orders";
+import { toast } from "sonner";
 
 type ResultStatus = "loading" | "success" | "failed" | "cancelled";
 
@@ -48,11 +50,12 @@ export default function KhaltiCallbackPage() {
   const pidx = searchParams.get("pidx");
   const statusFromUrl = (searchParams.get("status") ?? "").toLowerCase();
   const isCancelled = statusFromUrl.includes("cancel");
+  const purchaseOrderId = searchParams.get("purchase_order_id");
 
   const [result, setResult] = useState<ResultStatus>(() =>
     pidx ? "loading" : isCancelled ? "cancelled" : "failed",
   );
-  const [orderId, setOrderId] = useState<string | null>(null);
+  const [orderId, setOrderId] = useState<string | null>(purchaseOrderId);
   const hasVerified = useRef(false);
 
   const { mutateAsync: verifyPayment } = useVerifyKhalti();
@@ -69,7 +72,31 @@ export default function KhaltiCallbackPage() {
       .catch(() => {
         setResult(isCancelled ? "cancelled" : "failed");
       });
+
   }, [pidx, isCancelled, verifyPayment]);
+
+  useEffect(() => {
+    if (result !== "failed" && result !== "cancelled") return;
+    if (!orderId) return;
+
+    let cancelled = false;
+
+    const handlePayment = async () => {
+      try {
+        await deleteAbandonedOrder(orderId);
+        if (cancelled) return;
+        toast.error("Payment was cancelled");
+      } catch (err) {
+        console.error("Failed to delete abandoned order", err);
+      }
+    };
+
+    handlePayment();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [result, orderId]);
 
   const { data: order, isLoading: isLoadingOrder } = useOrderById(
     result === "success" ? (orderId ?? undefined) : undefined,

@@ -97,3 +97,8 @@ export const getUserOrderById = (orderId: string) =>
   api
     .get<ApiResponse<IOrderResponse>>(`${urls.getOrderById}/${orderId}`)
     .then((res) => res.data.data.data);
+
+export const deleteAbandonedOrder = (orderId: string) =>
+  api
+    .delete<ApiResponse<null>>(`${urls.getOrderById}/${orderId}/abandon`)
+    .then((res) => res.data);
