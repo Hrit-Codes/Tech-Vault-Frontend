@@ -38,6 +38,9 @@ const urls = {
   getHeroSections: "/hero-sections",
   getHeroSectionById: "/hero-sections/admin",
 
+  // ========== PROMOTIONAL BANNERS ==========
+  getPromotionalBanners: "/promotional-banners",
+
   // ========== NEWSLETTER ==========
   subscribeToNewsletter: "/newsletter/subscribe",
   checkSubscriptionStatus: "/newsletter/check-status",
