@@ -118,86 +118,98 @@ export default function HomeBannerSection() {
   // ── 1. Loading skeleton ─────────────────────────────────────
   if (isLoading) {
     return (
-      <section className="relative overflow-hidden bg-section">
-        <div className="relative max-w-6xl min-h-screen mx-auto py-30 grid grid-cols-1 justify-items-center md:grid-cols-2 gap-12 items-center place-items-center animate-pulse">
-          <div className="space-y-6 flex flex-col px-2 lg:px-12 items-center lg:items-start text-center lg:text-left w-full">
-            <div className="h-8 w-48 rounded-full bg-white/10" />
-            <div className="h-16 w-3/4 rounded-2xl bg-white/10" />
-            <div className="h-16 w-2/3 rounded-2xl bg-white/10" />
-            <div className="h-12 w-3/4 rounded-xl bg-white/10" />
-            <div className="flex gap-4">
-              <div className="h-12 w-32 rounded-xl bg-white/10" />
-              <div className="h-12 w-40 rounded-xl bg-white/10" />
+      <section className="relative overflow-hidden min-h-screen w-full flex items-center bg-section">
+        {/* Full-width background placeholder */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 animate-pulse" />
+        </div>
+
+        {/* Text content skeleton — mirrors the live hero layout */}
+        <div className="relative z-10 w-full mx-auto px-6 lg:px-20">
+          <div className="space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl">
+            <div className="space-y-4 w-full">
+              {/* Eyebrow pill */}
+              <div className="h-8 w-48 rounded-full bg-white/10 animate-pulse" />
+              {/* Heading lines */}
+              <div className="space-y-3">
+                <div className="h-12 md:h-14 xl:h-16 w-3/4 rounded-2xl bg-white/10 animate-pulse" />
+                <div className="h-12 md:h-14 xl:h-16 w-2/3 rounded-2xl bg-white/10 animate-pulse" />
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="space-y-3 w-full max-w-lg">
+              <div className="h-4 w-full rounded-full bg-white/10 animate-pulse" />
+              <div className="h-4 w-5/6 rounded-full bg-white/10 animate-pulse" />
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <div className="h-12 w-32 rounded-xl bg-white/10 animate-pulse" />
+              <div className="h-12 w-40 rounded-xl bg-white/10 animate-pulse" />
             </div>
           </div>
-          <div className="w-72 h-72 md:w-96 md:h-96 rounded-3xl bg-white/10" />
         </div>
-      </section>
-    );
-  }
 
-  // ── 2. Empty state — no active hero sections ────────────────
-  if (heroes.length === 0) {
-    return (
-      <section className="relative overflow-hidden bg-section">
-        <div className="relative max-w-6xl min-h-screen mx-auto py-30 flex flex-col items-center justify-center gap-4 text-center px-4">
-          <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 backdrop-blur flex items-center justify-center">
-            <span className="text-2xl">🖼️</span>
+        {/* Slide indicators skeleton */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+          <div className="w-9 h-9 rounded-full bg-white/10 animate-pulse" />
+          <div className="flex gap-2">
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className={`h-2 rounded-full bg-white/10 animate-pulse ${
+                  i === 0 ? "w-8" : "w-2"
+                }`}
+              />
+            ))}
           </div>
-          <h3 className="text-xl md:text-2xl font-semibold text-white">
-            No hero section found
-          </h3>
-          <p className="max-w-md text-sm md:text-base text-description">
-            Add a hero section from the admin dashboard to display it here.
-          </p>
+          <div className="w-9 h-9 rounded-full bg-white/10 animate-pulse" />
         </div>
-        <SocialBar />
-        <RotateShopBar />
+
+        {/* Social bar skeleton */}
+        <div className="absolute flex flex-row lg:flex-col z-10 bottom-14 left-4 gap-4">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="w-11 h-11 rounded-full bg-white/10 animate-pulse"
+            />
+          ))}
+        </div>
+
+        {/* Rotate shop bar skeleton */}
+        <div className="absolute z-20 bottom-18 right-0 rotate-90 border-r-2 border-t-2 border-zinc-200/40">
+          <div className="h-6 w-20 rounded-full bg-white/10 animate-pulse" />
+        </div>
       </section>
     );
   }
 
   if (isError || !hero) {
     return (
-      <section className="relative overflow-hidden bg-section">
-        <div className="relative max-w-6xl min-h-screen mx-auto py-30 grid grid-cols-1 justify-items-center md:grid-cols-2 gap-12 items-center place-items-center">
-          <div className="space-y-6 flex flex-col px-2 lg:px-12 items-center lg:items-start text-center lg:text-left">
-            <div className="space-y-4">
-              <span className="inline-block px-4 py-1 text-sm bg-secondary-800/10 text-primary-400 rounded-full border border-secondary-400/30 font-semibold">
-                Nepal's Trusted Tech Store 🇳🇵
-              </span>
-              <h2 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">
-                Upgrade Your <br />
-                <span className="text-primary-400">Tech Lifestyle</span>
-              </h2>
-            </div>
-            <p className="max-w-sm md:max-w-lg lg:max-w-xl text-base md:text-lg leading-relaxed text-description font-normal">
-              Premium tech accessories — earbuds, speakers, smartwatches and
-              more. Genuine products with fast delivery across Nepal.
-            </p>
-            <div className="flex gap-4 justify-center lg:justify-start">
-              <Link
-                to="/products"
-                className="px-6 py-3 bg-primary-500 text-white font-semibold rounded-xl hover:bg-primary-500/90 transition"
-              >
-                Shop Now
-              </Link>
-              <Link
-                to="/categories"
-                className="px-6 py-3 border border-secondary-400 rounded-xl text-description hover:bg-secondary-200/30 font-semibold transition"
-              >
-                Browse Categories
-              </Link>
-            </div>
-          </div>
-          <div className="flex justify-center lg:justify-end">
-            <div className="w-72 h-72 md:w-96 md:h-96 rounded-3xl bg-black/30 border border-[var(--primary)]/40 backdrop-blur flex items-center justify-center">
-              <span className="text-description text-sm font-medium">
-                Product Image / Slider
-              </span>
-            </div>
-          </div>
+      <section className="relative overflow-hidden min-h-screen w-full flex items-center bg-[#0b0f19]">
+        {/* Full-width static background image */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          <img
+            src="/Banners/Dummy_Banner.webp" 
+            alt="TechVault Premium Tech"
+            className="w-full h-full object-fit opacity-80" 
+          />
+          {/* Dark gradient overlay to ensure the button is readable */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-transparent to-[#0b0f19]/50" />
         </div>
+
+        {/* Content container - Centered for the button */}
+        <div className="relative z-10 w-full mx-auto px-6 h-full flex flex-col justify-end pb-32 items-center">
+          {/* Shop Now Button */}
+          <Link
+            to="/shop" // 👈 Linked to your shop page as requested
+            className="px-10 py-4 bg-primary-500 text-white text-lg font-bold rounded-xl hover:bg-primary-600 transition-all duration-300 shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:scale-105"
+          >
+            Shop Now
+          </Link>
+        </div>
+
         <SocialBar />
         <RotateShopBar />
       </section>
